@@ -17,7 +17,11 @@ public class StealthPlayerSwitcher : MonoBehaviour {
 			otherPlayer = GameObject.FindGameObjectWithTag("Player");
 			myIndex = Random.Range(0,2);
 			if(myIndex == otherPlayer.GetComponent<StealthPlayerSwitcher>().myIndex){
-				myIndex = Random.Range(0,2);			
+				myIndex = Random.Range(0,2);
+				if(myIndex == 0)
+					CurrentPlayerTracker.SetCurrentPlayer(this.gameObject);
+				else if(myIndex != 0)
+					this.gameObject.SetActive(false);			
 			}
 		}
 		startPos = transform.position;
@@ -26,7 +30,7 @@ public class StealthPlayerSwitcher : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		Debug.Log("Current player is player " + CurrentPlayerTracker.currentPlayer.GetComponent<StealthPlayerSwitcher>().myIndex);
 	}
 
 	public void SwitchToThis(){
