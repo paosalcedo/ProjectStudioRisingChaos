@@ -14,4 +14,5 @@ MonoBehaviour:
   scenes: []
   players:
   - {fileID: 1558069723449614, guid: 2c01d31418f2cc146b868764588e591a, type: 2}
+  - {fileID: 1558069723449614, guid: f664d3251d925454aa31d9176284811a, type: 2}
   node: {fileID: 1543508034879966, guid: 34da08956d9edf04589f22abeb5889e4, type: 2}

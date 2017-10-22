@@ -43,9 +43,9 @@ GameObject:
   - component: {fileID: 120945019672069614}
   - component: {fileID: 114485315157377806}
   - component: {fileID: 114933151353933390}
-  - component: {fileID: 114650677987803162}
+  - component: {fileID: 114642724447069284}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Player2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -274,7 +274,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 330f171319c34d444bcd4cb75e00fd42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114650677987803162
+--- !u!114 &114642724447069284
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -285,7 +285,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01093c0ef17832d4f983c98bf6224208, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  indexOfPlayerToSwitchTo: 1
+  indexOfPlayerToSwitchTo: 0
 --- !u!114 &114933151353933390
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -297,8 +297,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a581e91437b96c54eb6c88a555b3beff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  otherPlayers:
-  - {fileID: 0}
+  otherPlayers: []
   drawingState: 1
   targetLayer:
     serializedVersion: 2
@@ -425,7 +424,7 @@ LineRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 2100000, guid: fed4e78bda2b3de45954637fee164b8c, type: 2}
+  - {fileID: 2100000, guid: 82096aab38f01cb40a1cbf8629a810ba, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

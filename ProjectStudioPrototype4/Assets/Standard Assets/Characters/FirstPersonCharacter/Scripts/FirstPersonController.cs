@@ -236,7 +236,13 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void RotateView()
         {
-            m_MouseLook.LookRotation (transform, m_Camera.transform);
+            if(m_Camera != null){
+                m_MouseLook.LookRotation (transform, m_Camera.transform);
+            }
+            else{
+                m_Camera = GetComponentInChildren<Camera>();
+                m_MouseLook.LookRotation (transform, m_Camera.transform);
+            }
         }
 
 

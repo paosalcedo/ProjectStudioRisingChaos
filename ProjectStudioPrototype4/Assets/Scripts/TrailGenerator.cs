@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.Characters.FirstPerson;
 
 public class TrailGenerator : MonoBehaviour {
 
@@ -9,6 +10,8 @@ public class TrailGenerator : MonoBehaviour {
 		DRAWING,
 		NOT_DRAWING
 	}
+
+	public GameObject[] otherPlayers;
 
 	public DrawingState drawingState;
 
@@ -24,14 +27,16 @@ public class TrailGenerator : MonoBehaviour {
 	float totalLengthOfLine;
 	public float maxLengthOfLine = 0;
 
-	[SerializeField]float lineInterval = 1f;
-	[SerializeField]float startingLineInterval = 1f;
+	[SerializeField]float lineInterval;
+	[SerializeField]float startingLineInterval;
 
 	[SerializeField]float l_width;
 	[SerializeField]float l_length;
 
 	public KeyCode drawKey;
 	LineRenderer lr;
+	private Vector3 lastPos;
+	private Vector3 currentPos;
 
 	// Use this for initialization
 	void Start () {
@@ -41,35 +46,53 @@ public class TrailGenerator : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		currentPos = transform.position;
 		if(drawingState == DrawingState.DRAWING){
-			DrawLine ();
+			// DrawLine ();
 			DropNodesNoInput ();
 			Debug.Log(drawingState);
 		} else {
 			Debug.Log(drawingState);
 		}
+		lastPos = transform.position;
  	}
 
 	void DropNodesNoInput(){
 
 		lineInterval -= Time.deltaTime;
-
-		Ray ray = new Ray(transform.position, Vector3.down);
-
-		RaycastHit rayHit = new RaycastHit ();
-		if (Physics.Raycast (ray, out rayHit, Mathf.Infinity)) {
-			if (rayHit.transform != null) {
-				if(lineInterval <= 0){
-					// GameObject node_ = Instantiate (Resources.Load ("Node")) as GameObject;
-					GameObject node_ = Instantiate (Services.Prefabs.Node) as GameObject;
-					node_.transform.position = rayHit.point;
-					nodes.Add (node_);
-					nodePositions.Add (node_.transform.position);
-					lineInterval = startingLineInterval;
-					// 					}
-				}
+		if(lineInterval <= 0){
+			
+			// GameObject node_ = Instantiate (Resources.Load ("Node")) as GameObject;
+			// node.transform.position = rayHit.point + Vector3.up;
+			// node.transform.rotation = Quaternion.identity; 
+			if(currentPos != lastPos){
+				GameObject node = Instantiate (Services.Prefabs.Node, transform.position, this.gameObject.transform.rotation) as GameObject;
+				nodes.Add (node);
+				nodePositions.Add (node.transform.position);
 			}
+			lineInterval = startingLineInterval;
+		
+			// 					}
 		}
+
+
+		//raycast version
+		// Ray ray = new Ray(transform.position, Vector3.down);
+		// RaycastHit rayHit = new RaycastHit ();
+		// if (Physics.Raycast (ray, out rayHit, Mathf.Infinity)) {
+		// 	if (rayHit.transform != null) {
+		// 		if(lineInterval <= 0){
+		// 			// GameObject node_ = Instantiate (Resources.Load ("Node")) as GameObject;
+		// 			GameObject node = Instantiate (Services.Prefabs.Node, rayHit.point + Vector3.up, this.gameObject.transform.rotation) as GameObject;
+		// 			// node.transform.position = rayHit.point + Vector3.up;
+		// 			// node.transform.rotation = Quaternion.identity; 
+		// 			nodes.Add (node);
+		// 			nodePositions.Add (node.transform.position);
+		// 			lineInterval = startingLineInterval;
+		// 			// 					}
+		// 		}
+		// 	}
+		// }
 	}
 
 
@@ -126,10 +149,21 @@ public class TrailGenerator : MonoBehaviour {
 		totalLengthOfLine += length;
 	}
 
-	void OnTriggerEnter(Collider coll){
+	void OnTriggerEnter(){
 		drawingState = DrawingState.DRAWING;
 	}
-	void OnTriggerEnterExit(){
+	void OnTriggerExit(){
 		drawingState = DrawingState.NOT_DRAWING;
+		// otherPlayers[0].SetActive(true);
+		// gameObject.SetActive(false);
+	}
+
+	IEnumerator SwitchToOtherPlayer(float delay){
+		yield return new WaitForSeconds(delay);
+		this.gameObject.SetActive(false);
+		// GetComponentInChildren<Camera>().enabled = false;
+		// GetComponent<CharacterController>().enabled = false;
+		// GetComponent<FirstPersonController>().enabled = false;
+		// GetComponent<AudioSource>().enabled = false;
 	}
 }

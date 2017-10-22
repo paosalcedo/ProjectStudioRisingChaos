@@ -11,7 +11,7 @@ public class PrefabDB : ScriptableObject {
     [SerializeField]
 
     private GameObject[] players;
-    public GameObject[] Players { get { return scenes; } }
+    public GameObject[] Players { get { return players; } }
 
     [SerializeField]
     private GameObject node;
