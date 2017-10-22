@@ -18,17 +18,8 @@ public class PlayerSwitcher : MonoBehaviour {
 		
 	}
 
-	void OnTriggerExit(){
-		GameObject otherPlayer = Instantiate(Services.Prefabs.Players[indexOfPlayerToSwitchTo]) as GameObject;
-		otherPlayer.transform.position = startPos; 
-		GameObject.Find("TrailGenerator").transform.SetParent(null);
-		// gameObject.SetActive(false);
-		StartCoroutine(SwitchToOtherPlayer(.01f));
-	}
-
 	IEnumerator SwitchToOtherPlayer(float delay){
 		yield return new WaitForSeconds(delay);
-		Destroy(gameObject);
 		// GetComponentInChildren<Camera>().enabled = false;
 		// GetComponent<CharacterController>().enabled = false;
 		// GetComponent<FirstPersonController>().enabled = false;
