@@ -2,19 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Node : MonoBehaviour {
+public class MapManager : MonoBehaviour {
+
+	private Vector3 playerOneStart;
+	private Vector3 playerTwoStart;
 
 	// Use this for initialization
 	void Start () {
-		Invoke("EnableCollider", 5f);
+			
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		
-	}
-
-	public void EnableCollider(){
- 		GetComponent<Collider>().enabled = true;
 	}
 }

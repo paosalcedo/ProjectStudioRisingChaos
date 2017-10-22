@@ -25,7 +25,7 @@ public class Main : Scene<TransitionData>
 	void InitializeServices()
 	{
 		// Services.Main = this;
-		// Services.MapManager = GetComponentInChildren<MapManager>();
+		Services.MapManager = GetComponentInChildren<MapManager>();
 
 	}
 
