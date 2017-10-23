@@ -3417,7 +3417,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Press <backspace> to play
+  m_Text: 'Enter names
+
+    then press <enter> to play'
 --- !u!222 &1754461813
 CanvasRenderer:
   m_ObjectHideFlags: 0

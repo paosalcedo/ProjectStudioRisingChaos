@@ -15,7 +15,7 @@ public class DestroyThis : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(Input.GetKeyDown(KeyCode.Tab)){
+		if(Input.GetKeyDown(KeyCode.Return)){
 			if(p1NameInputField.text != "" && p2NameInputField.text != ""){
 				CurrentPlayerTracker.currentPlayer.GetComponent<PlayerTimeManager>().UnFreezeMe();
 				PlayerNames.AssignNames(p1NameInputField.text, p2NameInputField.text);
