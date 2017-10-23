@@ -15,11 +15,13 @@ public class DestroyThis : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(Input.GetKeyDown(KeyCode.Backspace)){
-			CurrentPlayerTracker.currentPlayer.GetComponent<PlayerTimeManager>().UnFreezeMe();
-			PlayerNames.AssignNames(p1NameInputField.text, p2NameInputField.text);
-			HideCursor();
-			StartCoroutine(LateDestroy(0.2f));
+		if(Input.GetKeyDown(KeyCode.Tab)){
+			if(p1NameInputField.text != "" && p2NameInputField.text != ""){
+				CurrentPlayerTracker.currentPlayer.GetComponent<PlayerTimeManager>().UnFreezeMe();
+				PlayerNames.AssignNames(p1NameInputField.text, p2NameInputField.text);
+				HideCursor();
+				StartCoroutine(LateDestroy(0.2f));
+			}
 		}
 	}
 
@@ -30,7 +32,9 @@ public class DestroyThis : MonoBehaviour {
 	}
 
 	void HideCursor(){
-		Cursor.lockState = CursorLockMode.Locked;
-		Cursor.visible = false;
+		GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+		foreach (GameObject player in players){
+			player.GetComponent<FirstPersonController>().HideCursor();
+		}
 	}
 }
