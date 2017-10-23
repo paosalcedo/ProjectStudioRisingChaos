@@ -22,9 +22,10 @@ GameObject:
   - component: {fileID: 20834124085875632}
   - component: {fileID: 81010437226638628}
   - component: {fileID: 124895946898171200}
+  - component: {fileID: 114052924047104130}
   m_Layer: 0
   m_Name: FirstPersonCharacter
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -45,6 +46,7 @@ GameObject:
   - component: {fileID: 114072164186955098}
   - component: {fileID: 23540117729180674}
   - component: {fileID: 33548451260860900}
+  - component: {fileID: 136417687004501904}
   m_Layer: 0
   m_Name: StealthPlayer
   m_TagString: Player
@@ -59,7 +61,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1742240419215954}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.4, y: 0, z: 13.44}
+  m_LocalPosition: {x: -11.921424, y: 1.02, z: 12.811062}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4126024473055688}
@@ -256,6 +258,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &114052924047104130
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1673096216069918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9adcef2055cae114886409b3fbdb4f8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  laserLifetime: 1
+  attackKey: 0
 --- !u!114 &114072164186955098
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -267,8 +282,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dd0fbe12da002448851190527a66680, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentPlayer: {fileID: 0}
   otherPlayer: {fileID: 0}
   myIndex: 0
+  otherIndex: 0
 --- !u!114 &114491445911656940
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -280,7 +297,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c28ef390c177624e9407726ee20b553, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  otherPlayer: {fileID: 0}
   playerFrozenState: 0
+  switchKey: 91
 --- !u!114 &114859991204236706
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -310,7 +329,7 @@ MonoBehaviour:
     lockCursor: 1
   m_UseFovKick: 1
   m_FovKick:
-    Camera: {fileID: 0}
+    Camera: {fileID: 20834124085875632}
     originalFov: 0
     FOVIncrease: 3
     TimeToIncrease: 1
@@ -333,7 +352,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  m_UseHeadBob: 0
+  m_UseHeadBob: 1
   m_HeadBob:
     HorizontalBobRange: 0.1
     VerticalBobRange: 0.1
@@ -390,6 +409,19 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1673096216069918}
   m_Enabled: 1
+--- !u!136 &136417687004501904
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1742240419215954}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!143 &143976220464494914
 CharacterController:
   m_ObjectHideFlags: 1

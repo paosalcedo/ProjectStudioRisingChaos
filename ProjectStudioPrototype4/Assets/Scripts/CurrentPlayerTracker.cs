@@ -8,5 +8,6 @@ public class CurrentPlayerTracker : MonoBehaviour {
 
 	public static void SetCurrentPlayer(GameObject playerToMakeCurrent){
 		currentPlayer = playerToMakeCurrent;
+		// Debug.Log("Current player set!");
 	}
 }

@@ -1,43 +1,66 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.Characters.FirstPerson;
 
 public class StealthPlayerSwitcher : MonoBehaviour {
 
 	private PlayerTimeManager timeManager;
+	private PlayerTimeManager otherTimeManager;
+
+	public GameObject currentPlayer;
 	public GameObject otherPlayer;
+
 	private Vector3 startPos;
 
 	public int myIndex;
+	public int otherIndex;
 	// public int myPlayerIndex;
 
 	// Use this for initialization
+
+	void Awake(){
+		timeManager = GetComponent<PlayerTimeManager>();
+		otherPlayer = GameObject.FindGameObjectWithTag("Player");
+	}
 	void Start () {
-		if(GameObject.FindGameObjectWithTag("Player") != this){
-			otherPlayer = GameObject.FindGameObjectWithTag("Player");
-			myIndex = Random.Range(0,2);
-			if(myIndex == otherPlayer.GetComponent<StealthPlayerSwitcher>().myIndex){
-				myIndex = Random.Range(0,2);
-				if(myIndex == 0)
+		// myIndex = Random.Range(0, 2);
+		otherTimeManager = otherPlayer.GetComponent<PlayerTimeManager>();
+		otherIndex = otherPlayer.GetComponent<StealthPlayerSwitcher>().myIndex;
+		for (int i = 0; i < 2; i++){
+			myIndex = i;
+			if(myIndex == otherIndex){
+				//set player 0 to current player.
+				myIndex = i-1;
+				if(myIndex == 0){
 					CurrentPlayerTracker.SetCurrentPlayer(this.gameObject);
-				else if(myIndex != 0)
-					this.gameObject.SetActive(false);			
+					currentPlayer = CurrentPlayerTracker.currentPlayer;
+				} 
+				//Freeze the other player; disable their camera
+				otherTimeManager.FreezeMe();
+				otherTimeManager.GetComponentInChildren<Camera>().enabled = false;		
 			}
 		}
 		startPos = transform.position;
-		timeManager = GetComponent<PlayerTimeManager>();
+		// Debug.Log("My index is " + myIndex);
+		StartCoroutine(InitOtherPlayer(0.1f));
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		Debug.Log("Current player is player " + CurrentPlayerTracker.currentPlayer.GetComponent<StealthPlayerSwitcher>().myIndex);
+
 	}
 
 	public void SwitchToThis(){
- 		timeManager.playerFrozenState = PlayerTimeManager.PlayerFrozenState.Not_Frozen;
-		// GetComponentInChildren<Camera>().enabled = false;
-		// GetComponent<CharacterController>().enabled = false;
-		// GetComponent<FirstPersonController>().enabled = false;
-		// GetComponent<AudioSource>().enabled = false;
+		timeManager.UnFreezeMe();
+ 		GetComponentInChildren<Camera>().enabled = true;
+	}
+
+	IEnumerator InitOtherPlayer(float delay){
+		yield return new WaitForSeconds(delay);
+		if(myIndex == 1){
+ 			otherPlayer = CurrentPlayerTracker.currentPlayer;
+			timeManager.switchKey = KeyCode.RightBracket;
+		}
 	}
 }
