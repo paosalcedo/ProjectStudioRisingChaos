@@ -14,6 +14,8 @@ public static class Services {
  
     public static MapManager MapManager { get; set; }
 
+    public static TimeManager TimeManager { get; set;}
+    
     // public static LightManager LightManager { get; set; }
 
 }

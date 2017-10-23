@@ -27,7 +27,9 @@ public class LaserControl : MonoBehaviour {
 
 	public void Attack(KeyCode key){
 		if (Input.GetKeyDown(key)){
-			ShootRay();
+			if(TimeManager.actionPoints == 100){
+				ShootRay();
+			}
 		}
 	}
 
@@ -39,6 +41,7 @@ public class LaserControl : MonoBehaviour {
 		if(Physics.Raycast(ray, out rayHit, Mathf.Infinity)){
 			if(rayHit.transform == playerSwitcher.otherPlayer.transform){
 				Debug.Log("Other player hit!");
+				rayHit.transform.GetComponent<PlayerHealthManager>().DepleteHealth(34);
 			} else {
 				Debug.Log("No one hit!");
 			}

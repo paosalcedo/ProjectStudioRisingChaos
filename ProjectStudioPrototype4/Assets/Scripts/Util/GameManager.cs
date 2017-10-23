@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
 		Services.Prefabs = Resources.Load<PrefabDB>("Prefabs/PrefabDB");
 		Services.Materials = Resources.Load<MaterialDB>("Art/Materials");
 		Services.MapManager = GetComponentInChildren<MapManager>();
+		Services.TimeManager = GetComponent<TimeManager>();
 		// Services.SceneStackManager = new SceneStackManager<TransitionData>(sceneRoot, Services.Prefabs.Scenes);
 		Services.InputManager = new InputManager();
 
