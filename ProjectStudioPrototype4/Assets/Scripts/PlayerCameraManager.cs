@@ -11,6 +11,8 @@ public class PlayerCameraManager : MonoBehaviour {
 		myCam = GetComponent<Camera>();	
 		if (thisPlayer.myIndex == 0){
 			myCam.targetDisplay = 1;
+		} else {
+			myCam.targetDisplay = 0;
 		}
 	}
 	
