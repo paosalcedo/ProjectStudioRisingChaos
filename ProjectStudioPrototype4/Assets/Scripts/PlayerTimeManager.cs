@@ -9,8 +9,8 @@ public class PlayerTimeManager : MonoBehaviour {
 	public float ap_jumpCost = 20f;
 	public float ap_walkCost = 1f;
 
-	public float ap_lookCost = 0.25f;
-	public float ap_attackCost = 100f;
+	public float ap_lookCost = 0.2f;
+	public float ap_attackCost = 50f;
 	float mouseX_pos;
 	float mouseY_pos;
 
@@ -70,11 +70,11 @@ public class PlayerTimeManager : MonoBehaviour {
 		}
 
 		//Deplete AP when you move
-		if(CrossPlatformInputManager.GetAxisRaw("Horizontal") != 0 || CrossPlatformInputManager.GetAxisRaw("Vertical") != 0){
+		if(CrossPlatformInputManager.GetAxis("Horizontal") != 0 || CrossPlatformInputManager.GetAxis("Vertical") != 0){
 			TimeManager.DepleteAP(ap_walkCost);
  		}
 
-		if(CrossPlatformInputManager.GetAxisRaw("Mouse X") > 0 || CrossPlatformInputManager.GetAxisRaw("Mouse Y") > 0){
+		if(CrossPlatformInputManager.GetAxisRaw("Mouse X") != 0 || CrossPlatformInputManager.GetAxisRaw("Mouse Y") != 0){
 			TimeManager.DepleteAP(ap_lookCost);
 		}
 
@@ -92,10 +92,9 @@ public class PlayerTimeManager : MonoBehaviour {
 		//deplete AP when you fire
 		if(CrossPlatformInputManager.GetButtonDown("Fire1")){
 			// Debug.Log("Lol! You fired!");
-			float ap_cost = 100f;
 			// otherPlayer.GetComponent<PlayerHealthManager>().DepleteHealth(10);
-			if(TimeManager.actionPoints >= ap_cost){
-				TimeManager.DepleteAP(ap_cost);
+			if(TimeManager.actionPoints >= ap_attackCost){
+				TimeManager.DepleteAP(ap_attackCost);
 			} else {
 				TimeManager.apAlertString = "Not enough AP to fire!";
 				Invoke("ClearAlertString", 3f);
@@ -113,6 +112,7 @@ public class PlayerTimeManager : MonoBehaviour {
 	}
 
 	public void FreezeMe(){
+		Debug.Log("Freezing me!");
 		playerFrozenState = PlayerFrozenState.Frozen;
 		rb.constraints = RigidbodyConstraints.FreezeAll;
 		rb.useGravity = false;
@@ -122,6 +122,7 @@ public class PlayerTimeManager : MonoBehaviour {
 	}
 
 	public void UnFreezeMe(){
+		Debug.Log("Unfreezing me!");
 		playerFrozenState = PlayerFrozenState.Not_Frozen;
 		rb.constraints = RigidbodyConstraints.None;
 		rb.useGravity = true;
@@ -169,6 +170,7 @@ public class PlayerTimeManager : MonoBehaviour {
 
 	IEnumerator InitOtherPlayer(float delay){
 		yield return new WaitForSeconds(delay);
+		transform.eulerAngles = new Vector3 (0, 76, 0);
 		otherPlayer = playerSwitcher.otherPlayer;
 		if(playerSwitcher.myIndex == 1){
 			GetComponentInChildren<AudioListener>().enabled = false;

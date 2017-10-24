@@ -24,8 +24,6 @@ public class PlayerNames : MonoBehaviour {
 	public static void AssignNames(string p1Name, string p2Name){
 		playerOneName = p1Name;
 		playerTwoName = p2Name;
-		Debug.Log(playerOneName);
-		Debug.Log(playerTwoName);
 	}
 
 }

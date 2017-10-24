@@ -10,17 +10,17 @@ public class DestroyThis : MonoBehaviour {
 	public InputField p2NameInputField;
 	// Use this for initialization
 	void Start () {
-		
+		GetComponent<Canvas>().enabled = true;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if(Input.GetKeyDown(KeyCode.Return)){
-			if(p1NameInputField.text != "" && p2NameInputField.text != ""){
+			if(p1NameInputField.text != "" && p2NameInputField.text != "" && p1NameInputField.text != p2NameInputField.text){
 				CurrentPlayerTracker.currentPlayer.GetComponent<PlayerTimeManager>().UnFreezeMe();
 				PlayerNames.AssignNames(p1NameInputField.text, p2NameInputField.text);
 				HideCursor();
-				StartCoroutine(LateDestroy(0.2f));
+ 				StartCoroutine(LateDestroy(0.2f));
 			}
 		}
 	}

@@ -6,7 +6,7 @@ public class LaserControl : MonoBehaviour {
 
 	StealthPlayerSwitcher playerSwitcher;
 	public float laserLifetime = 1f;
-
+	private GameObject canvasDuringTurn;
 	Transform parent;
 	public KeyCode attackKey;
 	float laserLifetimeReset;
@@ -16,6 +16,7 @@ public class LaserControl : MonoBehaviour {
 		parent = transform.parent;
 		laserLifetimeReset = laserLifetime;
 		attackKey = KeyCode.Mouse0;
+		canvasDuringTurn = GameObject.Find("CanvasDuringTurn");
 	}
 	
 	// Update is called once per frame
@@ -27,12 +28,10 @@ public class LaserControl : MonoBehaviour {
 
 	public void Attack(KeyCode key){
 		if (Input.GetKeyDown(key)){
-			if(TimeManager.actionPoints == 100){
-				ShootRay();
-			}
+			ShootRay();
 		}
 	}
-
+	
 	public void ShootRay(){
 		Ray ray = new Ray(transform.position, transform.forward);
 
@@ -40,10 +39,14 @@ public class LaserControl : MonoBehaviour {
 		Debug.DrawRay(transform.position, transform.forward * 10f, Color.red, 3f);
 		if(Physics.Raycast(ray, out rayHit, Mathf.Infinity)){
 			if(rayHit.transform == playerSwitcher.otherPlayer.transform){
-				Debug.Log("Other player hit!");
+ 				if(rayHit.transform.GetComponent<StealthPlayerSwitcher>().myIndex == 0){
+					canvasDuringTurn.GetComponentInChildren<UpdateHitAlertText>().ShowHitAlert();
+				} else if (rayHit.transform.GetComponent<StealthPlayerSwitcher>().myIndex == 1) {
+					canvasDuringTurn.GetComponentInChildren<UpdateHitAlertText>().ShowHitAlert();
+				}
 				rayHit.transform.GetComponent<PlayerHealthManager>().DepleteHealth(34);
 			} else {
-				Debug.Log("No one hit!");
+				// Debug.Log("No one hit!");
 			}
 			Debug.Log(rayHit.transform.name);
 		}

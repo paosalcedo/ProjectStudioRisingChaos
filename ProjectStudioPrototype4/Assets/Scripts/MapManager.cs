@@ -22,7 +22,9 @@ public class MapManager : MonoBehaviour {
 	public void AddPlayersToMap(){
 		GameObject playerOne = Instantiate(Services.Prefabs.StealthPlayers[0]) as GameObject;
 		playerOne.transform.position = playerOneStartPos;
+		// playerOne.transform.eulerAngles = new Vector3 (0, 180, 0);
 		GameObject playerTwo = Instantiate(Services.Prefabs.StealthPlayers[0]) as GameObject;
 		playerTwo.transform.position = playerTwoStartPos;
-	}
+
+	}	
 }
