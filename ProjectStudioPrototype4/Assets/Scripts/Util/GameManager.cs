@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour
 		Services.TimeManager = GetComponent<TimeManager>();
 		// Services.SceneStackManager = new SceneStackManager<TransitionData>(sceneRoot, Services.Prefabs.Scenes);
 		Services.InputManager = new InputManager();
+		Services.CanvasManager = new CanvasManager();
 
 
         // Services.LightManager = new LightManager();

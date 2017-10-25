@@ -376,6 +376,8 @@ GameObject:
   - component: {fileID: 131334542}
   - component: {fileID: 131334543}
   - component: {fileID: 131334544}
+  - component: {fileID: 131334545}
+  - component: {fileID: 131334546}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -442,6 +444,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5679dc0a81a825f418198849c3340edc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &131334545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 131334539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48b2456b9969c124abfff643d67c5d07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  players: []
+--- !u!114 &131334546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 131334539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7850fe01aa185fa4abdc515fb76b4c10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numPlayers: 2
+  spawnPoints: []
 --- !u!4 &221733495 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 93e86b57e56570d46814839867bf9a52, type: 2}
@@ -1201,7 +1228,7 @@ Canvas:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 486145231}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}
@@ -2019,7 +2046,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -56.8}
+  m_AnchoredPosition: {x: -183.8, y: -13.9}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &857181296
@@ -2592,16 +2619,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 36
       objectReference: {fileID: 0}
-    - target: {fileID: 65137282283895964, guid: afad8d923efc60c4c93a3509a8416e32,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 23511295134364226, guid: afad8d923efc60c4c93a3509a8416e32,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: afad8d923efc60c4c93a3509a8416e32, type: 2}
   m_IsPrefabParent: 0
@@ -2930,7 +2947,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Player 2 name
+  m_Text: Player 1 name
 --- !u!222 &1129121700
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3276,7 +3293,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -13.7}
+  m_AnchoredPosition: {x: -183.79999, y: -51}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1344326804
@@ -3529,7 +3546,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1412271945
 Transform:
   m_ObjectHideFlags: 0
@@ -3554,6 +3571,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7850fe01aa185fa4abdc515fb76b4c10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numPlayers: 0
+  spawnPoints: []
 --- !u!1001 &1415945881
 Prefab:
   m_ObjectHideFlags: 0
@@ -3731,7 +3750,7 @@ Canvas:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1496180211}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}
@@ -4513,7 +4532,7 @@ GameObject:
   - component: {fileID: 1787771600}
   - component: {fileID: 1787771599}
   m_Layer: 5
-  m_Name: CanvasDuringTurn (1)
+  m_Name: CanvasPlayer2
   m_TagString: Canvas
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5140,6 +5159,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 37
       objectReference: {fileID: 0}
+    - target: {fileID: 1928223723883112, guid: 4fe35f3f59b43844494e415f3722ed3a, type: 2}
+      propertyPath: m_TagString
+      value: Respawn
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4fe35f3f59b43844494e415f3722ed3a, type: 2}
   m_IsPrefabParent: 0
@@ -5359,7 +5382,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Player 1 name
+  m_Text: Player 2 name
 --- !u!222 &2080095302
 CanvasRenderer:
   m_ObjectHideFlags: 0

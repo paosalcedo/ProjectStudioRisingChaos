@@ -33,6 +33,7 @@ public class PlayerHealthManager : MonoBehaviour {
 
 	public void DepleteHealth(int damage){
 		currentHealth -= damage;
+		Debug.Log("Damaging " + this.gameObject);
 		HealthManager.CheckPlayerHealth(this.gameObject, currentHealth);
 	}
 
