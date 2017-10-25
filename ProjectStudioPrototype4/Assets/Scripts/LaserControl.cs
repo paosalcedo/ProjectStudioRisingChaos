@@ -6,7 +6,7 @@ public class LaserControl : MonoBehaviour {
 
 	StealthPlayerSwitcher playerSwitcher;
 	public float laserLifetime = 1f;
-	private GameObject canvasDuringTurn;
+	public GameObject myCanvas;
 	Transform parent;
 	public KeyCode attackKey;
 	float laserLifetimeReset;
@@ -16,7 +16,8 @@ public class LaserControl : MonoBehaviour {
 		parent = transform.parent;
 		laserLifetimeReset = laserLifetime;
 		attackKey = KeyCode.Mouse0;
-		canvasDuringTurn = GameObject.Find("CanvasDuringTurn");
+		
+
 	}
 	
 	// Update is called once per frame
@@ -40,15 +41,26 @@ public class LaserControl : MonoBehaviour {
 		if(Physics.Raycast(ray, out rayHit, Mathf.Infinity)){
 			if(rayHit.transform == playerSwitcher.otherPlayer.transform){
  				if(rayHit.transform.GetComponent<StealthPlayerSwitcher>().myIndex == 0){
-					canvasDuringTurn.GetComponentInChildren<UpdateHitAlertText>().ShowHitAlert();
+					myCanvas.GetComponentInChildren<UpdateHitAlertText>().ShowHitAlert();
 				} else if (rayHit.transform.GetComponent<StealthPlayerSwitcher>().myIndex == 1) {
-					canvasDuringTurn.GetComponentInChildren<UpdateHitAlertText>().ShowHitAlert();
+					myCanvas.GetComponentInChildren<UpdateHitAlertText>().ShowHitAlert();
 				}
 				rayHit.transform.GetComponent<PlayerHealthManager>().DepleteHealth(34);
 			} else {
 				// Debug.Log("No one hit!");
 			}
-			Debug.Log(rayHit.transform.name);
+			// Debug.Log(rayHit.transform.name);
 		}
 	}
+
+	// IEnumerator FindMyCanvas(float delay){
+	// 	yield return new WaitForSeconds(delay);
+	// 	if(transform.parent.GetComponent<PlayerIdentifier>().myPlayerNum == 0){
+	// 			myCanvas = Services.CanvasManager.canvases[0];
+	// 		} 
+
+	// 	if(transform.parent.GetComponent<PlayerIdentifier>().myPlayerNum == 1){
+	// 		myCanvas = Services.CanvasManager.canvases[1];
+	// 	}
+	// }
 }

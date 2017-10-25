@@ -5,23 +5,32 @@ using UnityEngine;
 public class CanvasManager : MonoBehaviour {
 
 	public GameObject[] players;
+	public GameObject[] canvases;
 	
 // Use this for initialization
 	void Awake(){
 		// players = GameObject.FindGameObjectsWithTag("Player");
 	}
 	void Start () {
-		StartCoroutine(IdentifyPlayers(0.001f));
+		StartCoroutine(IdentifyPlayersAndCanvases(0.001f));
 		StartCoroutine(AssignPlayerNumbers(0.002f));
+		StartCoroutine(AssignCanvasToPlayers(0.003f));
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
 	}
 
-	IEnumerator IdentifyPlayers(float delay){
+	IEnumerator IdentifyPlayersAndCanvases(float delay){
 		yield return new WaitForSeconds(delay);
+
 		players = GameObject.FindGameObjectsWithTag("Player");
+		canvases = GameObject.FindGameObjectsWithTag("Canvas");
+		GameObject tempCanvas1 = GameObject.Find("CanvasP1");
+		GameObject tempCanvas2 = GameObject.Find("CanvasP2");
+		canvases[0] = tempCanvas1;
+		canvases[1] = tempCanvas2;
 	}
 
 	IEnumerator AssignPlayerNumbers(float delay){
@@ -33,5 +42,13 @@ public class CanvasManager : MonoBehaviour {
 				players[i+1].GetComponent<PlayerIdentifier>().myPlayerNum = i+1;
 			}	
 		}
+	}
+
+	IEnumerator AssignCanvasToPlayers(float delay){
+		yield return new WaitForSeconds(delay);
+		players[0].GetComponent<PlayerTimeManager>().myCanvas = canvases[0];
+		players[1].GetComponent<PlayerTimeManager>().myCanvas = canvases[1];
+		players[0].GetComponentInChildren<LaserControl>().myCanvas = canvases[0];
+		players[1].GetComponentInChildren<LaserControl>().myCanvas = canvases[1];
 	}
 }

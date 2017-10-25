@@ -6,6 +6,9 @@ using UnityStandardAssets.CrossPlatformInput;
 using UnityEngine.UI;
 
 public class PlayerTimeManager : MonoBehaviour {
+
+	private PlayerIdentifier playerIdentifier;
+	// public GameObject myCanvas; 
 	public float ap_jumpCost = 20f;
 	public float ap_walkCost = 1f;
 
@@ -15,7 +18,7 @@ public class PlayerTimeManager : MonoBehaviour {
 	float mouseY_pos;
 
  	public GameObject otherPlayer;
-	private GameObject canvas;
+	public GameObject myCanvas;
 	private StealthPlayerSwitcher playerSwitcher;
 	private PlayerTimeManager timeManager;
 
@@ -31,17 +34,18 @@ public class PlayerTimeManager : MonoBehaviour {
 	public KeyCode switchKey;
 
 	void Start () {
+		playerIdentifier = GetComponent<PlayerIdentifier>();
 		firstPersonController = GetComponent<FirstPersonController>();
 		playerFrozenState = PlayerFrozenState.Frozen;
 		rb = GetComponent<Rigidbody>();
  		playerSwitcher = GetComponent<StealthPlayerSwitcher>();
-		canvas = GameObject.Find("Canvas");
+		
+		//pick a certain canvas depending on playernumber.
 		// if(GameObject.FindGameObjectWithTag("Player") != this.gameObject){
 		// 	otherPlayer = GameObject.FindGameObjectWithTag("Player");
 		// }
 
 		StartCoroutine(InitOtherPlayer(0.2f));
-		canvas.GetComponent<Canvas>().enabled = false;
 	}
 
 	// Update is called once per frame
@@ -103,7 +107,7 @@ public class PlayerTimeManager : MonoBehaviour {
 
 		if(TimeManager.actionPoints <= 0){
 			FreezeMe();
-			canvas.GetComponent<Canvas>().enabled = true;
+			myCanvas.GetComponent<Canvas>().enabled = true;
 			Invoke("SwitchToOtherPlayer", 3.5f);
 			// SwitchToOtherPlayer();
 			return;
@@ -112,7 +116,7 @@ public class PlayerTimeManager : MonoBehaviour {
 	}
 
 	public void FreezeMe(){
-		Debug.Log("Freezing me!");
+		// Debug.Log("Freezing me!");
 		playerFrozenState = PlayerFrozenState.Frozen;
 		rb.constraints = RigidbodyConstraints.FreezeAll;
 		rb.useGravity = false;
@@ -137,7 +141,7 @@ public class PlayerTimeManager : MonoBehaviour {
 		if(Input.GetKeyDown(key)){
 			//freeze or unfreeze this player; this should happen immediately.
 			FreezeMe();
-			canvas.GetComponent<Canvas>().enabled = true;
+			myCanvas.GetComponent<Canvas>().enabled = true;
 			//load a UI screen that says "Switching to Other Player". could have a bit of delay.
 			// StartCoroutine(ActivatePlayerSwitchCanvas(0.01f));
 			Invoke("SwitchToOtherPlayer", 5f);
@@ -159,12 +163,12 @@ public class PlayerTimeManager : MonoBehaviour {
         //talk to the StealthPlayerSwitcher script on the other player.
 		Debug.Log("Switching to other player without input!");
 		TimeManager.ResetAP();
-        canvas.GetComponent<Canvas>().enabled = false;
+        myCanvas.GetComponent<Canvas>().enabled = false;
         GetComponentInChildren<Camera>().enabled = false;
 		GetComponentInChildren<AudioListener>().enabled = false;
         CurrentPlayerTracker.SetCurrentPlayer(otherPlayer);
-        playerSwitcher.GetComponent<StealthPlayerSwitcher>().otherPlayer.GetComponent<StealthPlayerSwitcher>().SwitchToThis();
-        // playerSwitcher.
+		playerSwitcher.GetComponent<StealthPlayerSwitcher>().otherPlayer.GetComponent<StealthPlayerSwitcher>().SwitchToThis();
+		playerSwitcher.GetComponent<StealthPlayerSwitcher>().otherPlayer.GetComponent<PlayerTimeManager>().myCanvas.GetComponent<Canvas>().enabled = true;;
     }
 
 
@@ -175,6 +179,11 @@ public class PlayerTimeManager : MonoBehaviour {
 		if(playerSwitcher.myIndex == 1){
 			GetComponentInChildren<AudioListener>().enabled = false;
  		}
+	}
+
+	IEnumerator InitCanvas(float delay){
+		yield return new WaitForSeconds(delay);
+		myCanvas.GetComponent<Canvas>().enabled = false;
 	}
 
 	void ClearAlertString(){

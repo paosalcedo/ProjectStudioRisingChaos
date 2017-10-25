@@ -27,10 +27,6 @@ public class PlayerHealthManager : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		
-	}
-
 	public void DepleteHealth(int damage){
 		currentHealth -= damage;
 		Debug.Log("Damaging " + this.gameObject);

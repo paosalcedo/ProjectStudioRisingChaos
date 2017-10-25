@@ -27,7 +27,8 @@ public class DestroyThis : MonoBehaviour {
 
 	IEnumerator LateDestroy(float delay){
 		yield return new WaitForSeconds(delay);
-		GameObject.Find("CanvasDuringTurn").GetComponent<Canvas>().enabled = true;
+		GameObject.Find("CanvasP1").GetComponent<Canvas>().enabled = true;
+		GameObject.Find("CanvasP2").GetComponent<Canvas>().enabled = true;
 		Destroy(gameObject);
 	}
 
