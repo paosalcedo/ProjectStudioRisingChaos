@@ -12,10 +12,5 @@ public class DisplayScript : MonoBehaviour {
 			Debug.Log("Activated second display!");
 		}
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
 }

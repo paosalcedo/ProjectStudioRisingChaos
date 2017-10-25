@@ -48,7 +48,7 @@ public class CanvasManager : MonoBehaviour {
 		yield return new WaitForSeconds(delay);
 		players[0].GetComponent<PlayerTimeManager>().myCanvas = canvases[0];
 		players[1].GetComponent<PlayerTimeManager>().myCanvas = canvases[1];
-		players[0].GetComponentInChildren<LaserControl>().myCanvas = canvases[0];
-		players[1].GetComponentInChildren<LaserControl>().myCanvas = canvases[1];
+		// players[0].GetComponentInChildren<LaserControl>().myCanvas = canvases[0];
+		// players[1].GetComponentInChildren<LaserControl>().myCanvas = canvases[1];
 	}
 }

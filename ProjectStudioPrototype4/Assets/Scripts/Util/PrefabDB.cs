@@ -22,4 +22,8 @@ public class PrefabDB : ScriptableObject {
     [SerializeField]
     private GameObject node;
     public GameObject Node { get { return node; } }
+
+    [SerializeField]
+    private GameObject grenade;
+    public GameObject Grenade { get { return grenade; }}
 }

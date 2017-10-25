@@ -22,8 +22,8 @@ GameObject:
   - component: {fileID: 20834124085875632}
   - component: {fileID: 81010437226638628}
   - component: {fileID: 124895946898171200}
-  - component: {fileID: 114052924047104130}
   - component: {fileID: 114347504541553394}
+  - component: {fileID: 114543161232319218}
   m_Layer: 0
   m_Name: FirstPersonCharacter
   m_TagString: MainCamera
@@ -261,20 +261,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
---- !u!114 &114052924047104130
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1673096216069918}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9adcef2055cae114886409b3fbdb4f8b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  laserLifetime: 1
-  myCanvas: {fileID: 0}
-  attackKey: 0
 --- !u!114 &114072164186955098
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -320,6 +306,18 @@ MonoBehaviour:
   myCanvas: {fileID: 0}
   playerFrozenState: 0
   switchKey: 91
+--- !u!114 &114543161232319218
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1673096216069918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8034b1c4c7c2494b91b990ff30e5906, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldown: 1
 --- !u!114 &114859991204236706
 MonoBehaviour:
   m_ObjectHideFlags: 1

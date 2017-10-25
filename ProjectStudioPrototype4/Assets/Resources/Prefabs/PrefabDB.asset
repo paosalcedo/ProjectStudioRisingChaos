@@ -18,3 +18,4 @@ MonoBehaviour:
   stealthPlayers:
   - {fileID: 1742240419215954, guid: 554667eee07134c4f93d022c2599dc56, type: 2}
   node: {fileID: 1543508034879966, guid: 34da08956d9edf04589f22abeb5889e4, type: 2}
+  grenade: {fileID: 1646510768976546, guid: c8b907e6ba93b804eaa4c70a2c846243, type: 2}
