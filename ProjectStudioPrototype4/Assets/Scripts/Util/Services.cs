@@ -11,15 +11,12 @@ public static class Services {
     public static SceneStackManager<TransitionData> SceneStackManager { get; set; }
     public static InputManager InputManager { get; set; }
     // public static Main Main { get; set; }
- 
     public static MapManager MapManager { get; set; }
-
     public static TimeManager TimeManager { get; set;}
-
     public static CanvasManager CanvasManager { get; set; }
-
     public static WeaponDefinitions WeaponDefinitions { get; set; }
-    
+
+    public static GameStateManager GameStateManager { get; set; }
     // public static LightManager LightManager { get; set; }
 
 }
