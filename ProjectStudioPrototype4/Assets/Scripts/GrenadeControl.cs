@@ -15,7 +15,7 @@ public class GrenadeControl : MonoBehaviour {
 		NOT_FIRING
 	}
 	void Start () {
-		playerTimeManager = GetComponent<PlayerTimeManager>();
+		playerTimeManager = GetComponentInParent<PlayerTimeManager>();
 		attackKey = KeyCode.Mouse0;
 		startingCooldown = Services.WeaponDefinitions.weapons[WeaponDefinitions.WeaponType.Grenade].cooldown;
 		cooldown = startingCooldown;
@@ -23,8 +23,11 @@ public class GrenadeControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(playerTimeManager.playerFrozenState == PlayerTimeManager.PlayerFrozenState.Not_Frozen){
-			Attack(attackKey);	
+		if(playerTimeManager != null){
+			if(playerTimeManager.playerFrozenState == PlayerTimeManager.PlayerFrozenState.Not_Frozen){
+				Debug.Log("attacking!");
+				Attack(attackKey);	
+			}
 		}
 	}
 	public void Attack(KeyCode key){

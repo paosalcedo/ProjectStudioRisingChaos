@@ -38,9 +38,9 @@ public class GrenadeEngine : MonoBehaviour {
 		Vector3 explosionPos = transform.position;
         Collider[] colliders = Physics.OverlapSphere(explosionPos, radius);
         foreach (Collider hit in colliders){
-			if(hit.tag == "Player" && hit.gameObject != this.gameObject && hit.GetComponent<Rigidbody>() != null){
+			if(hit.tag == "Player" && hit.transform != transform.parent && hit.GetComponent<Rigidbody>() != null){
  				Rigidbody rb = hit.GetComponent<Rigidbody>();
-				Debug.Log("Depleting health on" + GetComponent<PlayerIdentifier>().myName);
+				Debug.Log("Depleting health on" + hit.transform.GetComponent<PlayerIdentifier>().myName);
 				hit.GetComponent<PlayerHealthManager>().DepleteHealth(damage);
 				if (rb != null)
 					// Debug.Log("hit " + rb.name);

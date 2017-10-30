@@ -21,8 +21,7 @@ public class CanvasManager : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-	}
+
 
 	public void IdentifyPlayersAndCanvases(){
  		players = GameObject.FindGameObjectsWithTag("Player");
