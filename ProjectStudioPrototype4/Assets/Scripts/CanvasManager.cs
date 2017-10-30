@@ -49,6 +49,12 @@ public class CanvasManager : MonoBehaviour {
 		// players[1].GetComponentInChildren<LaserControl>().myCanvas = canvases[1];
 	}
 
+	public void HideCursor(){
+		Debug.Log("Cursor is hidden!");
+		Cursor.lockState = CursorLockMode.Locked;
+		Cursor.visible = false;
+	}
+
 	// IEnumerator IdentifyPlayersAndCanvases(float delay){
 	// 	yield return new WaitForSeconds(delay);
 

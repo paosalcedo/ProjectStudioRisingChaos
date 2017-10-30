@@ -24,7 +24,7 @@ public class DestroyThis : MonoBehaviour {
 				Services.CanvasManager.IdentifyPlayersAndCanvases();
 				Services.CanvasManager.AssignCanvasToPlayers();
 				Services.CanvasManager.AssignPlayerNumbers();
-				HideCursor();
+				Services.CanvasManager.HideCursor();
 				StartCoroutine(LateDestroy(0.2f));
 			}
 		}
@@ -32,8 +32,6 @@ public class DestroyThis : MonoBehaviour {
 
 	IEnumerator LateDestroy(float delay){
 		yield return new WaitForSeconds(delay);
-		
-		
 		Destroy(gameObject);
 	}
 
