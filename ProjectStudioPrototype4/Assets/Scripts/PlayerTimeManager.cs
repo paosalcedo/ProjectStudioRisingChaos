@@ -14,6 +14,8 @@ public class PlayerTimeManager : MonoBehaviour {
 
 	public float ap_lookCost = 0.2f;
 	public float ap_attackCost = 50f;
+
+	public float myActionPoints = 100;
 	float mouseX_pos;
 	float mouseY_pos;
 
@@ -45,6 +47,11 @@ public class PlayerTimeManager : MonoBehaviour {
 		if(playerIdentifier.myPlayerNum == 0){
 			UnFreezeMe();
 			Debug.Log("I'm unfrozen! I am player " + playerIdentifier.myPlayerNum);
+		} 
+
+		if(playerIdentifier.myPlayerNum == 1){
+			FreezeMe();
+			Debug.Log("I'm frozen! I am player " + playerIdentifier.myPlayerNum);
 		}
 		
 		//pick a certain canvas depending on playernumber.
@@ -57,13 +64,16 @@ public class PlayerTimeManager : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-
+		Debug.Log(playerFrozenState + " " + playerIdentifier.myPlayerNum);
 		// Debug.Log("player " + playerSwitcher.myIndex + " is " + playerFrozenState);
 		if(playerFrozenState == PlayerFrozenState.Frozen){
 			FreezeMe();
+			// Debug.Log(playerIdentifier.myName + " is being frozen in PlayerTimeManager");
+
 		}
 		else if (playerFrozenState == PlayerFrozenState.Not_Frozen){
 			UnFreezeMe();
+			// Debug.Log(playerIdentifier.myName + " is being unfrozen in PlayerTimeManager");
 			if(CurrentPlayerTracker.currentPlayer == this.gameObject){
 				//if player is out of time,
 				TrackPlayerAction();
@@ -82,18 +92,22 @@ public class PlayerTimeManager : MonoBehaviour {
 
 		//Deplete AP when you move
 		if(CrossPlatformInputManager.GetAxis("Horizontal") != 0 || CrossPlatformInputManager.GetAxis("Vertical") != 0){
-			TimeManager.DepleteAP(ap_walkCost);
+			// TimeManager.DepleteAP(ap_walkCost);
+			myActionPoints -= ap_walkCost;
  		}
 
 		if(CrossPlatformInputManager.GetAxisRaw("Mouse X") != 0 || CrossPlatformInputManager.GetAxisRaw("Mouse Y") != 0){
-			TimeManager.DepleteAP(ap_lookCost);
+			// TimeManager.DepleteAP(ap_lookCost);
+			myActionPoints -= ap_lookCost;
 		}
 
 		//deplete AP when you jump and update alert text
 		if(CrossPlatformInputManager.GetButtonDown("Jump")){
 			// float ap_cost = 20f;
- 			if(TimeManager.actionPoints >= ap_jumpCost){
-				TimeManager.DepleteAP(ap_jumpCost);
+ 			// if(TimeManager.actionPoints >= ap_jumpCost){
+			if(myActionPoints >= ap_jumpCost){
+				// TimeManager.DepleteAP(ap_jumpCost);
+				myActionPoints -= ap_jumpCost;
 			} else {
 				TimeManager.apAlertString = "Not enough AP to jump!";
 				Invoke("ClearAlertString", 3f);
@@ -104,26 +118,26 @@ public class PlayerTimeManager : MonoBehaviour {
 		if(CrossPlatformInputManager.GetButtonDown("Fire1")){
 			// Debug.Log("Lol! You fired!");
 			// otherPlayer.GetComponent<PlayerHealthManager>().DepleteHealth(10);
-			if(TimeManager.actionPoints >= ap_attackCost){
-				TimeManager.DepleteAP(ap_attackCost);
+			if(myActionPoints >= ap_attackCost){
+			// if(TimeManager.actionPoints >= ap_attackCost){
+				// TimeManager.DepleteAP(ap_attackCost);
 			} else {
 				TimeManager.apAlertString = "Not enough AP to fire!";
 				Invoke("ClearAlertString", 3f);
 			}
 		}
-
-		if(TimeManager.actionPoints <= 0){
+		if(myActionPoints <= 0){
+		// if(TimeManager.actionPoints <= 0){
 			// FreezeMe();
  			myCanvas.GetComponent<Canvas>().enabled = true;
 			Invoke("SwitchToOtherPlayer", 3.5f);
 			// SwitchToOtherPlayer();
 			return;
-		}
-		
+		}		
 	}
 
 	public void FreezeMe(){
-		Debug.Log("Freezing player " + playerIdentifier.myPlayerNum);
+		// Debug.Log("Freezing player " + playerIdentifier.myPlayerNum);
 		playerFrozenState = PlayerFrozenState.Frozen;
 		rb.constraints = RigidbodyConstraints.FreezeAll;
 		rb.useGravity = false;
@@ -133,7 +147,7 @@ public class PlayerTimeManager : MonoBehaviour {
 	}
 
 	public void UnFreezeMe(){
-		Debug.Log("Unfreezing player " + playerIdentifier.myPlayerNum);
+		// Debug.Log("Unfreezing player " + playerIdentifier.myPlayerNum);
 		playerFrozenState = PlayerFrozenState.Not_Frozen;
 		rb.constraints = RigidbodyConstraints.None;
 		rb.useGravity = true;
@@ -169,13 +183,13 @@ public class PlayerTimeManager : MonoBehaviour {
         // yield return new WaitForSeconds(delay);
         //talk to the StealthPlayerSwitcher script on the other player.
 		Debug.Log("Switching to other player without input!");
-		TimeManager.ResetAP();
+		myActionPoints = 100f;
         myCanvas.GetComponent<Canvas>().enabled = false;
         GetComponentInChildren<Camera>().enabled = false;
 		GetComponentInChildren<AudioListener>().enabled = false;
         CurrentPlayerTracker.SetCurrentPlayer(otherPlayer);
 		playerSwitcher.GetComponent<StealthPlayerSwitcher>().otherPlayer.GetComponent<StealthPlayerSwitcher>().SwitchToThis();
-		playerSwitcher.GetComponent<StealthPlayerSwitcher>().otherPlayer.GetComponent<PlayerTimeManager>().myCanvas.GetComponent<Canvas>().enabled = true;;
+		playerSwitcher.GetComponent<StealthPlayerSwitcher>().otherPlayer.GetComponent<PlayerTimeManager>().myCanvas.GetComponent<Canvas>().enabled = true;
     }
 
 

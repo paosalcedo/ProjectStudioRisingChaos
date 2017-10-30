@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GrenadeControl : MonoBehaviour {
 
+	private PlayerTimeManager playerTimeManager;
 	private KeyCode attackKey;
 	public float cooldown = 0;
 	private float startingCooldown;
@@ -14,6 +15,7 @@ public class GrenadeControl : MonoBehaviour {
 		NOT_FIRING
 	}
 	void Start () {
+		playerTimeManager = GetComponent<PlayerTimeManager>();
 		attackKey = KeyCode.Mouse0;
 		startingCooldown = Services.WeaponDefinitions.weapons[WeaponDefinitions.WeaponType.Grenade].cooldown;
 		cooldown = startingCooldown;
@@ -21,7 +23,9 @@ public class GrenadeControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		Attack(attackKey);	
+		if(playerTimeManager.playerFrozenState == PlayerTimeManager.PlayerFrozenState.Not_Frozen){
+			Attack(attackKey);	
+		}
 	}
 	public void Attack(KeyCode key){
 		cooldown -= Time.deltaTime;

@@ -11,14 +11,14 @@ public class GrenadeEngine : MonoBehaviour {
 
 	private float speed;
 	private float upwardsMod = 0f;
+	private float timeBeforeExplode = 2f;
 	void Awake(){
-	
 		rb = GetComponent<Rigidbody>();
 		speed = Services.WeaponDefinitions.weapons[WeaponDefinitions.WeaponType.Grenade].speed;
 		damage = Services.WeaponDefinitions.weapons[WeaponDefinitions.WeaponType.Grenade].damage;
 	}
 	void Start () {
-		
+		Debug.Log("Launching grenade!");
 		MoveMortar();
 	}
 	
@@ -37,10 +37,10 @@ public class GrenadeEngine : MonoBehaviour {
 	void OnCollisionEnter(){
 		Vector3 explosionPos = transform.position;
         Collider[] colliders = Physics.OverlapSphere(explosionPos, radius);
-        foreach (Collider hit in colliders)
-        {
-			if(hit.tag == "Player" && hit.GetComponent<PlayerHealthManager>() != null){
+        foreach (Collider hit in colliders){
+			if(hit.tag == "Player" && hit.gameObject != this.gameObject && hit.GetComponent<Rigidbody>() != null){
  				Rigidbody rb = hit.GetComponent<Rigidbody>();
+				Debug.Log("Depleting health on" + GetComponent<PlayerIdentifier>().myName);
 				hit.GetComponent<PlayerHealthManager>().DepleteHealth(damage);
 				if (rb != null)
 					// Debug.Log("hit " + rb.name);
@@ -48,7 +48,7 @@ public class GrenadeEngine : MonoBehaviour {
 			}
         }
 
-		Destroy(gameObject, 1.5f);
+		Destroy(gameObject, timeBeforeExplode);
 	}
 
 	// void OnTriggerEnter(Collider coll){

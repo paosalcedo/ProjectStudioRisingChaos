@@ -23,7 +23,7 @@ public class StealthPlayerSwitcher : MonoBehaviour {
 	void Awake(){
 		playerIdentifier = GetComponent<PlayerIdentifier>();
 		timeManager = GetComponent<PlayerTimeManager>();
-		otherPlayer = GameObject.FindGameObjectWithTag("Player");
+		// otherPlayer = GameObject.FindGameObjectWithTag("Player");
 	}
 	void Start () {
 		// myIndex = Random.Range(0, 2);
@@ -34,6 +34,9 @@ public class StealthPlayerSwitcher : MonoBehaviour {
 			CurrentPlayerTracker.SetCurrentPlayer(this.gameObject);
 			timeManager.UnFreezeMe();
  			// Debug.Log("assigning current player to PLayer 0");
+		} else if (playerIdentifier.myPlayerNum == 1){
+			// otherPlayer = this.gameObject;
+			timeManager.FreezeMe();
 		} 
 		
 		for (int i = 0; i < 2; i++){
@@ -43,11 +46,11 @@ public class StealthPlayerSwitcher : MonoBehaviour {
 				myIndex = i-1;
 				if(myIndex == 0){
 					// CurrentPlayerTracker.SetCurrentPlayer(this.gameObject);
-					currentPlayer = CurrentPlayerTracker.currentPlayer;
+					// currentPlayer = CurrentPlayerTracker.currentPlayer;
 				} 
 				//Freeze the other player; disable their camera
 				// otherTimeManager.FreezeMe();
-				otherTimeManager.GetComponentInChildren<Camera>().enabled = false;		
+				// otherTimeManager.GetComponentInChildren<Camera>().enabled = false;		
 			}
 		}
 		startPos = transform.position;
@@ -58,6 +61,7 @@ public class StealthPlayerSwitcher : MonoBehaviour {
 
 	public void SwitchToThis(){
 		timeManager.UnFreezeMe();
+		// Debug.Log("SwitchToThis() was called");
  		GetComponentInChildren<Camera>().enabled = true;
 		GetComponentInChildren<AudioListener>().enabled = true;
 	}

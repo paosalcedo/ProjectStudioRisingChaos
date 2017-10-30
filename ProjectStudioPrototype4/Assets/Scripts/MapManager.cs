@@ -35,7 +35,9 @@ public class MapManager : MonoBehaviour {
 		// playerOne.transform.eulerAngles = new Vector3 (0, 180, 0);
 		GameObject playerTwo = Instantiate(Services.Prefabs.StealthPlayers[0]) as GameObject;
 		playerTwo.transform.position = spawnPoints[1].transform.position;
-
+		
+		playerOne.GetComponent<StealthPlayerSwitcher>().otherPlayer = playerTwo;
+		playerTwo.GetComponent<StealthPlayerSwitcher>().otherPlayer = playerOne;
  		// for (int i = 0; i < numPlayers; i++){
 		// 	Debug.Log("adding player!");
 		// 	players[i] = Instantiate(Services.Prefabs.StealthPlayers[0]) as GameObject;
