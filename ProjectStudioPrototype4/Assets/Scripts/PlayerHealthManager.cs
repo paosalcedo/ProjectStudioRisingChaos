@@ -9,10 +9,12 @@ public class PlayerHealthManager : MonoBehaviour {
 	public int myIndex;
 	public int currentHealth;
 
+	PlayerIdentifier playerIdentifier;
 	StealthPlayerSwitcher playerSwitcher;
 	public int maxHealth = 100;
 	// Use this for initialization
 	void Start () {
+		playerIdentifier = GetComponent<PlayerIdentifier>();
 		playerSwitcher = GetComponent<StealthPlayerSwitcher>();
 		myIndex = playerSwitcher.myIndex;
 		if(myIndex == 0){

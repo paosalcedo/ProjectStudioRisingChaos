@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class PlayerCameraManager : MonoBehaviour {
 
-	StealthPlayerSwitcher thisPlayer;
+	// StealthPlayerSwitcher thisPlayer;
+	PlayerIdentifier thisPlayer;
 	private Camera myCam;
 	void Start () {
-		thisPlayer = GetComponentInParent<StealthPlayerSwitcher>();
+		// thisPlayer = GetComponentInParent<StealthPlayerSwitcher>();
+		thisPlayer = GetComponentInParent<PlayerIdentifier>();
 		myCam = GetComponent<Camera>();	
-		if (thisPlayer.myIndex == 0){
-			myCam.targetDisplay = 1;
-		} else {
+		if (thisPlayer.myPlayerNum == 0){
 			myCam.targetDisplay = 0;
+		} else if(thisPlayer.myPlayerNum == 1) {
+			myCam.targetDisplay = 1;
 		}
 	}
 	

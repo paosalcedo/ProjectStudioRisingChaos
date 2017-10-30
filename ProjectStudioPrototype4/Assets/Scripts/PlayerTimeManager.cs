@@ -39,13 +39,20 @@ public class PlayerTimeManager : MonoBehaviour {
 		playerFrozenState = PlayerFrozenState.Frozen;
 		rb = GetComponent<Rigidbody>();
  		playerSwitcher = GetComponent<StealthPlayerSwitcher>();
+		// if(playerSwitcher.myIndex == 0){
+		// 	UnFreezeMe();
+		// }
+		if(playerIdentifier.myPlayerNum == 0){
+			UnFreezeMe();
+			Debug.Log("I'm unfrozen! I am player " + playerIdentifier.myPlayerNum);
+		}
 		
 		//pick a certain canvas depending on playernumber.
 		// if(GameObject.FindGameObjectWithTag("Player") != this.gameObject){
 		// 	otherPlayer = GameObject.FindGameObjectWithTag("Player");
 		// }
 
-		StartCoroutine(InitOtherPlayer(0.2f));
+		// StartCoroutine(InitOtherPlayer(0.2f));
 	}
 
 	// Update is called once per frame
@@ -106,8 +113,8 @@ public class PlayerTimeManager : MonoBehaviour {
 		}
 
 		if(TimeManager.actionPoints <= 0){
-			FreezeMe();
-			myCanvas.GetComponent<Canvas>().enabled = true;
+			// FreezeMe();
+ 			myCanvas.GetComponent<Canvas>().enabled = true;
 			Invoke("SwitchToOtherPlayer", 3.5f);
 			// SwitchToOtherPlayer();
 			return;
@@ -116,7 +123,7 @@ public class PlayerTimeManager : MonoBehaviour {
 	}
 
 	public void FreezeMe(){
-		// Debug.Log("Freezing me!");
+		Debug.Log("Freezing player " + playerIdentifier.myPlayerNum);
 		playerFrozenState = PlayerFrozenState.Frozen;
 		rb.constraints = RigidbodyConstraints.FreezeAll;
 		rb.useGravity = false;
@@ -126,7 +133,7 @@ public class PlayerTimeManager : MonoBehaviour {
 	}
 
 	public void UnFreezeMe(){
-		Debug.Log("Unfreezing me!");
+		Debug.Log("Unfreezing player " + playerIdentifier.myPlayerNum);
 		playerFrozenState = PlayerFrozenState.Not_Frozen;
 		rb.constraints = RigidbodyConstraints.None;
 		rb.useGravity = true;

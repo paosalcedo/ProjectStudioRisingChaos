@@ -24,23 +24,23 @@ public class GameManager : MonoBehaviour
 	void Update()
 	{
 		Services.TaskManager.Update();
-		Debug.Log(Services.WeaponDefinitions.weapons[WeaponDefinitions.WeaponType.Grenade].description);
+		// Debug.Log(Services.WeaponDefinitions.weapons[WeaponDefinitions.WeaponType.Grenade].description);
 	}
 
 	void InitializeServices()
 	{
 		Services.GameManager = this;
-		Services.MapManager = GetComponentInChildren<MapManager>();
+		Services.MapManager = new MapManager();
+		Services.CanvasManager = new CanvasManager();
+		Services.GameStateManager = new GameStateManager();
+		Services.TimeManager = new TimeManager();
 		Services.WeaponDefinitions = new WeaponDefinitions();
 		Services.EventManager = new EventManager();
 		Services.TaskManager = new TaskManager();
 		Services.Prefabs = Resources.Load<PrefabDB>("Prefabs/PrefabDB");
 		Services.Materials = Resources.Load<MaterialDB>("Art/Materials");
-		Services.TimeManager = GetComponent<TimeManager>();
 		// Services.SceneStackManager = new SceneStackManager<TransitionData>(sceneRoot, Services.Prefabs.Scenes);
 		Services.InputManager = new InputManager();
-		Services.CanvasManager = new CanvasManager();
-
 
         // Services.LightManager = new LightManager();
 

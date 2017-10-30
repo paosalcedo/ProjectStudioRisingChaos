@@ -6,7 +6,7 @@ public class MapManager : MonoBehaviour {
 	
 	[SerializeField]int numPlayers;
 
-	private GameObject[] players;
+	public GameObject[] players;
 
 	public GameObject[] spawnPoints;
 	private Vector3 playerOneStartPos;
@@ -20,8 +20,8 @@ public class MapManager : MonoBehaviour {
 		// AddPlayersToMap();
 	}
 	void Start () {
-		AddSpawnPointsToArray();
-  		AddPlayersToMap();			
+		// AddSpawnPointsToArray();
+  		// AddPlayersToMap();			
 	}
 	
 	// Update is called once per frame
@@ -43,7 +43,6 @@ public class MapManager : MonoBehaviour {
 		// 	//pick spawns
 		// 	players[i].transform.position = spawnPoints[i].transform.position;
 		// }
-
 	}	
 
 	public void AddSpawnPointsToArray(){

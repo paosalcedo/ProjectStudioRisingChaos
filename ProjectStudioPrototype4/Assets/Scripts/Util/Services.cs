@@ -15,8 +15,11 @@ public static class Services {
     public static TimeManager TimeManager { get; set;}
     public static CanvasManager CanvasManager { get; set; }
     public static WeaponDefinitions WeaponDefinitions { get; set; }
-
     public static GameStateManager GameStateManager { get; set; }
+    public static HealthManager HealthManager { get; set; }
+    public static DisplayScript DisplayScript { get; set; }
+
+    public static PlayerNames PlayerNames { get; set; }
     // public static LightManager LightManager { get; set; }
 
 }

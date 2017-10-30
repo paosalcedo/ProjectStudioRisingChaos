@@ -8,6 +8,7 @@ public class StealthPlayerSwitcher : MonoBehaviour {
 	private PlayerTimeManager timeManager;
 	private PlayerTimeManager otherTimeManager;
 
+	private PlayerIdentifier playerIdentifier;
 	public GameObject currentPlayer;
 	public GameObject otherPlayer;
 
@@ -20,6 +21,7 @@ public class StealthPlayerSwitcher : MonoBehaviour {
 	// Use this for initialization
 
 	void Awake(){
+		playerIdentifier = GetComponent<PlayerIdentifier>();
 		timeManager = GetComponent<PlayerTimeManager>();
 		otherPlayer = GameObject.FindGameObjectWithTag("Player");
 	}
@@ -27,29 +29,32 @@ public class StealthPlayerSwitcher : MonoBehaviour {
 		// myIndex = Random.Range(0, 2);
 		otherTimeManager = otherPlayer.GetComponent<PlayerTimeManager>();
 		otherIndex = otherPlayer.GetComponent<StealthPlayerSwitcher>().myIndex;
+		//add if statement to check if this player is player 0
+		if(playerIdentifier.myPlayerNum == 0){
+			CurrentPlayerTracker.SetCurrentPlayer(this.gameObject);
+			timeManager.UnFreezeMe();
+ 			// Debug.Log("assigning current player to PLayer 0");
+		} 
+		
 		for (int i = 0; i < 2; i++){
 			myIndex = i;
 			if(myIndex == otherIndex){
 				//set player 0 to current player.
 				myIndex = i-1;
 				if(myIndex == 0){
-					CurrentPlayerTracker.SetCurrentPlayer(this.gameObject);
+					// CurrentPlayerTracker.SetCurrentPlayer(this.gameObject);
 					currentPlayer = CurrentPlayerTracker.currentPlayer;
 				} 
 				//Freeze the other player; disable their camera
-				otherTimeManager.FreezeMe();
+				// otherTimeManager.FreezeMe();
 				otherTimeManager.GetComponentInChildren<Camera>().enabled = false;		
 			}
 		}
 		startPos = transform.position;
-		// Debug.Log("My index is " + myIndex);
-		StartCoroutine(InitOtherPlayer(0.1f));
+ 		// StartCoroutine(InitOtherPlayer(0.1f));
 	}
 	
 	// Update is called once per frame
-	void Update () {
-
-	}
 
 	public void SwitchToThis(){
 		timeManager.UnFreezeMe();
