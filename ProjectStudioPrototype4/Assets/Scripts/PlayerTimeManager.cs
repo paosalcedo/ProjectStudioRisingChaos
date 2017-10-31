@@ -41,44 +41,54 @@ public class PlayerTimeManager : MonoBehaviour {
 		playerFrozenState = PlayerFrozenState.Frozen;
 		rb = GetComponent<Rigidbody>();
  		playerSwitcher = GetComponent<StealthPlayerSwitcher>();
-		// if(playerSwitcher.myIndex == 0){
-		// 	UnFreezeMe();
-		// }
 		if(playerIdentifier.myPlayerNum == 0){
 			UnFreezeMe();
 			Debug.Log("I'm unfrozen! I am player " + playerIdentifier.myPlayerNum);
 		} 
-
 		if(playerIdentifier.myPlayerNum == 1){
 			FreezeMe();
 			Debug.Log("I'm frozen! I am player " + playerIdentifier.myPlayerNum);
 		}
-		
-		//pick a certain canvas depending on playernumber.
-		// if(GameObject.FindGameObjectWithTag("Player") != this.gameObject){
-		// 	otherPlayer = GameObject.FindGameObjectWithTag("Player");
-		// }
-
-		// StartCoroutine(InitOtherPlayer(0.2f));
 	}
 
 	// Update is called once per frame
 	void Update () {
 		Debug.Log(playerFrozenState + " " + playerIdentifier.myPlayerNum);
 		// Debug.Log("player " + playerSwitcher.myIndex + " is " + playerFrozenState);
+
+
+		switch (playerFrozenState){
+			case PlayerFrozenState.Frozen:
+			FreezeMe();
+
+			break;
+
+			case PlayerFrozenState.Not_Frozen:
+			UnFreezeMe();
+			if(CurrentPlayerTracker.currentPlayer == this.gameObject){
+				//if player is out of time,
+				TrackPlayerAction();
+				// SwitchToOtherPlayerTemp(switchKey);
+			}
+			break;
+
+			default:
+			break;
+
+		}
 		if(playerFrozenState == PlayerFrozenState.Frozen){
 			FreezeMe();
 			// Debug.Log(playerIdentifier.myName + " is being frozen in PlayerTimeManager");
 
 		}
-		else if (playerFrozenState == PlayerFrozenState.Not_Frozen){
+		if (playerFrozenState == PlayerFrozenState.Not_Frozen){
 			UnFreezeMe();
 			// Debug.Log(playerIdentifier.myName + " is being unfrozen in PlayerTimeManager");
-			if(CurrentPlayerTracker.currentPlayer == this.gameObject){
+			// if(CurrentPlayerTracker.currentPlayer == this.gameObject){
 				//if player is out of time,
 				TrackPlayerAction();
-				SwitchToOtherPlayerTemp(switchKey);
-			}
+				// SwitchToOtherPlayerTemp(switchKey);
+			// }
 		}			
 	}
 
@@ -126,8 +136,10 @@ public class PlayerTimeManager : MonoBehaviour {
 				Invoke("ClearAlertString", 3f);
 			}
 		}
+
 		if(myActionPoints <= 0){
 		// if(TimeManager.actionPoints <= 0){
+			playerFrozenState = PlayerFrozenState.Frozen;
 			// FreezeMe();
  			myCanvas.GetComponent<Canvas>().enabled = true;
 			Invoke("SwitchToOtherPlayer", 3.5f);
@@ -138,7 +150,7 @@ public class PlayerTimeManager : MonoBehaviour {
 
 	public void FreezeMe(){
 		// Debug.Log("Freezing player " + playerIdentifier.myPlayerNum);
-		playerFrozenState = PlayerFrozenState.Frozen;
+		// playerFrozenState = PlayerFrozenState.Frozen;
 		rb.constraints = RigidbodyConstraints.FreezeAll;
 		rb.useGravity = false;
 		GetComponent<CharacterController>().enabled = false;
@@ -183,7 +195,7 @@ public class PlayerTimeManager : MonoBehaviour {
         // yield return new WaitForSeconds(delay);
         //talk to the StealthPlayerSwitcher script on the other player.
 		Debug.Log("Switching to other player without input!");
-		myActionPoints = 100f;
+		// myActionPoints = 100f;
         myCanvas.GetComponent<Canvas>().enabled = false;
         GetComponentInChildren<Camera>().enabled = false;
 		GetComponentInChildren<AudioListener>().enabled = false;
