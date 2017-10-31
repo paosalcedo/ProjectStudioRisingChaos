@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class GrenadeEngine : MonoBehaviour {
 
+
 	Rigidbody rb;
-	private float radius = 3F;
-    private float power = 20.0F;	
+	private float radius = 2.5F;
+    // private float power = 20.0F;	
 	private int damage;
+
+	private bool exploded;
 
 	private float speed;
 	private float upwardsMod = 0f;
@@ -18,8 +21,10 @@ public class GrenadeEngine : MonoBehaviour {
 		damage = Services.WeaponDefinitions.weapons[WeaponDefinitions.WeaponType.Grenade].damage;
 	}
 	void Start () {
-		Debug.Log("Launching grenade!");
-		MoveMortar();
+		exploded = false;
+		MoveGrenade();
+		// Collider[] colliders = Physics.OverlapSphere(explosionPos, radius);
+		StartCoroutine(DelayedExplosion(timeBeforeExplode));
 	}
 	
 	// Update is called once per frame
@@ -30,31 +35,29 @@ public class GrenadeEngine : MonoBehaviour {
 	void FixedUpdate(){
  	}
 
-	public void MoveMortar(){
+	public void MoveGrenade(){
 		rb.AddForce(transform.forward * speed, ForceMode.Impulse);
 	}
 
-	void OnCollisionEnter(){
-		Vector3 explosionPos = transform.position;
-        Collider[] colliders = Physics.OverlapSphere(explosionPos, radius);
-        foreach (Collider hit in colliders){
-			if(hit.tag == "Player" && hit.transform != transform.parent && hit.GetComponent<Rigidbody>() != null){
- 				Rigidbody rb = hit.GetComponent<Rigidbody>();
-				Debug.Log("Depleting health on" + hit.transform.GetComponent<PlayerIdentifier>().myName);
-				hit.GetComponent<PlayerHealthManager>().DepleteHealth(damage);
-				if (rb != null)
-					// Debug.Log("hit " + rb.name);
-					rb.AddExplosionForce(power, explosionPos, radius, upwardsMod, ForceMode.Impulse);
+	IEnumerator DelayedExplosion(float delay){
+		yield return new WaitForSeconds(delay);
+		Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
+		foreach (Collider hit in colliders){
+			if(	  
+				hit.tag == "Player" 
+				// && !exploded
+			){
+				//check if player within explosion is the other player. 
+				if(hit.GetComponent<PlayerTimeManager>().playerFrozenState == PlayerTimeManager.PlayerFrozenState.Frozen){
+					//if so, deplete health.
+					Debug.Log("Depleting health on " + hit.transform.GetComponent<PlayerIdentifier>().myName);
+					hit.GetComponent<PlayerHealthManager>().DepleteHealth(damage);
+				} else {
+					Debug.Log("Found no target!");
+				}
 			}
-        }
-
-		Destroy(gameObject, timeBeforeExplode);
+		}
+		// exploded = true;
+		Destroy(gameObject);
 	}
-
-	// void OnTriggerEnter(Collider coll){
-	// 	if(coll.gameObject.tag == "Door"){
-	// 		Destroy(gameObject);
-	// 	}
-	// }
-
 }

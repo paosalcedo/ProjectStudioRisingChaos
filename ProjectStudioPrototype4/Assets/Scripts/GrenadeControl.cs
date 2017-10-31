@@ -36,7 +36,7 @@ public class GrenadeControl : MonoBehaviour {
 			GameObject bullet;
 			// GetComponentInParent<ActionRecorder>().isAttacking = true;
 			bullet = Instantiate (Services.Prefabs.Grenade) as GameObject;
-			bullet.transform.position = transform.position;
+			bullet.transform.position = transform.position + transform.forward;
 			bullet.transform.rotation = transform.rotation;
 			cooldown = startingCooldown;
  		}

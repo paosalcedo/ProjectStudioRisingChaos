@@ -62,8 +62,8 @@ public class StealthPlayerSwitcher : MonoBehaviour {
 	public void SwitchToThis(){
 		timeManager.UnFreezeMe();
 		// Debug.Log("SwitchToThis() was called");
- 		GetComponentInChildren<Camera>().enabled = true;
-		GetComponentInChildren<AudioListener>().enabled = true;
+ 		// GetComponentInChildren<Camera>().enabled = true;
+		// GetComponentInChildren<AudioListener>().enabled = true;
 	}
 
 	IEnumerator InitOtherPlayer(float delay){

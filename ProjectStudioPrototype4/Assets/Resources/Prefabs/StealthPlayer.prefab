@@ -287,6 +287,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b5f74089faab3945a737c6e8cf5f2a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myDisplayNum: 0
 --- !u!114 &114491445911656940
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -302,6 +303,7 @@ MonoBehaviour:
   ap_walkCost: 1
   ap_lookCost: 1
   ap_attackCost: 50
+  myActionPoints: 1e+9
   otherPlayer: {fileID: 0}
   myCanvas: {fileID: 0}
   playerFrozenState: 0
@@ -447,8 +449,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myName: 
   myIndex: 0
-  currentHealth: 0
   maxHealth: 100
+  currentHealth: 0
 --- !u!124 &124895946898171200
 Behaviour:
   m_ObjectHideFlags: 1

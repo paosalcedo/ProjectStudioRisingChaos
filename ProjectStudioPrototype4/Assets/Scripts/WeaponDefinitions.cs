@@ -17,7 +17,7 @@ public class WeaponDefinitions {
 		{ 
 			WeaponType.Grenade, new WeaponInfo (
 				"a grenade for throwing", 
-				20f, 
+				12.5f, 
 				30, 
 				2, 
 				"unknown"

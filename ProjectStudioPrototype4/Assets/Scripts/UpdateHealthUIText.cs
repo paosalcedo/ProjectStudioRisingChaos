@@ -16,6 +16,6 @@ public class UpdateHealthUIText : MonoBehaviour {
 	}
 
 	public void UpdateHP(){
-		hpText.text = "HP: " + CurrentPlayerTracker.currentPlayer.GetComponent<PlayerHealthManager>().currentHealth.ToString() + "/100";
+		// hpText.text = "HP: " + CurrentPlayerTracker.currentPlayer.GetComponent<PlayerHealthManager>().currentHealth.ToString() + "/100";
 	}
 }
