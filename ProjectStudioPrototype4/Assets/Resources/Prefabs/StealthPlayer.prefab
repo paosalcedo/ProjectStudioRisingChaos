@@ -485,7 +485,7 @@ MonoBehaviour:
   ap_walkCost: 1
   ap_lookCost: 1
   ap_attackCost: 50
-  myActionPoints: 100
+  myActionPoints: 9999
   otherPlayer: {fileID: 0}
   myCanvas: {fileID: 0}
   playerFrozenState: 0
