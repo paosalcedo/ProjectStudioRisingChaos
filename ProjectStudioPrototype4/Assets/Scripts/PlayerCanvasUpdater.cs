@@ -11,12 +11,17 @@ public class PlayerCanvasUpdater : MonoBehaviour {
 	public Text alertText;
 
 	// Use this for initialization
-	void Start () {
-		
-	}
+
 	
 	// Update is called once per frame
-	void Update () {
-		
+	public void UpdateHitAlert(string nameOfPlayerHit, int damageDealt){
+		hitAlertText.text = "You hit " + nameOfPlayerHit + " for " + damageDealt;
+		Debug.Log("You hit " + nameOfPlayerHit + " for " + damageDealt);
+		StartCoroutine(ClearText(3f));
+	}
+
+	IEnumerator ClearText(float delay){
+		yield return new WaitForSeconds(delay);
+		hitAlertText.text = "";
 	}
 }

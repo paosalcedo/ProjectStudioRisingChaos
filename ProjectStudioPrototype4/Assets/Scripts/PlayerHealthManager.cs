@@ -1,20 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class PlayerHealthManager : MonoBehaviour {
 
+	
 	public string myName;
-
+	private GameObject myCanvas;
 	public int myIndex;
 	public int maxHealth = 100;
 	public int currentHealth;
 
+	private PlayerTimeManager timeManager;
 	PlayerIdentifier playerIdentifier;
 	StealthPlayerSwitcher playerSwitcher;
 	// Use this for initialization
 	void Start () {
+		myCanvas = timeManager.myCanvas;
 		currentHealth = maxHealth;
+		Debug.Log(currentHealth);
 		playerIdentifier = GetComponent<PlayerIdentifier>();
  		// myIndex = playerSwitcher.myIndex;
 		currentHealth = maxHealth;
@@ -29,10 +33,18 @@ public class PlayerHealthManager : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
+	void Update(){
+
+	}
 	public void DepleteHealth(int damage){
 		currentHealth -= damage;
 		Debug.Log("Damaging " + this.gameObject);
 		HealthManager.CheckPlayerHealth(this.gameObject, currentHealth);
+	}
+
+	public void UpdateCanvasHealth(int _health){
+		Text hpText = myCanvas.GetComponent<PlayerCanvasUpdater>().hpText;
+		hpText.text = "HP: " + currentHealth.ToString("F0") + "/" + maxHealth;
 	}
 
 	

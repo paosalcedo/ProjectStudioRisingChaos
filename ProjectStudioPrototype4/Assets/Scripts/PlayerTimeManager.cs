@@ -16,8 +16,8 @@ public class PlayerTimeManager : MonoBehaviour {
 	public float ap_lookCost = 0.2f;
 	public float ap_attackCost = 50f;
 
-	public float myActionPoints = 100;
-	private float maxActionPoints;
+	public float myActionPoints;
+	public float maxActionPoints;
 	float mouseX_pos;
 	float mouseY_pos;
 
@@ -142,10 +142,7 @@ public class PlayerTimeManager : MonoBehaviour {
 			if(myActionPoints >= ap_attackCost){
 			// if(TimeManager.actionPoints >= ap_attackCost){
 				// TimeManager.DepleteAP(ap_attackCost);
-			} else {
-				TimeManager.apAlertString = "Not enough AP to fire!";
-				Invoke("ClearAlertString", 3f);
-			}
+			} 
 		}
 
 		if(myActionPoints <= 0){

@@ -50,8 +50,15 @@ public class GrenadeEngine : MonoBehaviour {
 				//check if player within explosion is the other player. 
 				if(hit.GetComponent<PlayerTimeManager>().playerFrozenState == PlayerTimeManager.PlayerFrozenState.Frozen){
 					//if so, deplete health.
-					Debug.Log("Depleting health on " + hit.transform.GetComponent<PlayerIdentifier>().myName);
+					// Debug.Log("Depleting health on " + hit.transform.GetComponent<PlayerIdentifier>().myName);
 					hit.GetComponent<PlayerHealthManager>().DepleteHealth(damage);
+					//check if hit player is currentPlayer or otherPlayer.
+					if(hit.gameObject == CurrentPlayerTracker.otherPlayer){
+					//tell the canvas of currentPlayer to show a hit alert.
+						CurrentPlayerTracker.currentPlayer.GetComponent<PlayerTimeManager>().myCanvas.GetComponent<PlayerCanvasUpdater>().UpdateHitAlert(hit.GetComponent<PlayerIdentifier>().myName, damage);
+					} else {
+						CurrentPlayerTracker.otherPlayer.GetComponent<PlayerTimeManager>().myCanvas.GetComponent<PlayerCanvasUpdater>().UpdateHitAlert(hit.GetComponent<PlayerIdentifier>().myName, damage);
+					}
 				} else {
 					Debug.Log("Found no target!");
 				}

@@ -65,7 +65,7 @@ public class StealthPlayerSwitcher : MonoBehaviour {
  	}
 	public void SwitchToThis(){
 		timeManager.UnFreezeMe();
-		timeManager.myActionPoints = 100;
+		timeManager.myActionPoints = timeManager.maxActionPoints;
 		// CurrentPlayerTracker.currentPlayer = this.gameObject;
 		// Debug.Log("SwitchToThis() was called");
  		// GetComponentInChildren<Camera>().enabled = true;

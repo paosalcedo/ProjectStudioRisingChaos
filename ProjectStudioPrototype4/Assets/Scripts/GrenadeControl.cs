@@ -49,6 +49,7 @@ public class GrenadeControl : MonoBehaviour {
 			grenade = Instantiate (Services.Prefabs.Grenade) as GameObject;
 			grenade.transform.position = transform.position + transform.forward;
 			grenade.transform.rotation = transform.rotation;
+			thisPlayerTimeManager.myActionPoints -= thisPlayerTimeManager.ap_attackCost;  
 			cooldown = startingCooldown;
  		}
   	}
