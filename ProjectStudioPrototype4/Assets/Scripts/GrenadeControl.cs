@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class GrenadeControl : MonoBehaviour {
 
-	private PlayerTimeManager playerTimeManager;
+	private PlayerTimeManager currentPlayerTimeManager;
+	private PlayerTimeManager thisPlayerTimeManager;
 	private KeyCode attackKey;
 	public float cooldown = 0;
 	private float startingCooldown;
@@ -15,7 +16,8 @@ public class GrenadeControl : MonoBehaviour {
 		NOT_FIRING
 	}
 	void Start () {
-		playerTimeManager = CurrentPlayerTracker.currentPlayer.GetComponent<PlayerTimeManager>();
+		currentPlayerTimeManager = CurrentPlayerTracker.currentPlayer.GetComponent<PlayerTimeManager>();
+		thisPlayerTimeManager = GetComponentInParent<PlayerTimeManager>();
 		attackKey = KeyCode.Mouse0;
 		startingCooldown = Services.WeaponDefinitions.weapons[WeaponDefinitions.WeaponType.Grenade].cooldown;
 		cooldown = startingCooldown;
@@ -23,23 +25,30 @@ public class GrenadeControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(playerTimeManager != null){
-			if(playerTimeManager.playerFrozenState == PlayerTimeManager.PlayerFrozenState.Not_Frozen){
-				Debug.Log("attacking!");
-				if(playerTimeManager.myActionPoints >= 0 && playerTimeManager.ap_attackCost <= playerTimeManager.myActionPoints){
-					Attack(attackKey);	
-				}
+		// if(currentPlayerTimeManager != null){
+		// 	if(currentPlayerTimeManager.playerFrozenState == PlayerTimeManager.PlayerFrozenState.Not_Frozen){
+		// 		Debug.Log("attacking!");
+		// 		if(currentPlayerTimeManager.myActionPoints >= 0 && currentPlayerTimeManager.ap_attackCost <= currentPlayerTimeManager.myActionPoints){
+		// 			Attack(attackKey);	
+		// 		}
+		// 	}
+		// }
+
+		if(thisPlayerTimeManager.playerFrozenState == PlayerTimeManager.PlayerFrozenState.Not_Frozen){
+			if(thisPlayerTimeManager.myActionPoints >= 0 && thisPlayerTimeManager.ap_attackCost <= thisPlayerTimeManager.myActionPoints){
+				Attack(attackKey);	
 			}
 		}
+		
 	}
 	public void Attack(KeyCode key){
 		cooldown -= Time.deltaTime;
 		if(Input.GetKeyDown(key) && cooldown <= 0){
-			GameObject bullet;
+			GameObject grenade;
 			// GetComponentInParent<ActionRecorder>().isAttacking = true;
-			bullet = Instantiate (Services.Prefabs.Grenade) as GameObject;
-			bullet.transform.position = transform.position + transform.forward;
-			bullet.transform.rotation = transform.rotation;
+			grenade = Instantiate (Services.Prefabs.Grenade) as GameObject;
+			grenade.transform.position = transform.position + transform.forward;
+			grenade.transform.rotation = transform.rotation;
 			cooldown = startingCooldown;
  		}
   	}
