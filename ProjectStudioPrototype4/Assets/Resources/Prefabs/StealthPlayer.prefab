@@ -481,11 +481,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c28ef390c177624e9407726ee20b553, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isActive: 0
   ap_jumpCost: 20
   ap_walkCost: 1
   ap_lookCost: 1
   ap_attackCost: 50
-  myActionPoints: 100
+  myActionPoints: 200
   otherPlayer: {fileID: 0}
   myCanvas: {fileID: 0}
   playerFrozenState: 0
