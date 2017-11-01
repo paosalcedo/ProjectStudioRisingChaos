@@ -16,6 +16,7 @@ public class PlayerHealthManager : MonoBehaviour {
 	StealthPlayerSwitcher playerSwitcher;
 	// Use this for initialization
 	void Start () {
+		timeManager = GetComponent<PlayerTimeManager>();
 		myCanvas = timeManager.myCanvas;
 		currentHealth = maxHealth;
 		Debug.Log(currentHealth);
@@ -40,11 +41,12 @@ public class PlayerHealthManager : MonoBehaviour {
 		currentHealth -= damage;
 		Debug.Log("Damaging " + this.gameObject);
 		HealthManager.CheckPlayerHealth(this.gameObject, currentHealth);
+		UpdateCanvasHealth(currentHealth);
 	}
 
 	public void UpdateCanvasHealth(int _health){
 		Text hpText = myCanvas.GetComponent<PlayerCanvasUpdater>().hpText;
-		hpText.text = "HP: " + currentHealth.ToString("F0") + "/" + maxHealth;
+		hpText.text = "HP: " + _health.ToString("F0") + "/" + maxHealth;
 	}
 
 	
