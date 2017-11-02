@@ -25,6 +25,7 @@ public class DestroyThis : MonoBehaviour {
 				Services.CanvasManager.AssignCanvasToPlayers();
 				Services.CanvasManager.AssignPlayerNumbers();
 				Services.CanvasManager.HideCursor();
+				
 				StartCoroutine(LateDestroy(0.2f));
 			}
 		}

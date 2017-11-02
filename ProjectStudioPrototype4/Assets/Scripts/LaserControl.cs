@@ -4,33 +4,40 @@ using UnityEngine;
 
 public class LaserControl : MonoBehaviour {
 
+	protected PlayerTimeManager thisPlayerTimeManager;
 	StealthPlayerSwitcher playerSwitcher;
 	public float laserLifetime = 1f;
+
+	protected float myAPcost;
+	protected int damage;
 	public GameObject myCanvas;
 	Transform parent;
 	public KeyCode attackKey;
 	float laserLifetimeReset;
 	// Use this for initialization
-	void Start () {
+	protected virtual void Start () {
 		playerSwitcher = GetComponentInParent<StealthPlayerSwitcher>();
+		thisPlayerTimeManager = GetComponentInParent<PlayerTimeManager>();
 		parent = transform.parent;
 		laserLifetimeReset = laserLifetime;
 		attackKey = KeyCode.Mouse0;
-		
-
+		damage = Services.WeaponDefinitions.weapons[WeaponDefinitions.WeaponType.Laser].damage;
+		myAPcost = Services.WeaponDefinitions.weapons[WeaponDefinitions.WeaponType.Laser].ap_cost;
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		if(CurrentPlayerTracker.currentPlayer == parent.gameObject){
-			Attack(attackKey);
+	public virtual void Update () {
+		if(thisPlayerTimeManager.playerFrozenState == PlayerTimeManager.PlayerFrozenState.Not_Frozen){
+			if(thisPlayerTimeManager.myActionPoints >= 0 && myAPcost <= thisPlayerTimeManager.myActionPoints){
+				Attack(attackKey);	
+			}
 		}
 	}
 
-	public void Attack(KeyCode key){
+	public virtual void Attack(KeyCode key){
 		if (Input.GetKeyDown(key)){
 			ShootRay();
-		}
+ 		}
 	}
 	
 	public void ShootRay(){
@@ -39,28 +46,31 @@ public class LaserControl : MonoBehaviour {
 		RaycastHit rayHit = new RaycastHit();
 		Debug.DrawRay(transform.position, transform.forward * 10f, Color.red, 3f);
 		if(Physics.Raycast(ray, out rayHit, Mathf.Infinity)){
-			if(rayHit.transform == playerSwitcher.otherPlayer.transform){
- 				if(rayHit.transform.GetComponent<StealthPlayerSwitcher>().myIndex == 0){
-					myCanvas.GetComponentInChildren<UpdateHitAlertText>().ShowHitAlert();
-				} else if (rayHit.transform.GetComponent<StealthPlayerSwitcher>().myIndex == 1) {
-					myCanvas.GetComponentInChildren<UpdateHitAlertText>().ShowHitAlert();
-				}
-				rayHit.transform.GetComponent<PlayerHealthManager>().DepleteHealth(34);
-			} else {
-				// Debug.Log("No one hit!");
+			if(	  
+				rayHit.transform.tag == "Player" 
+				// && !exploded
+			){
+				//check if player within explosion is the other player. 
+				if(rayHit.transform.GetComponent<PlayerTimeManager>().playerFrozenState == PlayerTimeManager.PlayerFrozenState.Frozen){
+					//if so, deplete health.
+					// Debug.Log("Depleting health on " + rayHit.transform.GetComponent<PlayerIdentifier>().myName);
+					rayHit.transform.GetComponent<PlayerHealthManager>().DepleteHealth(damage);
+					thisPlayerTimeManager.myActionPoints -= myAPcost;  
+
+					//check if rayHit player is currentPlayer or otherPlayer.
+					if(rayHit.transform.gameObject == CurrentPlayerTracker.otherPlayer){
+					//tell the canvas of currentPlayer to show a hit alert.
+						CurrentPlayerTracker.currentPlayer.GetComponent<PlayerTimeManager>().myCanvas.GetComponent<PlayerCanvasUpdater>().UpdateHitAlert(rayHit.transform.GetComponent<PlayerIdentifier>().myName, damage);
+					} else {
+						CurrentPlayerTracker.otherPlayer.GetComponent<PlayerTimeManager>().myCanvas.GetComponent<PlayerCanvasUpdater>().UpdateHitAlert(rayHit.transform.GetComponent<PlayerIdentifier>().myName, damage);
+					}
+				} 
 			}
-			// Debug.Log(rayHit.transform.name);
+			 else {
+				Debug.Log("Hit nothing!");
+				thisPlayerTimeManager.myActionPoints -= myAPcost;  
+			}	
 		}
 	}
 
-	// IEnumerator FindMyCanvas(float delay){
-	// 	yield return new WaitForSeconds(delay);
-	// 	if(transform.parent.GetComponent<PlayerIdentifier>().myPlayerNum == 0){
-	// 			myCanvas = Services.CanvasManager.canvases[0];
-	// 		} 
-
-	// 	if(transform.parent.GetComponent<PlayerIdentifier>().myPlayerNum == 1){
-	// 		myCanvas = Services.CanvasManager.canvases[1];
-	// 	}
-	// }
 }

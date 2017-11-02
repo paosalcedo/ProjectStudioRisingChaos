@@ -25,15 +25,6 @@ public class GrenadeControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		// if(currentPlayerTimeManager != null){
-		// 	if(currentPlayerTimeManager.playerFrozenState == PlayerTimeManager.PlayerFrozenState.Not_Frozen){
-		// 		Debug.Log("attacking!");
-		// 		if(currentPlayerTimeManager.myActionPoints >= 0 && currentPlayerTimeManager.ap_attackCost <= currentPlayerTimeManager.myActionPoints){
-		// 			Attack(attackKey);	
-		// 		}
-		// 	}
-		// }
-
 		if(thisPlayerTimeManager.playerFrozenState == PlayerTimeManager.PlayerFrozenState.Not_Frozen){
 			if(thisPlayerTimeManager.myActionPoints >= 0 && thisPlayerTimeManager.ap_attackCost <= thisPlayerTimeManager.myActionPoints){
 				Attack(attackKey);	
@@ -45,7 +36,6 @@ public class GrenadeControl : MonoBehaviour {
 		cooldown -= Time.deltaTime;
 		if(Input.GetKeyDown(key) && cooldown <= 0){
 			GameObject grenade;
-			// GetComponentInParent<ActionRecorder>().isAttacking = true;
 			grenade = Instantiate (Services.Prefabs.Grenade) as GameObject;
 			grenade.transform.position = transform.position + transform.forward;
 			grenade.transform.rotation = transform.rotation;
