@@ -37,6 +37,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4208629745925920}
   - component: {fileID: 65079059937531476}
+  - component: {fileID: 114017518304422678}
   m_Layer: 0
   m_Name: SwordC_Old_NoSheath
   m_TagString: Untagged
@@ -447,6 +448,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &114017518304422678
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1250504520738960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d3747235957aa54db5feaee5d71d4a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114072164186955098
 MonoBehaviour:
   m_ObjectHideFlags: 1

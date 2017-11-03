@@ -25,13 +25,16 @@ public class KnifeControl : LaserControl {
 
 	void AnimateKnifeAttack(){
 		Debug.Log("Animating knife!");
+		knife.GetComponent<KnifeEngine>().EnableKnifeCollider();
 		knife.transform.DOLocalMove(Vector3.left, 0.3f, false);
 		knife.transform.DOLocalRotate(new Vector3 (0, 0, 90), 0.3f, RotateMode.FastBeyond360);
+		thisPlayerTimeManager.myActionPoints -= myAPcost;
 		StartCoroutine(AnimateKnifeReturn(0.4f));
 	}
 
 	IEnumerator AnimateKnifeReturn(float delay){
 		yield return new WaitForSeconds(delay);
+		knife.GetComponent<KnifeEngine>().DisableKnifeCollider();
 		knife.transform.DOLocalMove(startPos, 0.3f, false);
 		knife.transform.DOLocalRotate(startRot, 0.3f, RotateMode.FastBeyond360);
 	}
@@ -42,6 +45,7 @@ public class KnifeControl : LaserControl {
 			thisPlayerTimeManager.myActionPoints -= myAPcost;  
 		}
   	}
+	
 
 
 }

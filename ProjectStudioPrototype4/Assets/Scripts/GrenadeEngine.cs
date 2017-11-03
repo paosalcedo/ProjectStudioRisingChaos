@@ -6,7 +6,7 @@ public class GrenadeEngine : MonoBehaviour {
 
 
 	Rigidbody rb;
-	private float radius = 2.5F;
+	private float radius = 3.5F;
     // private float power = 20.0F;	
 	private int damage;
 
