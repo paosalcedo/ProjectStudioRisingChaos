@@ -19,7 +19,7 @@ public class WeaponDefinitions {
 		{ 
 			WeaponType.Grenade, new WeaponInfo (
 				"a grenade for throwing", 
-				12.5f, //speed
+				14f, //speed
 				30, //damage
 				2, //cooldown
 				110, //ap cost
