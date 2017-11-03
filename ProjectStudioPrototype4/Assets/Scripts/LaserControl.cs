@@ -4,18 +4,19 @@ using UnityEngine;
 
 public class LaserControl : MonoBehaviour {
 
+	public GameObject laserPistol;
 	protected PlayerTimeManager thisPlayerTimeManager;
 	StealthPlayerSwitcher playerSwitcher;
 	public float laserLifetime = 1f;
 
 	protected float myAPcost;
 	protected int damage;
-	public GameObject myCanvas;
 	Transform parent;
 	public KeyCode attackKey;
 	float laserLifetimeReset;
 	// Use this for initialization
 	protected virtual void Start () {
+		laserPistol.SetActive(true);
 		playerSwitcher = GetComponentInParent<StealthPlayerSwitcher>();
 		thisPlayerTimeManager = GetComponentInParent<PlayerTimeManager>();
 		parent = transform.parent;
@@ -71,6 +72,10 @@ public class LaserControl : MonoBehaviour {
 				thisPlayerTimeManager.myActionPoints -= myAPcost;  
 			}	
 		}
+	}
+
+	void AnimateLaserAttack(){
+		
 	}
 
 }

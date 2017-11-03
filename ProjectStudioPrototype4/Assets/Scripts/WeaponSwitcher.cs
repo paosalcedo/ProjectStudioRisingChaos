@@ -46,6 +46,9 @@ public class WeaponSwitcher : MonoBehaviour {
 			laserControl.enabled = false;
 			grenadeControl.enabled = false;
 			knifeControl.enabled = false;
+			laserControl.laserPistol.SetActive(false);
+			knifeControl.knife.SetActive(false);
+			grenadeControl.grenade.SetActive(false);
 		}
 	}
 
@@ -55,6 +58,10 @@ public class WeaponSwitcher : MonoBehaviour {
 			laserControl.enabled = false;
 			grenadeControl.enabled = true;
 			knifeControl.enabled = false;
+			laserControl.laserPistol.SetActive(false);
+			knifeControl.knife.SetActive(false);
+			grenadeControl.grenade.SetActive(true);
+			grenadeControl.cooldown = 0;
 		}
 	}
 
@@ -64,6 +71,9 @@ public class WeaponSwitcher : MonoBehaviour {
 			laserControl.enabled = true;
 			grenadeControl.enabled = false;
 			knifeControl.enabled = false;
+			laserControl.laserPistol.SetActive(true);
+			knifeControl.knife.SetActive(false);
+			grenadeControl.grenade.SetActive(false);
 		}
 	}
 
@@ -73,6 +83,9 @@ public class WeaponSwitcher : MonoBehaviour {
 			laserControl.enabled = false;
 			grenadeControl.enabled = false;
 			knifeControl.enabled = true;
+			laserControl.laserPistol.SetActive(false);
+			grenadeControl.grenade.SetActive(false);
+			knifeControl.knife.SetActive(true);
 		}
 	}
 

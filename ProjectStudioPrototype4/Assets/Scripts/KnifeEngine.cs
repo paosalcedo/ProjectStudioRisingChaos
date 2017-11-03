@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class KnifeEngine : MonoBehaviour {
 
-	Collider collider;
+	Collider myCollider;
 	GameObject parent;
 	private int damage;
 	// Use this for initialization
 	void Start () {
 		damage = Services.WeaponDefinitions.weapons[WeaponDefinitions.WeaponType.Knife].damage;
 		parent = transform.parent.gameObject;
-		collider = GetComponent<BoxCollider>();
-		collider.enabled = false;
+		myCollider = GetComponent<BoxCollider>();
+		myCollider.enabled = false;
 	}
 	
 	// Update is called once per frame
@@ -21,11 +21,11 @@ public class KnifeEngine : MonoBehaviour {
 	}
 
 	public void EnableKnifeCollider(){
-		collider.enabled = true;
+		myCollider.enabled = true;
 	}
 
 	public void DisableKnifeCollider(){
-		collider.enabled = false;
+		myCollider.enabled = false;
 	}
 
 	void OnTriggerEnter(Collider coll){
