@@ -11,6 +11,11 @@ public class WeaponSwitcher : MonoBehaviour {
 		Knife
 	}
 
+	private PlayerCanvasUpdater playerCanvasUpdater;
+	public KeyCode selectTrapKey;
+	public KeyCode selectLaserKey;
+	public KeyCode selectGrenadeKey;
+	public KeyCode selectKnifeKey;
 	private LaserControl laserControl;
 	private GrenadeControl grenadeControl;
 	private TrapControl trapControl;
@@ -21,6 +26,7 @@ public class WeaponSwitcher : MonoBehaviour {
 		laserControl = GetComponent<LaserControl>();
 		grenadeControl = GetComponent<GrenadeControl>();
 		knifeControl = GetComponent<KnifeControl>();
+		playerCanvasUpdater = GetComponentInParent<PlayerCanvasUpdater>();
 		// trapControl.enabled = false;
 		// laserControl.enabled = false;
 		// grenadeControl.enabled = false;
@@ -28,36 +34,46 @@ public class WeaponSwitcher : MonoBehaviour {
 	}
 
 	void Update(){
-
+		SelectTrap(selectTrapKey);
+		SelectGrenade(selectGrenadeKey);
+		SelectKnife(selectKnifeKey);
+		SelectLaser(selectLaserKey);
 	}
 	
-	// Update is called once per frame
-	public void SelectTrap(){
-		trapControl.enabled = true;
-		laserControl.enabled = false;
-		grenadeControl.enabled = false;
-		knifeControl.enabled = false;
+	public void SelectTrap(KeyCode key){
+		if(Input.GetKeyDown(key)){
+			trapControl.enabled = true;
+			laserControl.enabled = false;
+			grenadeControl.enabled = false;
+			knifeControl.enabled = false;
+		}
 	}
 
-	public void SelectGrenade(){
-		trapControl.enabled = true;
-		laserControl.enabled = false;
-		grenadeControl.enabled = true;
-		knifeControl.enabled = false;
+	public void SelectGrenade(KeyCode key){
+		if(Input.GetKeyDown(key)){
+			trapControl.enabled = true;
+			laserControl.enabled = false;
+			grenadeControl.enabled = true;
+			knifeControl.enabled = false;
+		}
 	}
 
-	public void SelectLaser(){
-		trapControl.enabled = false;
-		laserControl.enabled = true;
-		grenadeControl.enabled = false;
-		knifeControl.enabled = false;
+	public void SelectLaser(KeyCode key){
+		if(Input.GetKeyDown(key)){
+			trapControl.enabled = false;
+			laserControl.enabled = true;
+			grenadeControl.enabled = false;
+			knifeControl.enabled = false;
+		}
 	}
 
-	public void SelectKnife(){
-		trapControl.enabled = false;
-		laserControl.enabled = false;
-		grenadeControl.enabled = false;
-		knifeControl.enabled = true;
+	public void SelectKnife(KeyCode key){
+		if(Input.GetKeyDown(key)){
+			trapControl.enabled = false;
+			laserControl.enabled = false;
+			grenadeControl.enabled = false;
+			knifeControl.enabled = true;
+		}
 	}
 
 }

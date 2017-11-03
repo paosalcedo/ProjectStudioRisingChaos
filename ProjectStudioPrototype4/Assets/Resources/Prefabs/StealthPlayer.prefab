@@ -556,6 +556,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 766913b2cdc6f3e449a8fd29cbc47a46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectTrapKey: 52
+  selectLaserKey: 49
+  selectGrenadeKey: 50
+  selectKnifeKey: 51
 --- !u!114 &114859991204236706
 MonoBehaviour:
   m_ObjectHideFlags: 1
