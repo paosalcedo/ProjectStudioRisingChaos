@@ -16,7 +16,7 @@ public class DestroyThis : MonoBehaviour {
 			if(p1NameInputField.text != p2NameInputField.text && p1NameInputField.text != "" && p2NameInputField.text != ""){
 				// CurrentPlayerTracker.currentPlayer.GetComponent<PlayerTimeManager>().UnFreezeMe();
 				PlayerNames.AssignNames(p1NameInputField.text, p2NameInputField.text);
-			
+							
 				GameObject.Find("CanvasP1").GetComponent<Canvas>().enabled = true;
 				GameObject.Find("CanvasP2").GetComponent<Canvas>().enabled = true;
 				Services.MapManager.AddSpawnPointsToArray();
@@ -25,7 +25,6 @@ public class DestroyThis : MonoBehaviour {
 				Services.CanvasManager.AssignCanvasToPlayers();
 				Services.CanvasManager.AssignPlayerNumbers();
 				Services.CanvasManager.HideCursor();
-				
 				StartCoroutine(LateDestroy(0.2f));
 			}
 		}
@@ -34,6 +33,7 @@ public class DestroyThis : MonoBehaviour {
 	IEnumerator LateDestroy(float delay){
 		yield return new WaitForSeconds(delay);
 		Destroy(gameObject);
+		Destroy(GameObject.Find("P2IntroCanvas"));
 	}
 
 	void HideCursor(){
