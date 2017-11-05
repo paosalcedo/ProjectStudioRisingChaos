@@ -22,4 +22,6 @@ public static class Services {
     public static PlayerNames PlayerNames { get; set; }
     // public static LightManager LightManager { get; set; }
 
+    public static ScoreKeeper ScoreKeeper { get; set; }
+
 }

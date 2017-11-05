@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class PlayerHealthManager : MonoBehaviour {
 
-	
+	bool scoreHasBeenIncreased;
 	public string myName;
 	private GameObject myCanvas;
 	public int myIndex;
@@ -16,6 +16,7 @@ public class PlayerHealthManager : MonoBehaviour {
 	StealthPlayerSwitcher playerSwitcher;
 	// Use this for initialization
 	void Start () {
+		scoreHasBeenIncreased = false;
 		timeManager = GetComponent<PlayerTimeManager>();
 		myCanvas = timeManager.myCanvas;
 		currentHealth = maxHealth;
@@ -35,7 +36,10 @@ public class PlayerHealthManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update(){
-
+		if(currentHealth <= 0){
+			AddToEnemyScore();
+			myCanvas.GetComponent<PlayerCanvasUpdater>().UpdateRoundScore();
+		}
 	}
 	public void DepleteHealth(int damage){
 		currentHealth -= damage;
@@ -48,6 +52,24 @@ public class PlayerHealthManager : MonoBehaviour {
 		Text hpText = myCanvas.GetComponent<PlayerCanvasUpdater>().hpText;
 		hpText.text = "HP: " + _health.ToString("F0") + "/" + maxHealth;
 	}
+
+
+
+	public void AddToEnemyScore(){
+		//if this player is Player 1, then add to the score of Player 2 (otherplayer)
+		if(!scoreHasBeenIncreased){
+			if(playerIdentifier.myPlayerNum == 0){
+				Services.ScoreKeeper.AddToRoundScore(CurrentPlayerTracker.otherPlayer.GetComponent<PlayerIdentifier>().myPlayerNum);
+				scoreHasBeenIncreased = true;
+			} else {
+			//if this player is Player 2, then add to the score of Player 1(currentPlayer)
+				Services.ScoreKeeper.AddToRoundScore(CurrentPlayerTracker.currentPlayer.GetComponent<PlayerIdentifier>().myPlayerNum);	
+				scoreHasBeenIncreased = true;
+			}
+		}
+	} 
+
+
 
 	
 }

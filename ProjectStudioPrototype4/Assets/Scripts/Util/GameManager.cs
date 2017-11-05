@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
 		Services.CanvasManager = new CanvasManager();
 		Services.GameStateManager = new GameStateManager();
 		Services.TimeManager = new TimeManager();
+		Services.ScoreKeeper = new ScoreKeeper();
 		Services.WeaponDefinitions = new WeaponDefinitions();
 		Services.EventManager = new EventManager();
 		Services.TaskManager = new TaskManager();
