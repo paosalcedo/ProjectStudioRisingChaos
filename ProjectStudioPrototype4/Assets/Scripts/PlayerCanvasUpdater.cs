@@ -25,6 +25,9 @@ public class PlayerCanvasUpdater : MonoBehaviour {
 		}
 	}
 	
+	void Update(){
+		UpdateRoundScore();
+	}
 	// Update is called once per frame
 	public void UpdateHitAlert(string nameOfPlayerHit, int damageDealt){
 		hitAlertText.text = "You hit " + nameOfPlayerHit + " for " + damageDealt;
@@ -45,6 +48,9 @@ public class PlayerCanvasUpdater : MonoBehaviour {
 		}
 	}
 
+	public void UpdateAlertTextWithDeath(string winningPlayer){
+		alertText.text = winningPlayer + " killed you!";
+	}
 	IEnumerator ClearText(float delay, Text textToClear){
 		yield return new WaitForSeconds(delay);
 		textToClear.text = "";

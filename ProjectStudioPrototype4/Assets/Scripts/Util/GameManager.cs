@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-
+	private KeyCode restartKey;
 	public GameObject sceneRoot;
 	// public Camera currentCamera;
 	void Awake()
@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
 	// Use this for initialization
 	void Start()
 	{
+		restartKey = KeyCode.F1;
 		// Services.EventManager.Register<Reset>(Reset);
 		// Services.SceneStackManager.PushScene<TitleScreen>();
 	}
@@ -24,6 +25,7 @@ public class GameManager : MonoBehaviour
 	void Update()
 	{
 		Services.TaskManager.Update();
+		RestartScene(restartKey);
 		// Debug.Log(Services.WeaponDefinitions.weapons[WeaponDefinitions.WeaponType.Grenade].description);
 	}
 
@@ -53,6 +55,9 @@ public class GameManager : MonoBehaviour
 		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 	}
 
-	//UI buttons
+	public void RestartScene(KeyCode key){
+		if(Input.GetKeyDown(key))
+			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+	}
 
 }

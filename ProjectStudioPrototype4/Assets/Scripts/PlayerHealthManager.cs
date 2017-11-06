@@ -104,11 +104,13 @@ public class PlayerHealthManager : MonoBehaviour {
 			transform.position = Services.MapManager.spawnPoints[Random.Range(0,2)].transform.position;
 			currentHealth = maxHealth;
 			UpdateCanvasHealth(currentHealth);
+			myCanvas.GetComponent<PlayerCanvasUpdater>().UpdateAlertTextWithDeath(myEnemy.GetComponent<PlayerIdentifier>().myName);
 		} else if (playerIdentifier.myPlayerNum == 1){
 			// transform.position = Services.MapManager.playerTwoStartPos;			
 			transform.position = Services.MapManager.spawnPoints[Random.Range(0,2)].transform.position;
 			currentHealth = maxHealth;
 			UpdateCanvasHealth(currentHealth);
+			myCanvas.GetComponent<PlayerCanvasUpdater>().UpdateAlertTextWithDeath(myEnemy.GetComponent<PlayerIdentifier>().myName);
 		}
 	}
 

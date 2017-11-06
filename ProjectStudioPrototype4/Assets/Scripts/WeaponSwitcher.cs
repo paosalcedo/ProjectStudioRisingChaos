@@ -34,10 +34,13 @@ public class WeaponSwitcher : MonoBehaviour {
 	}
 
 	void Update(){
-		SelectTrap(selectTrapKey);
-		SelectGrenade(selectGrenadeKey);
-		SelectKnife(selectKnifeKey);
-		SelectLaser(selectLaserKey);
+		//only allow weapon switching if you're not frozen.
+		if(GetComponentInParent<PlayerTimeManager>().playerFrozenState == PlayerTimeManager.PlayerFrozenState.Not_Frozen){
+			SelectTrap(selectTrapKey);
+			SelectGrenade(selectGrenadeKey);
+			SelectKnife(selectKnifeKey);
+			SelectLaser(selectLaserKey);
+		}
 	}
 	
 	public void SelectTrap(KeyCode key){
