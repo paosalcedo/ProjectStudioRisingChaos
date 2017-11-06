@@ -9,8 +9,8 @@ public class MapManager : MonoBehaviour {
 	public GameObject[] players;
 
 	public GameObject[] spawnPoints;
-	private Vector3 playerOneStartPos;
-	private Vector3 playerTwoStartPos;
+	public Vector3 playerOneStartPos;
+	public Vector3 playerTwoStartPos;
 
 	// Use this for initialization
 	void Awake (){	

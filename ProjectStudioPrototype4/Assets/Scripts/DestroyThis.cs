@@ -25,6 +25,9 @@ public class DestroyThis : MonoBehaviour {
 				Services.CanvasManager.AssignCanvasToPlayers();
 				Services.CanvasManager.AssignPlayerNumbers();
 				Services.CanvasManager.HideCursor();
+				Services.CurrentPlayerTracker.AssignPlayers();
+				Services.CurrentPlayerTracker.players[0].GetComponent<PlayerHealthManager>().enabled = true;
+				Services.CurrentPlayerTracker.players[1].GetComponent<PlayerHealthManager>().enabled = true;
 				StartCoroutine(LateDestroy(0.2f));
 			}
 		}

@@ -19,6 +19,7 @@ public static class Services {
     public static HealthManager HealthManager { get; set; }
     public static DisplayScript DisplayScript { get; set; }
 
+    public static CurrentPlayerTracker CurrentPlayerTracker { get; set; }
     public static PlayerNames PlayerNames { get; set; }
     // public static LightManager LightManager { get; set; }
 

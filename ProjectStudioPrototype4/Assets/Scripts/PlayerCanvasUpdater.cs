@@ -34,12 +34,12 @@ public class PlayerCanvasUpdater : MonoBehaviour {
 
 	public void UpdateRoundScore(){
 		if(this.gameObject.name == "CanvasP1"){
-			Debug.Log("I  AM P1");
+			// Debug.Log("I  AM P1");
 			roundScoreText.text = "Your score: " + Services.ScoreKeeper.p1RoundScore;
 			enemyRoundScoreText.text = PlayerNames.playerTwoName + ": " + Services.ScoreKeeper.p2RoundScore;
 		}
 		if(this.gameObject.name == "CanvasP2"){
-			Debug.Log("I AM P2");
+			// Debug.Log("I AM P2");
 			roundScoreText.text = "Your score: " + Services.ScoreKeeper.p2RoundScore;
 			enemyRoundScoreText.text = PlayerNames.playerOneName + ": " + Services.ScoreKeeper.p1RoundScore;
 		}

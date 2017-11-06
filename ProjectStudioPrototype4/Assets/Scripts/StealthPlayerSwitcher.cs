@@ -31,7 +31,8 @@ public class StealthPlayerSwitcher : MonoBehaviour {
 		// otherIndex = otherPlayer.GetComponent<StealthPlayerSwitcher>().myIndex;
 		//add if statement to check if this player is player 0
 		if(playerIdentifier.myPlayerNum == 0){
-			CurrentPlayerTracker.SetCurrentPlayer(this.gameObject);
+			// CurrentPlayerTracker.SetCurrentPlayer(this.gameObject);
+			CurrentPlayerTracker.currentPlayer = this.gameObject;
 			Debug.Log("Active player is " + CurrentPlayerTracker.currentPlayer.GetComponent<PlayerIdentifier>().myPlayerNum);
 			// timeManager.UnFreezeMe();
 			// Debug.Log("Current active player name is " + CurrentPlayerTracker.currentPlayer.GetComponent<PlayerIdentifier>().myName);

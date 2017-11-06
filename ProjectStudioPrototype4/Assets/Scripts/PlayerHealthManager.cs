@@ -27,31 +27,24 @@ public class PlayerHealthManager : MonoBehaviour {
 		playerIdentifier = GetComponent<PlayerIdentifier>();
  		// myIndex = playerSwitcher.myIndex;
 		currentHealth = maxHealth;
-		if(playerIdentifier.myPlayerNum == 0){
-			//you are player 1
-			myName = PlayerNames.playerOneName;
-			myEnemy = CurrentPlayerTracker.otherPlayer;
-		} 
-		if(playerIdentifier.myPlayerNum == 1){
-			//you are player 2
-			myName = PlayerNames.playerTwoName;
-			myEnemy = CurrentPlayerTracker.currentPlayer;
-		}
+		AssignPlayerAndEnemy();
+		// if(playerIdentifier.myPlayerNum == 0){
+		// 	//you are player 1
+		// 	myName = PlayerNames.playerOneName;
+		// 	myEnemy = CurrentPlayerTracker.otherPlayer;
+		// } 
+		// if(playerIdentifier.myPlayerNum == 1){
+		// 	//you are player 2
+		// 	myName = PlayerNames.playerTwoName;
+		// 	myEnemy = CurrentPlayerTracker.currentPlayer;
+		// }
 	}
 	
 	// Update is called once per frame
 	void Update(){
 		if(currentHealth <= 0 && !scoreHasBeenIncreased){
 			AddToEnemyScore();
-			myCanvas.GetComponent<PlayerCanvasUpdater>().UpdateRoundScore();
-			scoreHasBeenIncreased = true;
-			// Debug.Log("Current health is " + currentHealth);
-			myEnemy = CurrentPlayerTracker.otherPlayer;
-			Debug.Log(myEnemy.GetComponent<PlayerHealthManager>().myScore);
-			//reset enemy's health (this should eventually be respawning)
-			myEnemy.GetComponent<PlayerHealthManager>().currentHealth = myEnemy.GetComponent<PlayerHealthManager>().maxHealth;
-			scoreHasBeenIncreased = false;
-			Debug.Log("My enemy's health is: " + myEnemy.GetComponent<PlayerHealthManager>().currentHealth);
+			// Debug.Log("My enemy's health is: " + myEnemy.GetComponent<PlayerHealthManager>().currentHealth);			
 		}
 		Debug.Log("My enemy's score is: " + myEnemy.GetComponent<PlayerHealthManager>().myScore);
 	}
@@ -70,20 +63,54 @@ public class PlayerHealthManager : MonoBehaviour {
 
 
 	public void AddToEnemyScore(){
-		GameObject myEnemy = CurrentPlayerTracker.otherPlayer;
+		myCanvas.GetComponent<PlayerCanvasUpdater>().UpdateRoundScore();
+		myEnemy.GetComponent<PlayerHealthManager>().currentHealth = 100;
 		myEnemy.GetComponent<PlayerHealthManager>().myScore += 1;
-		//if this player is Player 1, then add to the score of Player 2 (otherplayer)
-		// if(!scoreHasBeenIncreased){
-		// 	if(playerIdentifier.myPlayerNum == 0){
-		// 		Services.ScoreKeeper.AddToRoundScore(CurrentPlayerTracker.otherPlayer.GetComponent<PlayerIdentifier>().myPlayerNum);
-		// 		scoreHasBeenIncreased = true;
-		// 	} else {
-		// 	//if this player is Player 2, then add to the score of Player 1(currentPlayer)
-		// 		Services.ScoreKeeper.AddToRoundScore(CurrentPlayerTracker.currentPlayer.GetComponent<PlayerIdentifier>().myPlayerNum);	
-		// 		scoreHasBeenIncreased = true;
-		// 	}
-		// }
+		if(playerIdentifier.myPlayerNum == 0){
+			Services.ScoreKeeper.p2RoundScore = myEnemy.GetComponent<PlayerHealthManager>().myScore;
+			//update my canvas.
+			myCanvas.GetComponent<PlayerCanvasUpdater>().UpdateRoundScore();
+			//update enemy's canvas.
+			myEnemy.GetComponent<PlayerHealthManager>().myCanvas.GetComponent<PlayerCanvasUpdater>().UpdateRoundScore();
+			// myCanvas.GetComponent<PlayerCanvasUpdater>().UpdateRoundScore();
+			scoreHasBeenIncreased = true;
+			RespawnPlayerAfterDeath();
+		} else if(playerIdentifier.myPlayerNum == 1){
+			Services.ScoreKeeper.p1RoundScore = myEnemy.GetComponent<PlayerHealthManager>().myScore;
+			//update my canvas.
+			myCanvas.GetComponent<PlayerCanvasUpdater>().UpdateRoundScore();
+			//update enemy's canvas.
+			myEnemy.GetComponent<PlayerHealthManager>().myCanvas.GetComponent<PlayerCanvasUpdater>().UpdateRoundScore();
+			scoreHasBeenIncreased = false;
+			RespawnPlayerAfterDeath();
+		}
 	} 
+
+	public void AssignPlayerAndEnemy(){
+		if(playerIdentifier.myPlayerNum == 0){
+			//you are player 1
+			myName = PlayerNames.playerOneName;
+			myEnemy = CurrentPlayerTracker.otherPlayer;
+		} 
+		if(playerIdentifier.myPlayerNum == 1){
+			//you are player 2
+			myName = PlayerNames.playerTwoName;
+			myEnemy = CurrentPlayerTracker.currentPlayer;
+		}
+	}
+
+	public void RespawnPlayerAfterDeath(){
+		if(playerIdentifier.myPlayerNum == 0){
+			transform.position = Services.MapManager.spawnPoints[Random.Range(0,2)].transform.position;
+			currentHealth = maxHealth;
+			UpdateCanvasHealth(currentHealth);
+		} else if (playerIdentifier.myPlayerNum == 1){
+			// transform.position = Services.MapManager.playerTwoStartPos;			
+			transform.position = Services.MapManager.spawnPoints[Random.Range(0,2)].transform.position;
+			currentHealth = maxHealth;
+			UpdateCanvasHealth(currentHealth);
+		}
+	}
 
 
 

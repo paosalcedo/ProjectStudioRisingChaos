@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
 	{
 		Services.GameManager = this;
 		Services.MapManager = new MapManager();
+		Services.CurrentPlayerTracker = new CurrentPlayerTracker(); 
 		Services.CanvasManager = new CanvasManager();
 		Services.GameStateManager = new GameStateManager();
 		Services.TimeManager = new TimeManager();

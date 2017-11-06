@@ -24,7 +24,7 @@ public class KnifeControl : LaserControl {
 	}
 
 	void AnimateKnifeAttack(){
-		Debug.Log("Animating knife!");
+		// Debug.Log("Animating knife!");
 		knife.GetComponent<KnifeEngine>().EnableKnifeCollider();
 		knife.transform.DOLocalMove(Vector3.left, 0.3f, false);
 		knife.transform.DOLocalRotate(new Vector3 (0, 0, 90), 0.3f, RotateMode.FastBeyond360);
