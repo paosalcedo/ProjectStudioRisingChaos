@@ -30,9 +30,9 @@ public class WeaponDefinitions {
 			WeaponType.Trap, new WeaponInfo (
 				"a souvenir for a friend, if you hate that friend", 
 				5, 
-				40, 
+				10, 
 				5f,
-				70, 
+				110, 
 				"who knows"
 			)
 		},
