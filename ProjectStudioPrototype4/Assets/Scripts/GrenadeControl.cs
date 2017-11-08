@@ -38,6 +38,8 @@ public class GrenadeControl : MonoBehaviour {
 		
 	}
 	public virtual void Attack(KeyCode key){
+
+		Debug.Log("Throwing grenade!");
 		if(cooldown > 0){
 			cooldown -= Time.deltaTime;
 		}

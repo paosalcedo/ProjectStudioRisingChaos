@@ -22,6 +22,7 @@ public class TrapControl : GrenadeControl {
 	}
 
 	public override void Attack(KeyCode key){
+		Debug.Log("Throwing trap!");
 		if(cooldown > 0){
 			cooldown -= Time.deltaTime;
 		}

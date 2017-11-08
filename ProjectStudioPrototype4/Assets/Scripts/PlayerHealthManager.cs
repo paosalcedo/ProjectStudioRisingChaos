@@ -23,7 +23,7 @@ public class PlayerHealthManager : MonoBehaviour {
 		timeManager = GetComponent<PlayerTimeManager>();
 		myCanvas = timeManager.myCanvas;
 		currentHealth = maxHealth;
-		Debug.Log(currentHealth);
+		// Debug.Log(currentHealth);
 		playerIdentifier = GetComponent<PlayerIdentifier>();
  		// myIndex = playerSwitcher.myIndex;
 		currentHealth = maxHealth;

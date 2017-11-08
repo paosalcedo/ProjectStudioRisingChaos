@@ -1360,9 +1360,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectTrapKey: 52
-  selectLaserKey: 49
-  selectGrenadeKey: 50
-  selectKnifeKey: 51
+  selectLaserKey: 50
+  selectGrenadeKey: 51
+  selectKnifeKey: 49
 --- !u!114 &114859991204236706
 MonoBehaviour:
   m_ObjectHideFlags: 1

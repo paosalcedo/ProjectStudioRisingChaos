@@ -49,6 +49,7 @@ public class WeaponSwitcher : MonoBehaviour {
 			laserControl.enabled = false;
 			grenadeControl.enabled = false;
 			knifeControl.enabled = false;
+			trapControl.trap.SetActive(true);
 			laserControl.laserPistol.SetActive(false);
 			knifeControl.knife.SetActive(false);
 			grenadeControl.grenade.SetActive(false);
@@ -57,10 +58,11 @@ public class WeaponSwitcher : MonoBehaviour {
 
 	public void SelectGrenade(KeyCode key){
 		if(Input.GetKeyDown(key)){
-			trapControl.enabled = true;
+			trapControl.enabled = false;
 			laserControl.enabled = false;
 			grenadeControl.enabled = true;
 			knifeControl.enabled = false;
+			trapControl.trap.SetActive(false);
 			laserControl.laserPistol.SetActive(false);
 			knifeControl.knife.SetActive(false);
 			grenadeControl.grenade.SetActive(true);
@@ -74,6 +76,7 @@ public class WeaponSwitcher : MonoBehaviour {
 			laserControl.enabled = true;
 			grenadeControl.enabled = false;
 			knifeControl.enabled = false;
+			trapControl.trap.SetActive(false);
 			laserControl.laserPistol.SetActive(true);
 			knifeControl.knife.SetActive(false);
 			grenadeControl.grenade.SetActive(false);
@@ -86,6 +89,7 @@ public class WeaponSwitcher : MonoBehaviour {
 			laserControl.enabled = false;
 			grenadeControl.enabled = false;
 			knifeControl.enabled = true;
+			trapControl.trap.SetActive(false);
 			laserControl.laserPistol.SetActive(false);
 			grenadeControl.grenade.SetActive(false);
 			knifeControl.knife.SetActive(true);

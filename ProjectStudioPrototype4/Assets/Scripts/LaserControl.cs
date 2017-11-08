@@ -36,6 +36,7 @@ public class LaserControl : MonoBehaviour {
 	}
 
 	public virtual void Attack(KeyCode key){
+		Debug.Log("Firing laser!");
 		if (Input.GetKeyDown(key)){
 			ShootRay();
  		}

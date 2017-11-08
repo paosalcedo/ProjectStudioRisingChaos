@@ -2599,7 +2599,7 @@ Prefab:
     - target: {fileID: 223879020175227742, guid: fdc8ff331427b7542a1300bee05b6421,
         type: 2}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224610468540615316, guid: fdc8ff331427b7542a1300bee05b6421,
         type: 2}
@@ -2631,6 +2631,11 @@ Prefab:
       propertyPath: enemyRoundScoreText
       value: 
       objectReference: {fileID: 1108345775}
+    - target: {fileID: 223879020175227742, guid: fdc8ff331427b7542a1300bee05b6421,
+        type: 2}
+      propertyPath: m_RenderMode
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114301353536764320, guid: fdc8ff331427b7542a1300bee05b6421, type: 2}
     - {fileID: 114340202137833618, guid: fdc8ff331427b7542a1300bee05b6421, type: 2}
