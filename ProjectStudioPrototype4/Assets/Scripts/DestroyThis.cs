@@ -17,8 +17,8 @@ public class DestroyThis : MonoBehaviour {
 				// CurrentPlayerTracker.currentPlayer.GetComponent<PlayerTimeManager>().UnFreezeMe();
 				PlayerNames.AssignNames(p1NameInputField.text, p2NameInputField.text);
 							
-				GameObject.Find("CanvasP1").GetComponent<Canvas>().enabled = true;
-				GameObject.Find("CanvasP2").GetComponent<Canvas>().enabled = true;
+				// GameObject.Find("CanvasP1").GetComponent<Canvas>().enabled = true;
+				// GameObject.Find("CanvasP2").GetComponent<Canvas>().enabled = true;
 				Services.MapManager.AddSpawnPointsToArray();
 				Services.MapManager.AddPlayersToMap();
 				Services.CanvasManager.IdentifyPlayersAndCanvases();

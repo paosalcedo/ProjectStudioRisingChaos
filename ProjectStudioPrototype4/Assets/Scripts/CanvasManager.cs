@@ -26,10 +26,10 @@ public class CanvasManager : MonoBehaviour {
 	public void IdentifyPlayersAndCanvases(){
  		players = GameObject.FindGameObjectsWithTag("Player");
 		canvases = GameObject.FindGameObjectsWithTag("Canvas");
-		GameObject tempCanvas1 = GameObject.Find("CanvasP1");
-		GameObject tempCanvas2 = GameObject.Find("CanvasP2");
-		canvases[0] = tempCanvas1;
-		canvases[1] = tempCanvas2;
+		// GameObject tempCanvas1 = GameObject.Find("CanvasP1");
+		// GameObject tempCanvas2 = GameObject.Find("CanvasP2");
+		// canvases[0] = tempCanvas1;
+		// canvases[1] = tempCanvas2;
 	}
 	public void AssignPlayerNumbers(){
 		for (int i = 0; i < players.Length-1; i++)
@@ -41,9 +41,9 @@ public class CanvasManager : MonoBehaviour {
 		}
 	}
 	public void AssignCanvasToPlayers(){
-		players[0].GetComponent<PlayerTimeManager>().myCanvas = canvases[0];
-		Debug.Log("Canvas assigned to players!");
-		players[1].GetComponent<PlayerTimeManager>().myCanvas = canvases[1];
+		// players[0].GetComponent<PlayerTimeManager>().myCanvas = canvases[0];
+		// Debug.Log("Canvas assigned to players!");
+		// players[1].GetComponent<PlayerTimeManager>().myCanvas = canvases[1];
 		// players[0].GetComponentInChildren<LaserControl>().myCanvas = canvases[0];
 		// players[1].GetComponentInChildren<LaserControl>().myCanvas = canvases[1];
 	}

@@ -6,7 +6,7 @@ public class PlayerHealthManager : MonoBehaviour {
 
 	bool scoreHasBeenIncreased;
 	public string myName;
-	private GameObject myCanvas;
+	public GameObject myCanvas;
 	public GameObject myEnemy;
 	public int myIndex;
 	public int myScore;

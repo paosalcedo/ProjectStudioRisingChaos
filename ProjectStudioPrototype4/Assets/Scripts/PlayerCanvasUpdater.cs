@@ -13,15 +13,17 @@ public class PlayerCanvasUpdater : MonoBehaviour {
 	public Text roundScoreText;	
 	public Text enemyRoundScoreText;
 
+	public GameObject thisPlayer;
+
 	// Use this for initialization
 	void Start(){
 		roundScoreText.text = "Your score: " + 0;
-
-		if(this.gameObject.name == "CanvasP1"){
+		//if this is player 1.
+		if(thisPlayer.GetComponent<PlayerIdentifier>().myPlayerNum == 0){
 			enemyRoundScoreText.text = PlayerNames.playerOneName + ": " + 0;
-		} else {
+		} else { 
+			//if this is player 2
 			enemyRoundScoreText.text = PlayerNames.playerTwoName + ": " + 0;
-			// Debug.Log("This is player 2's canvas");
 		}
 	}
 	

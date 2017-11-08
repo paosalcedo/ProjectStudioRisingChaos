@@ -8,8 +8,7 @@ using UnityEngine.UI;
 public class PlayerTimeManager : MonoBehaviour {
 
 	private PlayerIdentifier playerIdentifier;
-	// public GameObject myCanvas; 
-	public bool isActive;
+ 	public bool isActive;
 	public float ap_jumpCost = 20f;
 	public float ap_walkCost = 1f;
 

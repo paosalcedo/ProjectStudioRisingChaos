@@ -2634,7 +2634,11 @@ Prefab:
     - target: {fileID: 223879020175227742, guid: fdc8ff331427b7542a1300bee05b6421,
         type: 2}
       propertyPath: m_RenderMode
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1240820044087052, guid: fdc8ff331427b7542a1300bee05b6421, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114301353536764320, guid: fdc8ff331427b7542a1300bee05b6421, type: 2}
@@ -5076,7 +5080,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1787771599
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5122,7 +5126,7 @@ Canvas:
   m_GameObject: {fileID: 1787771598}
   m_Enabled: 0
   serializedVersion: 3
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -5177,6 +5181,7 @@ MonoBehaviour:
   alertText: {fileID: 1588007138}
   roundScoreText: {fileID: 815933903}
   enemyRoundScoreText: {fileID: 923800292}
+  thisPlayer: {fileID: 0}
 --- !u!4 &1851407019 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4540200678019238, guid: 4fe35f3f59b43844494e415f3722ed3a,
