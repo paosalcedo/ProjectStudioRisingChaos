@@ -6,9 +6,10 @@ public class PlayerCameraManager : MonoBehaviour {
 
 	// StealthPlayerSwitcher thisPlayer;
 	public GameObject myCanvas;
+	public Camera myCam;
 	PlayerIdentifier thisPlayerID;
 	GameObject thisPlayer;
-	private Camera myCam;
+	// private Camera myCam;
 	public int myDisplayNum;
 	void Start () {
 		thisPlayerID = GetComponentInParent<PlayerIdentifier>();

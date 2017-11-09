@@ -1625,6 +1625,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myCanvas: {fileID: 1444211616986644}
+  myCam: {fileID: 20834124085875632}
   myDisplayNum: 0
 --- !u!114 &114347741858822128
 MonoBehaviour:
@@ -2293,8 +2294,8 @@ RectTransform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1444211616986644}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1.65}
-  m_LocalScale: {x: 0.0044483542, y: 0.004448355, z: 0.004448355}
+  m_LocalPosition: {x: 0, y: 0, z: 0.33}
+  m_LocalScale: {x: 0.0011975621, y: 0.001197562, z: 0.001197562}
   m_Children:
   - {fileID: 224664919674427228}
   - {fileID: 224432244941375362}
@@ -2312,7 +2313,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 589, y: 368}
+  m_SizeDelta: {x: 554, y: 346}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224641495898011050
 RectTransform:
