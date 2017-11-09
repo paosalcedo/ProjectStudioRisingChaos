@@ -36,6 +36,18 @@ public class TrapEngine : MonoBehaviour {
 
   			trapped.GetComponent<PlayerTimeManager>().myActionPoints = 10;
 			trapped.GetComponent<PlayerHealthManager>().currentHealth -= damage;
+			if(trapped.GetComponentInChildren<PlayerCanvasUpdater>() != null){
+				trapped.GetComponentInChildren<PlayerCanvasUpdater>().alertText.text = "You stepped on a trap!"; 			
+				//if trapped player is Player 1...
+				if(trapped.gameObject.GetComponent<PlayerIdentifier>().myPlayerNum == 0){
+					//update canvas for Player 2
+					CurrentPlayerTracker.otherPlayer.GetComponentInChildren<PlayerCanvasUpdater>().UpdateAlertTextForTrapper(trapped.gameObject);		
+				} 
+				//if trapped player is player 2
+				else {
+					CurrentPlayerTracker.currentPlayer.GetComponentInChildren<PlayerCanvasUpdater>().UpdateAlertTextForTrapper(trapped.gameObject);
+				}
+			}
 			trapTriggered = true;
 			Destroy(gameObject, 0.01f);
 			Destroy(transform.parent.gameObject, 0.02f);

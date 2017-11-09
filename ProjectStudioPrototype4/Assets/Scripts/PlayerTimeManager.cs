@@ -25,6 +25,7 @@ public class PlayerTimeManager : MonoBehaviour {
 	private StealthPlayerSwitcher playerSwitcher;
 	private PlayerTimeManager timeManager;
 
+	private PlayerCanvasUpdater myCanvasUpdater;
 	private FirstPersonController firstPersonController;
 	bool isFrozen;
 	Rigidbody rb;
@@ -40,6 +41,7 @@ public class PlayerTimeManager : MonoBehaviour {
 		// otherPlayer = GetComponent<StealthPlayerSwitcher>().otherPlayer;
 		maxActionPoints = myActionPoints;
 		playerIdentifier = GetComponent<PlayerIdentifier>();
+		myCanvasUpdater = myCanvas.GetComponent<PlayerCanvasUpdater>();
 		firstPersonController = GetComponent<FirstPersonController>();
 		playerFrozenState = PlayerFrozenState.Frozen;
 		rb = GetComponent<Rigidbody>();
@@ -64,7 +66,12 @@ public class PlayerTimeManager : MonoBehaviour {
 		switch (playerFrozenState){
 			case PlayerFrozenState.Frozen:
 			FreezeMe();
+			if(playerIdentifier.myPlayerNum == 0){
+				myCanvasUpdater.turnText.text = CurrentPlayerTracker.otherPlayer.GetComponent<PlayerIdentifier>().myName + " 's turn";
 
+			} else {
+				myCanvasUpdater.turnText.text = CurrentPlayerTracker.currentPlayer.GetComponent<PlayerIdentifier>().myName + " 's turn";
+			}
 			break;
 
 			case PlayerFrozenState.Not_Frozen:
@@ -170,7 +177,9 @@ public class PlayerTimeManager : MonoBehaviour {
 		isActive = true;
 		playerFrozenState = PlayerFrozenState.Not_Frozen;
 		rb.constraints = RigidbodyConstraints.None;
-		rb.useGravity = true;
+		rb.useGravity = true;						
+		myCanvasUpdater.turnText.text = "";
+		GetComponentInChildren<WeaponSwitcher>().ResetWeaponCooldowns();
 		GetComponent<CharacterController>().enabled = true;
 		GetComponent<FirstPersonController>().enabled = true;
 		// Debug.Log(playerFrozenState);

@@ -42,4 +42,6 @@ public class TrapControl : GrenadeControl {
 			cooldown = startingCooldown;
  		}
 	}
+
+
 }

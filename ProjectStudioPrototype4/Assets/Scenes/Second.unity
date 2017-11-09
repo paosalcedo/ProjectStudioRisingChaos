@@ -5179,6 +5179,7 @@ MonoBehaviour:
   hpText: {fileID: 1940576036}
   hitAlertText: {fileID: 551555200}
   alertText: {fileID: 1588007138}
+  turnText: {fileID: 0}
   roundScoreText: {fileID: 815933903}
   enemyRoundScoreText: {fileID: 923800292}
   thisPlayer: {fileID: 0}

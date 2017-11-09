@@ -59,12 +59,30 @@ public class LaserControl : MonoBehaviour {
 					rayHit.transform.GetComponent<PlayerHealthManager>().DepleteHealth(damage);
 					thisPlayerTimeManager.myActionPoints -= myAPcost;  
 
-					//check if rayHit player is currentPlayer or otherPlayer.
+					//check if rayHit player is Player 2.
 					if(rayHit.transform.gameObject == CurrentPlayerTracker.otherPlayer){
-					//tell the canvas of currentPlayer to show a hit alert.
-						CurrentPlayerTracker.currentPlayer.GetComponent<PlayerTimeManager>().myCanvas.GetComponent<PlayerCanvasUpdater>().UpdateHitAlert(rayHit.transform.GetComponent<PlayerIdentifier>().myName, damage);
-					} else {
-						CurrentPlayerTracker.otherPlayer.GetComponent<PlayerTimeManager>().myCanvas.GetComponent<PlayerCanvasUpdater>().UpdateHitAlert(rayHit.transform.GetComponent<PlayerIdentifier>().myName, damage);
+						//check if Player 2 has any health left.
+						if(CurrentPlayerTracker.otherPlayer.GetComponent<PlayerHealthManager>().currentHealth > 0){
+						//tell the canvas of currentPlayer to show a hit alert.
+							CurrentPlayerTracker.currentPlayer.GetComponent<PlayerTimeManager>().myCanvas.GetComponent<PlayerCanvasUpdater>().UpdateHitAlert(rayHit.transform.GetComponent<PlayerIdentifier>().myName, damage);
+							CurrentPlayerTracker.otherPlayer.GetComponent<PlayerTimeManager>().myCanvas.GetComponent<PlayerCanvasUpdater>().UpdateGotHitAlert(CurrentPlayerTracker.otherPlayer.GetComponent<PlayerIdentifier>().myName, damage);
+						} 
+						//if Player 2 got killed by the laser, show Player 1 that they killed Player 2.
+						else {
+							CurrentPlayerTracker.currentPlayer.GetComponentInChildren<PlayerCanvasUpdater>().UpdateAlertTextWithFrag(CurrentPlayerTracker.otherPlayer.GetComponent<PlayerIdentifier>().myName);
+						}
+					} 
+					//if it's not Player 2, then it's player 1.
+					else {
+						if(CurrentPlayerTracker.currentPlayer.GetComponent<PlayerHealthManager>().currentHealth > 0){
+						//tell the canvas of currentPlayer to show a hit alert.
+							CurrentPlayerTracker.otherPlayer.GetComponent<PlayerTimeManager>().myCanvas.GetComponent<PlayerCanvasUpdater>().UpdateHitAlert(rayHit.transform.GetComponent<PlayerIdentifier>().myName, damage);
+							CurrentPlayerTracker.currentPlayer.GetComponent<PlayerTimeManager>().myCanvas.GetComponent<PlayerCanvasUpdater>().UpdateGotHitAlert(CurrentPlayerTracker.currentPlayer.GetComponent<PlayerIdentifier>().myName, damage);
+						} 
+						//if Player 2 got killed by the laser, show Player 1 that they killed Player 2.
+						else {
+							CurrentPlayerTracker.otherPlayer.GetComponentInChildren<PlayerCanvasUpdater>().UpdateAlertTextWithFrag(CurrentPlayerTracker.currentPlayer.GetComponent<PlayerIdentifier>().myName);
+						}
 					}
 				} 
 			}

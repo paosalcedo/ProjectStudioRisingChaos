@@ -57,4 +57,8 @@ public class GrenadeControl : MonoBehaviour {
 			cooldown = startingCooldown;
  		}
   	}
+	
+	public virtual void ResetCooldown(){
+		cooldown = 0;
+	}
 }

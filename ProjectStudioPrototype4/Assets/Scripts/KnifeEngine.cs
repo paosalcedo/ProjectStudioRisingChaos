@@ -39,6 +39,7 @@ public class KnifeEngine : MonoBehaviour {
 			} else {
 				CurrentPlayerTracker.otherPlayer.GetComponent<PlayerTimeManager>().myCanvas.GetComponent<PlayerCanvasUpdater>().UpdateHitAlert(coll.transform.GetComponent<PlayerIdentifier>().myName, damage);
 			}
+
 		}
 	}
 }

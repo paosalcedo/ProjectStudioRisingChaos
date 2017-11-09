@@ -53,6 +53,7 @@ public class WeaponSwitcher : MonoBehaviour {
 			laserControl.laserPistol.SetActive(false);
 			knifeControl.knife.SetActive(false);
 			grenadeControl.grenade.SetActive(false);
+			trapControl.cooldown = 0;
 		}
 	}
 
@@ -94,6 +95,11 @@ public class WeaponSwitcher : MonoBehaviour {
 			grenadeControl.grenade.SetActive(false);
 			knifeControl.knife.SetActive(true);
 		}
+	}
+
+	public void ResetWeaponCooldowns(){
+		trapControl.cooldown = 0;
+		grenadeControl.cooldown = 0;
 	}
 
 }
