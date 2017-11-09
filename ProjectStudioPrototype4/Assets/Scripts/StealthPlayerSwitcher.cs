@@ -33,13 +33,13 @@ public class StealthPlayerSwitcher : MonoBehaviour {
 		if(playerIdentifier.myPlayerNum == 0){
 			// CurrentPlayerTracker.SetCurrentPlayer(this.gameObject);
 			CurrentPlayerTracker.currentPlayer = this.gameObject;
-			Debug.Log("Active player is " + CurrentPlayerTracker.currentPlayer.GetComponent<PlayerIdentifier>().myPlayerNum);
+			// Debug.Log("Active player is " + CurrentPlayerTracker.currentPlayer.GetComponent<PlayerIdentifier>().myPlayerNum);
 			// timeManager.UnFreezeMe();
 			// Debug.Log("Current active player name is " + CurrentPlayerTracker.currentPlayer.GetComponent<PlayerIdentifier>().myName);
  			// Debug.Log("assigning current player to PLayer 0");
 		} else if (playerIdentifier.myPlayerNum == 1){
 			CurrentPlayerTracker.otherPlayer = this.gameObject;
-			Debug.Log("Other player is " + CurrentPlayerTracker.otherPlayer.GetComponent<PlayerIdentifier>().myPlayerNum);
+			// Debug.Log("Other player is " + CurrentPlayerTracker.otherPlayer.GetComponent<PlayerIdentifier>().myPlayerNum);
 			// timeManager.FreezeMe();
 		} 
 		

@@ -46,7 +46,7 @@ public class PlayerHealthManager : MonoBehaviour {
 			AddToEnemyScore();
 			// Debug.Log("My enemy's health is: " + myEnemy.GetComponent<PlayerHealthManager>().currentHealth);			
 		}
-		Debug.Log("My enemy's score is: " + myEnemy.GetComponent<PlayerHealthManager>().myScore);
+		// Debug.Log("My enemy's score is: " + myEnemy.GetComponent<PlayerHealthManager>().myScore);
 	}
 	public void DepleteHealth(int damage){
 		currentHealth -= damage;

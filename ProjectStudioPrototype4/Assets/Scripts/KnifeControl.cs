@@ -40,7 +40,7 @@ public class KnifeControl : LaserControl {
 	}
 
 	public override void Attack(KeyCode key){
-		Debug.Log("Using Knife!");
+		// Debug.Log("Using Knife!");
 		if(Input.GetKeyDown(key)){
 			AnimateKnifeAttack();
 			thisPlayerTimeManager.myActionPoints -= myAPcost;  

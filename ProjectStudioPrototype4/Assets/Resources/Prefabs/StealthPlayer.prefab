@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 224453564666283260}
   - component: {fileID: 222997179736486522}
   - component: {fileID: 114317353414798870}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: HitAlertText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 224924928956022286}
   - component: {fileID: 222563288263921994}
   - component: {fileID: 114134222977242600}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 224139127073456680}
   - component: {fileID: 222941691115315696}
   - component: {fileID: 114251210230661112}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: EnemyRoundScore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -140,7 +140,7 @@ GameObject:
   - component: {fileID: 224432244941375362}
   - component: {fileID: 222242604160225812}
   - component: {fileID: 114856091197532040}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -174,7 +174,7 @@ GameObject:
   - component: {fileID: 224941377457626890}
   - component: {fileID: 222395177098149996}
   - component: {fileID: 114793029823114444}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: HPText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -191,7 +191,7 @@ GameObject:
   - component: {fileID: 224844959795292822}
   - component: {fileID: 222480396942279314}
   - component: {fileID: 114907934634901536}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: APText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -261,7 +261,7 @@ GameObject:
   - component: {fileID: 114710654824264634}
   - component: {fileID: 114035233592744014}
   - component: {fileID: 114894468292098296}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: PlayerCanvas
   m_TagString: Canvas
   m_Icon: {fileID: 0}
@@ -295,7 +295,7 @@ GameObject:
   - component: {fileID: 224641495898011050}
   - component: {fileID: 222536628042456982}
   - component: {fileID: 114211577481398802}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: TurnText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -312,7 +312,7 @@ GameObject:
   - component: {fileID: 224340981311579054}
   - component: {fileID: 222578936721937198}
   - component: {fileID: 114925718177605224}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: RoundScore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -462,7 +462,7 @@ GameObject:
   - component: {fileID: 224664919674427228}
   - component: {fileID: 222702372680697952}
   - component: {fileID: 114570366968962886}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -496,7 +496,7 @@ GameObject:
   - component: {fileID: 224229337265487324}
   - component: {fileID: 222036037805142788}
   - component: {fileID: 114948120213998190}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: AlertText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1624,6 +1624,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b5f74089faab3945a737c6e8cf5f2a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myCanvas: {fileID: 1444211616986644}
   myDisplayNum: 0
 --- !u!114 &114347741858822128
 MonoBehaviour:
