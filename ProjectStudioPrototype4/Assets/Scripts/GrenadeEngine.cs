@@ -53,11 +53,28 @@ public class GrenadeEngine : MonoBehaviour {
 					// Debug.Log("Depleting health on " + hit.transform.GetComponent<PlayerIdentifier>().myName);
 					hit.GetComponent<PlayerHealthManager>().DepleteHealth(damage);
 					//check if hit player is currentPlayer or otherPlayer.
-					if(hit.gameObject == CurrentPlayerTracker.otherPlayer){
-					//tell the canvas of currentPlayer to show a hit alert.
-						CurrentPlayerTracker.currentPlayer.GetComponent<PlayerTimeManager>().myCanvas.GetComponent<PlayerCanvasUpdater>().UpdateHitAlert(hit.GetComponent<PlayerIdentifier>().myName, damage);
+					if(hit.GetComponent<PlayerHealthManager>().currentHealth > 0){
+						if(hit.gameObject == CurrentPlayerTracker.otherPlayer){
+						//tell the canvas of currentPlayer to show a hit alert.
+							CurrentPlayerTracker.currentPlayer.GetComponent<PlayerTimeManager>().myCanvas.GetComponent<PlayerCanvasUpdater>().UpdateHitAlert(hit.GetComponent<PlayerIdentifier>().myName, damage);
+						//tell otherPlayer to show UpdateGotHitAlert.
+							CurrentPlayerTracker.otherPlayer.GetComponent<PlayerTimeManager>().myCanvas.GetComponent<PlayerCanvasUpdater>().UpdateGotHitAlert(CurrentPlayerTracker.currentPlayer.transform.GetComponent<PlayerIdentifier>().myName, damage);
+						} else {
+						//tell the canvas of otherPlayer to show a hit alert.
+							CurrentPlayerTracker.otherPlayer.GetComponent<PlayerTimeManager>().myCanvas.GetComponent<PlayerCanvasUpdater>().UpdateHitAlert(hit.GetComponent<PlayerIdentifier>().myName, damage);
+						//tell otherPlayer to show UpdateGotHitAlert.	
+							CurrentPlayerTracker.currentPlayer.GetComponent<PlayerTimeManager>().myCanvas.GetComponent<PlayerCanvasUpdater>().UpdateGotHitAlert(CurrentPlayerTracker.otherPlayer.GetComponent<PlayerIdentifier>().myName, damage);
+						}
 					} else {
-						CurrentPlayerTracker.otherPlayer.GetComponent<PlayerTimeManager>().myCanvas.GetComponent<PlayerCanvasUpdater>().UpdateHitAlert(hit.GetComponent<PlayerIdentifier>().myName, damage);
+						//if player 2 died
+						if(hit.gameObject == CurrentPlayerTracker.otherPlayer){
+							CurrentPlayerTracker.currentPlayer.GetComponentInChildren<PlayerCanvasUpdater>().UpdateAlertTextWithFrag(CurrentPlayerTracker.otherPlayer.GetComponent<PlayerIdentifier>().myName);
+						} 
+						//if player 1 died
+						else {
+							CurrentPlayerTracker.otherPlayer.GetComponentInChildren<PlayerCanvasUpdater>()
+							.UpdateAlertTextWithFrag(CurrentPlayerTracker.currentPlayer.GetComponent<PlayerIdentifier>().myName);
+						}				
 					}
 				} else {
 					Debug.Log("Found no target!");

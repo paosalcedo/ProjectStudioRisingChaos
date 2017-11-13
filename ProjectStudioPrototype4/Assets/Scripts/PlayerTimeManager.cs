@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class PlayerTimeManager : MonoBehaviour {
 
+	public KeyCode endTurnKey;
 	private PlayerIdentifier playerIdentifier;
  	public bool isActive;
 	public float ap_jumpCost = 20f;
@@ -67,14 +68,15 @@ public class PlayerTimeManager : MonoBehaviour {
 			case PlayerFrozenState.Frozen:
 			FreezeMe();
 			if(playerIdentifier.myPlayerNum == 0){
-				myCanvasUpdater.turnText.text = CurrentPlayerTracker.otherPlayer.GetComponent<PlayerIdentifier>().myName + " 's turn";
+				myCanvasUpdater.turnText.text = CurrentPlayerTracker.otherPlayer.GetComponent<PlayerIdentifier>().myName + "'s turn";
 
 			} else {
-				myCanvasUpdater.turnText.text = CurrentPlayerTracker.currentPlayer.GetComponent<PlayerIdentifier>().myName + " 's turn";
+				myCanvasUpdater.turnText.text = CurrentPlayerTracker.currentPlayer.GetComponent<PlayerIdentifier>().myName + "'s turn";
 			}
 			break;
 
 			case PlayerFrozenState.Not_Frozen:
+			EndTurn(endTurnKey);
 			UnFreezeMe();
 			UpdateCanvasAP(myActionPoints);
 				//if player is out of time,
@@ -185,18 +187,23 @@ public class PlayerTimeManager : MonoBehaviour {
 		// Debug.Log(playerFrozenState);
 	}
 
+	private void EndTurn(KeyCode key){
+		if(Input.GetKeyDown(key))
+			myActionPoints = 0;
+	}
+
 	//if time is <= 0, freeze this player, load UI screen that says "Switching to Player 2", then complete the switch.
 	
-	void SwitchToOtherPlayerTemp(KeyCode key){
-		if(Input.GetKeyDown(key)){
-			//freeze or unfreeze this player; this should happen immediately.
-			FreezeMe();
-			myCanvas.GetComponent<Canvas>().enabled = true;
-			//load a UI screen that says "Switching to Other Player". could have a bit of delay.
-			// StartCoroutine(ActivatePlayerSwitchCanvas(0.01f));
-			Invoke("SwitchToOtherPlayer", 5f);
-		} 
-	}
+	// void SwitchToOtherPlayerTemp(KeyCode key){
+	// 	if(Input.GetKeyDown(key)){
+	// 		//freeze or unfreeze this player; this should happen immediately.
+	// 		FreezeMe();
+	// 		myCanvas.GetComponent<Canvas>().enabled = true;
+	// 		//load a UI screen that says "Switching to Other Player". could have a bit of delay.
+	// 		// StartCoroutine(ActivatePlayerSwitchCanvas(0.01f));
+	// 		Invoke("SwitchToOtherPlayer", 5f);
+	// 	} 
+	// }
 
 	// void SwitchToOtherPlayer(){
 	// 	Debug.Log("Switching to other player without input!");
@@ -240,25 +247,5 @@ public class PlayerTimeManager : MonoBehaviour {
 		// playerSwitcher.GetComponent<StealthPlayerSwitcher>().otherPlayer.GetComponent<StealthPlayerSwitcher>().SwitchToThis();
 		// playerSwitcher.GetComponent<StealthPlayerSwitcher>().otherPlayer.GetComponent<PlayerTimeManager>().myCanvas.GetComponent<Canvas>().enabled = true;
     }
-
-
-	IEnumerator InitOtherPlayer(float delay){
-		yield return new WaitForSeconds(delay);
-		transform.eulerAngles = new Vector3 (0, 76, 0);
-		otherPlayer = playerSwitcher.otherPlayer;
-		if(playerSwitcher.myIndex == 1){
-			GetComponentInChildren<AudioListener>().enabled = false;
- 		}
-	}
-
-	IEnumerator InitCanvas(float delay){
-		yield return new WaitForSeconds(delay);
-		myCanvas.GetComponent<Canvas>().enabled = false;
-	}
-
-	void ClearAlertString(){
-		TimeManager.ClearAlertString();
-	}
-
 	
 }

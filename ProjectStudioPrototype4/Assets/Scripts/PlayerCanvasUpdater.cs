@@ -42,18 +42,17 @@ public class PlayerCanvasUpdater : MonoBehaviour {
 	}
 
 	public void UpdateGotHitAlert(string nameOfPlayerWhoHitYou, int damageReceived){
-		hitAlertText.text = nameOfPlayerWhoHitYou + " for " + damageReceived;
+		Debug.Log(nameOfPlayerWhoHitYou + " hit you for " + damageReceived);
+		hitAlertText.text = nameOfPlayerWhoHitYou + " hit you for " + damageReceived;
  		StartCoroutine(ClearText(3f, hitAlertText));
 	}
 	public void UpdateRoundScore(){
 		if(thisPlayerID.myPlayerNum == 0){
-			// Debug.Log("I  AM P1");
-			roundScoreText.text = "Your score: " + Services.ScoreKeeper.p1RoundScore;
+ 			roundScoreText.text = "Your score: " + Services.ScoreKeeper.p1RoundScore;
 			enemyRoundScoreText.text = PlayerNames.playerTwoName + ": " + Services.ScoreKeeper.p2RoundScore;
 		}
 		else {
-			// Debug.Log("I AM P2");
-			roundScoreText.text = "Your score: " + Services.ScoreKeeper.p2RoundScore;
+ 			roundScoreText.text = "Your score: " + Services.ScoreKeeper.p2RoundScore;
 			enemyRoundScoreText.text = PlayerNames.playerOneName + ": " + Services.ScoreKeeper.p1RoundScore;
 		}
 	}

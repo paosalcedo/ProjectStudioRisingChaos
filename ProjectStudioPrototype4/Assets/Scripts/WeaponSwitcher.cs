@@ -98,8 +98,10 @@ public class WeaponSwitcher : MonoBehaviour {
 	}
 
 	public void ResetWeaponCooldowns(){
-		trapControl.cooldown = 0;
-		grenadeControl.cooldown = 0;
+		if(trapControl != null && grenadeControl != null){
+			trapControl.cooldown = 0;
+			grenadeControl.cooldown = 0;
+		}
 	}
 
 }

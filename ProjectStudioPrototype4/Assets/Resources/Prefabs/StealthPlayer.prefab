@@ -95,7 +95,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1118243190417172
 GameObject:
   m_ObjectHideFlags: 1
@@ -1666,13 +1666,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c28ef390c177624e9407726ee20b553, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  endTurnKey: 13
   isActive: 0
   ap_jumpCost: 20
   ap_walkCost: 1
   ap_lookCost: 0
   ap_attackCost: 110
-  myActionPoints: 200
-  maxActionPoints: 200
+  myActionPoints: 10000
+  maxActionPoints: 10000
   otherPlayer: {fileID: 0}
   myCanvas: {fileID: 1444211616986644}
   playerFrozenState: 0
@@ -1798,7 +1799,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.641}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -2230,7 +2231,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -40}
+  m_AnchoredPosition: {x: 0, y: -29}
   m_SizeDelta: {x: 342.5, y: 32.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224340981311579054
@@ -2259,7 +2260,7 @@ RectTransform:
   m_GameObject: {fileID: 1124084291698170}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.09573525, y: 0.09573525, z: -0.06706028}
+  m_LocalScale: {x: 0.07936807, y: 0.07936807, z: -0.05559546}
   m_Children: []
   m_Father: {fileID: 224629499974993310}
   m_RootOrder: 1
@@ -2284,7 +2285,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -117.55}
+  m_AnchoredPosition: {x: 0, y: -137}
   m_SizeDelta: {x: 666.6, y: 169.71}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224629499974993310
