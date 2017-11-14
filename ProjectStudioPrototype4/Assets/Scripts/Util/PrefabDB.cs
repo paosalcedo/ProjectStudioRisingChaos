@@ -30,4 +30,8 @@ public class PrefabDB : ScriptableObject {
     [SerializeField]
     private GameObject trap;
     public GameObject Trap { get { return trap; }}
+
+    [SerializeField]
+    private GameObject reflectoid;
+    public GameObject Reflectoid {get { return reflectoid; }}
 }
