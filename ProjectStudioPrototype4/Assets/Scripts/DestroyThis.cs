@@ -35,7 +35,7 @@ public class DestroyThis : MonoBehaviour {
 
 	IEnumerator LateDestroy(float delay){
 		yield return new WaitForSeconds(delay);
-		Destroy(gameObject);
+ 		Destroy(gameObject);
 		Destroy(GameObject.Find("P2IntroCanvas"));
 	}
 

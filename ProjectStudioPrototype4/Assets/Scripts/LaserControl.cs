@@ -38,19 +38,22 @@ public class LaserControl : MonoBehaviour {
 	public virtual void Attack(KeyCode key){
 		// Debug.Log("Firing laser!");
 		if (Input.GetKeyDown(key)){
-			ShootRay();
+			// ShootRay();
+			GameObject reflectoid = Instantiate(Services.Prefabs.Reflectoid, transform.position + (transform.forward * 2), Quaternion.identity) as GameObject;
+			reflectoid.transform.rotation = transform.rotation;
+			thisPlayerTimeManager.myActionPoints -= myAPcost; 
+			reflectoid.GetComponent<ReflectoidEngine>().playerWhoFiredMe = transform.parent.gameObject;
  		}
 	}
-	
-	public void ShootRay(){
+
+	/*public void ShootRay(){
 		Ray ray = new Ray(transform.position, transform.forward);
 
 		RaycastHit rayHit = new RaycastHit();
 		Debug.DrawRay(transform.position, transform.forward * 100f, Color.red, 3f);
 		thisPlayerTimeManager.myActionPoints -= myAPcost; 
-		GameObject reflectoid = Instantiate(Services.Prefabs.Reflectoid, transform.position + (transform.forward * 2), Quaternion.identity) as GameObject;
-		reflectoid.transform.rotation = transform.rotation;
-		reflectoid.GetComponent<ReflectoidEngine>().ShootRay();
+	
+		// reflectoid.GetComponent<ReflectoidEngine>().ShootRay();
 		// reflectoid.GetComponent<ReflectoidEngine>().GetInitialDirection(transform.forward);
 		if(Physics.Raycast(ray, out rayHit, Mathf.Infinity)){
 			Vector3 firstReflection = Vector3.Reflect(ray.direction, rayHit.normal);
@@ -143,7 +146,7 @@ public class LaserControl : MonoBehaviour {
 				thisPlayerTimeManager.myActionPoints -= myAPcost;  
 			}	
 		}
-	}
+	}*/
 
 	void AnimateLaserAttack(){
 		

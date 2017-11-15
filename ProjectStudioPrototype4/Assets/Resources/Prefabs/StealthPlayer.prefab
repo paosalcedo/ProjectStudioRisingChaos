@@ -1672,8 +1672,8 @@ MonoBehaviour:
   ap_walkCost: 1
   ap_lookCost: 0
   ap_attackCost: 110
-  myActionPoints: 10000
-  maxActionPoints: 10000
+  myActionPoints: 200
+  maxActionPoints: 200
   otherPlayer: {fileID: 0}
   myCanvas: {fileID: 1444211616986644}
   playerFrozenState: 0
