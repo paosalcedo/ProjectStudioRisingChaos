@@ -15,6 +15,8 @@ public class ReflectoidEngine : MonoBehaviour {
 
 	ReflectionState reflectionState;
 	float speed = 10f;
+
+	public int bounces;
 	
 	private Vector3 initialDir;
 	List<Vector3> reflectionPoints = new List<Vector3>();
@@ -50,6 +52,9 @@ public class ReflectoidEngine : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if(bounces > 2){
+			Destroy(gameObject);
+		}
 
 		// rb.AddForce()
 		// if(!isInFirstTween && !isInSecondTween && !isInThirdTween){
@@ -155,7 +160,8 @@ public class ReflectoidEngine : MonoBehaviour {
 		} 
 	}
 
-	void OnTriggerEnter(Collider coll){
+	void OnCollisionEnter(Collision coll){
 		//use ontriggerenter here.
+		bounces += 1;
 	}
 }
