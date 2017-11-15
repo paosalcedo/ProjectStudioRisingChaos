@@ -18,13 +18,16 @@ public class TrapEngine : MonoBehaviour {
 	void Start () {
 		trapTriggered = false;
 
-		// GetComponent<Collider>().enabled = false;
+		GetComponent<Collider>().enabled = false;
 		MoveTrap();
 		// StartCoroutine(SetTrapToActive(0.5f));
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		if(rb.velocity.magnitude <= 0.5f){
+			GetComponent<Collider>().enabled = true;
+		}
 		transform.rotation = Quaternion.Euler(Vector3.down);
 	}
 
@@ -66,4 +69,7 @@ public class TrapEngine : MonoBehaviour {
 	public void GetGameObjectToIgnore(GameObject ignoreThis){
  		gameObjectToIgnore = ignoreThis;		
 	}
+
+
+
 }

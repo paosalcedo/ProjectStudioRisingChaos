@@ -68,6 +68,7 @@ public class PlayerCanvasUpdater : MonoBehaviour {
 	}
 	public void UpdateAlertTextForTrapper(GameObject trappedPlayer){
 		alertText.text = trappedPlayer.GetComponent<PlayerIdentifier>().myName + " sprung your trap!";
+		StartCoroutine(ClearText(3f, alertText));
 	}
 	public IEnumerator ClearText(float delay, Text textToClear){
 		yield return new WaitForSeconds(delay);

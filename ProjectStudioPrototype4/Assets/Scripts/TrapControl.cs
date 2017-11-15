@@ -5,6 +5,7 @@ using UnityEngine;
 public class TrapControl : GrenadeControl {
 
 	public GameObject trap;
+	int myPlayerNum;
 
  	void Start () {
 		trap.SetActive(true);
@@ -15,6 +16,10 @@ public class TrapControl : GrenadeControl {
 		startingCooldown = Services.WeaponDefinitions.weapons[WeaponDefinitions.WeaponType.Trap].cooldown;
 		myAPcost = Services.WeaponDefinitions.weapons[WeaponDefinitions.WeaponType.Trap].ap_cost;
 		cooldown = 0;
+		myPlayerNum = GetComponentInParent<PlayerIdentifier>().myPlayerNum;
+		if(myPlayerNum == 0){
+			
+		}
 	}
 
 	public override void Update(){
@@ -34,9 +39,15 @@ public class TrapControl : GrenadeControl {
 		if(Input.GetKeyDown(key) && cooldown <= 0){
 			GameObject trap;
 			trap = Instantiate (Services.Prefabs.Trap) as GameObject;
-			trap.transform.position = transform.position + transform.forward;
+			trap.transform.position = transform.position + transform.forward * 2;
 			trap.transform.rotation = transform.rotation;
 			// trap.GetComponent<TrapEngine>().colliderToIgnore = transform.parent.GetComponent<CapsuleCollider>();
+			if(GetComponentInParent<PlayerIdentifier>().myPlayerNum == 0){
+				trap.layer = 8;	
+			} else if (GetComponentInParent<PlayerIdentifier>().myPlayerNum == 1){
+				trap.layer = 9;
+			}
+			// add more else ifs if there are more players
 			trap.GetComponentInChildren<TrapEngine>().GetGameObjectToIgnore(transform.parent.gameObject);
 			thisPlayerTimeManager.myActionPoints -= myAPcost;  
 			cooldown = startingCooldown;

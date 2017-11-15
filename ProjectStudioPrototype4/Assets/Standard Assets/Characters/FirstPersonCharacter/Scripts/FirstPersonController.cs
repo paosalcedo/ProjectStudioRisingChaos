@@ -32,6 +32,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private Camera m_Camera;
         private bool m_Jump;
 
+        public KeyCode toggleCrouchKey;
         public bool canJump;
         private float m_YRotation;
         private Vector2 m_Input;
@@ -43,11 +44,27 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private float m_StepCycle;
         private float m_NextStep;
         private bool m_Jumping;
+        public bool m_Crouching;
         private AudioSource m_AudioSource;
+        private Vector3 standingSize;
+        private Vector3 crouchingSize;
 
+        private Vector3 standingCameraSize;
+        private Vector3 crouchingCameraSize;
+
+        private float crouchingHeight = 0.5f;
+
+        private GameObject myChild;
+        private bool isCrouching;
         // Use this for initialization
         private void Start()
         {
+            isCrouching = false;
+            myChild = transform.GetChild(0).gameObject;
+            standingSize = transform.localScale;
+            crouchingSize = new Vector3(0.5f, crouchingHeight, 0.5f);
+            standingCameraSize = transform.GetChild(0).localScale;
+            crouchingCameraSize = new Vector3 (transform.GetChild(0).localScale.x, transform.GetChild(0).localScale.y * 2f, transform.GetChild(0).localScale.z);        
             m_CharacterController = GetComponent<CharacterController>();
             // m_Camera = Camera.main;
             m_Camera = this.gameObject.GetComponentInChildren<Camera>();
@@ -57,6 +74,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_StepCycle = 0f;
             m_NextStep = m_StepCycle/2f;
             m_Jumping = false;
+            m_Crouching = false;
             m_AudioSource = GetComponent<AudioSource>();
 			m_MouseLook.Init(transform , m_Camera.transform);
         }
@@ -65,6 +83,22 @@ namespace UnityStandardAssets.Characters.FirstPerson
         // Update is called once per frame
         private void Update()
         {
+            ToggleCrouch(toggleCrouchKey);
+
+            if(m_Crouching){
+                m_IsWalking = true;
+                // myChild.transform.SetParent(null);
+                transform.localScale = crouchingSize;
+                // myChild.transform.SetParent(this.gameObject.transform);
+                // transform.GetChild(0).localScale = crouchingCameraSize;            
+            } else {
+                m_IsWalking = false;
+                // myChild.transform.SetParent(null);
+                transform.localScale = standingSize;
+                // myChild.transform.SetParent(this.gameObject.transform);
+                transform.GetChild(0).localScale = standingCameraSize;
+            }
+
             RotateView();
             // the jump state needs to read here to make sure it is not missed
             if (!m_Jump && m_CharacterController.isGrounded && canJump)
@@ -217,7 +251,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             // On standalone builds, walk/run speed is modified by a key press.
             // keep track of whether or not the character is walking or running
             // m_IsWalking = !Input.GetKey(KeyCode.LeftShift);
-            m_IsWalking = Input.GetKey(KeyCode.LeftShift); 
+            // m_IsWalking = Input.GetKey(KeyCode.LeftShift); 
 #endif
             // set the desired speed to be walking or running
             speed = m_IsWalking ? m_WalkSpeed : m_RunSpeed;
@@ -269,6 +303,16 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         public void HideCursor(){
             m_MouseLook.HideCursor();
+        }
+
+        
+        public void ToggleCrouch(KeyCode key){
+            if(Input.GetKeyDown(key))
+                m_Crouching = !m_Crouching;
+        }
+
+        public void Crouch(){
+
         }
     }
 }

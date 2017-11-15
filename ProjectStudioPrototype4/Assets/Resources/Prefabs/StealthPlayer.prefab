@@ -1672,8 +1672,8 @@ MonoBehaviour:
   ap_walkCost: 1
   ap_lookCost: 0
   ap_attackCost: 110
-  myActionPoints: 200
-  maxActionPoints: 200
+  myActionPoints: 10000
+  maxActionPoints: 10000
   otherPlayer: {fileID: 0}
   myCanvas: {fileID: 1444211616986644}
   playerFrozenState: 0
@@ -1916,6 +1916,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 8bc94ec6ed537e743b481638bdcd503d, type: 3}
   m_JumpSound: {fileID: 8300000, guid: 5897aeed9b676024fbb8c694b421a861, type: 3}
   m_LandSound: {fileID: 8300000, guid: 3b09d59f4499d45428baa7a21e954296, type: 3}
+  toggleCrouchKey: 99
   canJump: 0
 --- !u!114 &114870260325531698
 MonoBehaviour:
