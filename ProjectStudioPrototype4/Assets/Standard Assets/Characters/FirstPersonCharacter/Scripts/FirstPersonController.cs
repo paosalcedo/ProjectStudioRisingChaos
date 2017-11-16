@@ -49,22 +49,18 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private Vector3 standingSize;
         private Vector3 crouchingSize;
 
-        private Vector3 standingCameraSize;
-        private Vector3 crouchingCameraSize;
-
         private float crouchingHeight = 0.5f;
 
-        private GameObject myChild;
-        private bool isCrouching;
+        private GameObject myMesh;         
+        private GameObject myCameraObject;
+
         // Use this for initialization
         private void Start()
         {
-            isCrouching = false;
-            myChild = transform.GetChild(0).gameObject;
+            myMesh = transform.GetChild(1).gameObject;
+            myCameraObject = transform.GetChild(0).gameObject;
             standingSize = transform.localScale;
             crouchingSize = new Vector3(0.5f, crouchingHeight, 0.5f);
-            standingCameraSize = transform.GetChild(0).localScale;
-            crouchingCameraSize = new Vector3 (transform.GetChild(0).localScale.x, transform.GetChild(0).localScale.y * 2f, transform.GetChild(0).localScale.z);        
             m_CharacterController = GetComponent<CharacterController>();
             // m_Camera = Camera.main;
             m_Camera = this.gameObject.GetComponentInChildren<Camera>();
@@ -87,16 +83,16 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
             if(m_Crouching){
                 m_IsWalking = true;
-                // myChild.transform.SetParent(null);
-                transform.localScale = crouchingSize;
-                // myChild.transform.SetParent(this.gameObject.transform);
-                // transform.GetChild(0).localScale = crouchingCameraSize;            
+                myMesh.transform.localScale = new Vector3(1, 0.5f, 1);
+                myCameraObject.transform.localPosition = new Vector3(0, 0.4f, 0);
+                // transform.localScale = crouchingSize;
+                GetComponent<CharacterController>().height = 0.01f;          
             } else {
                 m_IsWalking = false;
-                // myChild.transform.SetParent(null);
-                transform.localScale = standingSize;
-                // myChild.transform.SetParent(this.gameObject.transform);
-                transform.GetChild(0).localScale = standingCameraSize;
+                myMesh.transform.localScale = new Vector3(1, 1f, 1);
+                myCameraObject.transform.localPosition = new Vector3(0, 0.8f, 0);
+                GetComponent<CharacterController>().height = 1.8f;
+                // transform.localScale = standingSize;
             }
 
             RotateView();
