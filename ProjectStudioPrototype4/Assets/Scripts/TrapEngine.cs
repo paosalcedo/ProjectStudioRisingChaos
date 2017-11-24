@@ -12,8 +12,8 @@ public class TrapEngine : MonoBehaviour {
 
 	void Awake(){
 		rb = GetComponentInParent<Rigidbody>();
-		speed = Services.WeaponDefinitions.weapons[WeaponDefinitions.WeaponType.Trap].speed;
-		damage = Services.WeaponDefinitions.weapons[WeaponDefinitions.WeaponType.Trap].damage;
+		speed = Services.WeaponDefinitions.weapons[WeaponType.Trap].speed;
+		damage = Services.WeaponDefinitions.weapons[WeaponType.Trap].damage;
 	}
 	void Start () {
 		trapTriggered = false;

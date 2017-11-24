@@ -668,6 +668,28 @@ MeshCollider:
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 900e53dd850c9cc4281be6fa21bdfea5, type: 3}
   m_PrefabInternal: {fileID: 430584474}
+--- !u!1 &401188171 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1673096216069918, guid: 554667eee07134c4f93d022c2599dc56,
+    type: 2}
+  m_PrefabInternal: {fileID: 1333796357}
+--- !u!114 &401188182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 401188171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf4846cbb44f78a4a98c602b6b5435fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasGrenade: 0
+  hasLaser: 0
+  hasTrap: 0
+  grenadeAmmoCount: 0
+  laserAmmoCount: 0
+  trapAmmoCount: 0
 --- !u!1001 &414359898
 Prefab:
   m_ObjectHideFlags: 0
@@ -4120,6 +4142,10 @@ Prefab:
       propertyPath: grenadeThrowClip
       value: 
       objectReference: {fileID: 8300000, guid: 834a8158e57136540a25a21c6741e9d7, type: 3}
+    - target: {fileID: 1906870799659552, guid: 554667eee07134c4f93d022c2599dc56, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 554667eee07134c4f93d022c2599dc56, type: 2}
   m_IsPrefabParent: 0

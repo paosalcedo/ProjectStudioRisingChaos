@@ -9,7 +9,7 @@ public class KnifeEngine : MonoBehaviour {
 	private int damage;
 	// Use this for initialization
 	void Start () {
-		damage = Services.WeaponDefinitions.weapons[WeaponDefinitions.WeaponType.Knife].damage;
+		damage = Services.WeaponDefinitions.weapons[WeaponType.Knife].damage;
 		parent = transform.parent.gameObject;
 		myCollider = GetComponent<BoxCollider>();
 		myCollider.enabled = false;

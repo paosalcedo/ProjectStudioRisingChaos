@@ -13,8 +13,8 @@ public class TrapControl : GrenadeControl {
 		currentPlayerTimeManager = CurrentPlayerTracker.currentPlayer.GetComponent<PlayerTimeManager>();
 		thisPlayerTimeManager = GetComponentInParent<PlayerTimeManager>();
 		attackKey = KeyCode.Mouse0;
-		startingCooldown = Services.WeaponDefinitions.weapons[WeaponDefinitions.WeaponType.Trap].cooldown;
-		myAPcost = Services.WeaponDefinitions.weapons[WeaponDefinitions.WeaponType.Trap].ap_cost;
+		startingCooldown = Services.WeaponDefinitions.weapons[WeaponType.Trap].cooldown;
+		myAPcost = Services.WeaponDefinitions.weapons[WeaponType.Trap].ap_cost;
 		cooldown = 0;
 		myPlayerNum = GetComponentInParent<PlayerIdentifier>().myPlayerNum;
 		if(myPlayerNum == 0){

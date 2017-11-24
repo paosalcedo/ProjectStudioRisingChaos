@@ -17,8 +17,8 @@ public class GrenadeEngine : MonoBehaviour {
 	private float timeBeforeExplode = 2f;
 	void Awake(){
 		rb = GetComponent<Rigidbody>();
-		speed = Services.WeaponDefinitions.weapons[WeaponDefinitions.WeaponType.Grenade].speed;
-		damage = Services.WeaponDefinitions.weapons[WeaponDefinitions.WeaponType.Grenade].damage;
+		speed = Services.WeaponDefinitions.weapons[WeaponType.Grenade].speed;
+		damage = Services.WeaponDefinitions.weapons[WeaponType.Grenade].damage;
 	}
 	void Start () {
 		exploded = false;

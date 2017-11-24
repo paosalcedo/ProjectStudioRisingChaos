@@ -25,8 +25,8 @@ public class LaserControl : MonoBehaviour {
 		parent = transform.parent;
 		laserLifetimeReset = laserLifetime;
 		attackKey = KeyCode.Mouse0;
-		damage = Services.WeaponDefinitions.weapons[WeaponDefinitions.WeaponType.Laser].damage;
-		myAPcost = Services.WeaponDefinitions.weapons[WeaponDefinitions.WeaponType.Laser].ap_cost;
+		damage = Services.WeaponDefinitions.weapons[WeaponType.Laser].damage;
+		myAPcost = Services.WeaponDefinitions.weapons[WeaponType.Laser].ap_cost;
 	}
 	
 	// Update is called once per frame

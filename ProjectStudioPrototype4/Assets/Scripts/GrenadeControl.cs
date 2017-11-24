@@ -25,8 +25,8 @@ public class GrenadeControl : MonoBehaviour {
 		currentPlayerTimeManager = CurrentPlayerTracker.currentPlayer.GetComponent<PlayerTimeManager>();
 		thisPlayerTimeManager = GetComponentInParent<PlayerTimeManager>();
 		attackKey = KeyCode.Mouse0;
-		myAPcost = Services.WeaponDefinitions.weapons[WeaponDefinitions.WeaponType.Grenade].ap_cost;
-		startingCooldown = Services.WeaponDefinitions.weapons[WeaponDefinitions.WeaponType.Grenade].cooldown;
+		myAPcost = Services.WeaponDefinitions.weapons[WeaponType.Grenade].ap_cost;
+		startingCooldown = Services.WeaponDefinitions.weapons[WeaponType.Grenade].cooldown;
 		cooldown = 0;
 	}
 	

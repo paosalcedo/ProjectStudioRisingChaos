@@ -12,8 +12,8 @@ public class KnifeControl : LaserControl {
 		weaponSoundManager = weaponSounds.GetComponent<WeaponSoundManager>();
 		knife.SetActive(true);
 		thisPlayerTimeManager = GetComponentInParent<PlayerTimeManager>();		
-		myAPcost = Services.WeaponDefinitions.weapons[WeaponDefinitions.WeaponType.Knife].ap_cost;
-		damage = Services.WeaponDefinitions.weapons[WeaponDefinitions.WeaponType.Knife].damage;
+		myAPcost = Services.WeaponDefinitions.weapons[WeaponType.Knife].ap_cost;
+		damage = Services.WeaponDefinitions.weapons[WeaponType.Knife].damage;
 		startPos = knife.transform.localPosition;
 		startRot = knife.transform.localEulerAngles;
 	}

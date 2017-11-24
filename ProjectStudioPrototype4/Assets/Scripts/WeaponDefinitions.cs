@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class WeaponDefinitions {
 
-	public enum WeaponType{
-		Grenade,
-		Trap,
-		Mine,
-		Laser,
-		Knife
+	// public enum WeaponType{
+	// 	Grenade,
+	// 	Trap,
+	// 	Mine,
+	// 	Laser,
+	// 	Knife
 
-	}
+	// }
 
 	WeaponType weapon;
 
@@ -23,6 +23,8 @@ public class WeaponDefinitions {
 				30, //damage
 				2, //cooldown
 				110, //ap cost
+				3,
+				2,
 				"unknown"
 			) 
 		},
@@ -32,7 +34,9 @@ public class WeaponDefinitions {
 				1, 
 				10, 
 				5f,
-				110, 
+				110,
+				2,
+				2,
 				"who knows"
 			)
 		},
@@ -42,7 +46,9 @@ public class WeaponDefinitions {
 				Mathf.Infinity, 
 				40,  
 				2.5f,
-				110,  
+				110,
+				6,
+				3,  
 				"who knows"
 			)
 		},
@@ -52,7 +58,9 @@ public class WeaponDefinitions {
 				30, 
 				100,  
 				5f,
-				110,  
+				110,
+				0,
+				0,  
 				"who knows"
 			)
 		}
