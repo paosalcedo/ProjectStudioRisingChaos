@@ -4,6 +4,8 @@ using UnityEngine;
 using DG.Tweening;
 public class LaserControl : MonoBehaviour {
 
+	public GameObject weaponSounds;
+	public WeaponSoundManager weaponSoundManager;
 	public GameObject laserPistol;
 	protected PlayerTimeManager thisPlayerTimeManager;
 	StealthPlayerSwitcher playerSwitcher;
@@ -16,6 +18,7 @@ public class LaserControl : MonoBehaviour {
 	float laserLifetimeReset;
 	// Use this for initialization
 	protected virtual void Start () {
+		weaponSoundManager = weaponSounds.GetComponent<WeaponSoundManager>();
 		laserPistol.SetActive(true);
 		playerSwitcher = GetComponentInParent<StealthPlayerSwitcher>();
 		thisPlayerTimeManager = GetComponentInParent<PlayerTimeManager>();
@@ -43,6 +46,7 @@ public class LaserControl : MonoBehaviour {
 			reflectoid.transform.rotation = transform.rotation;
 			thisPlayerTimeManager.myActionPoints -= myAPcost; 
 			reflectoid.GetComponent<ReflectoidEngine>().playerWhoFiredMe = transform.parent.gameObject;
+			weaponSoundManager.PlayLaserSound();	
  		}
 	}
 

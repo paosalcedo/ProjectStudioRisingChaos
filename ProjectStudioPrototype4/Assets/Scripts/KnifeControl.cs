@@ -4,12 +4,12 @@ using UnityEngine;
 using DG.Tweening;
 
 public class KnifeControl : LaserControl {
-
 	private Vector3 startPos;
 	private Vector3 startRot; 
 	public GameObject knife;
 	// Use this for initialization
 	protected override void Start () {
+		weaponSoundManager = weaponSounds.GetComponent<WeaponSoundManager>();
 		knife.SetActive(true);
 		thisPlayerTimeManager = GetComponentInParent<PlayerTimeManager>();		
 		myAPcost = Services.WeaponDefinitions.weapons[WeaponDefinitions.WeaponType.Knife].ap_cost;
@@ -43,6 +43,7 @@ public class KnifeControl : LaserControl {
 		// Debug.Log("Using Knife!");
 		if(Input.GetKeyDown(key)){
 			AnimateKnifeAttack();
+			weaponSoundManager.PlayKnifeSound();
 			thisPlayerTimeManager.myActionPoints -= myAPcost;  
 		}
   	}

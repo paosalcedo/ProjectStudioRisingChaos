@@ -4,18 +4,21 @@ using UnityEngine;
 using DG.Tweening;
 
 public class ReflectoidEngine : MonoBehaviour {
+
+	double delay = 0.0001f;
 	GameObject parent;
 	GameObject[] players;
 	public GameObject playerWhoFiredMe;
+	private AudioSource audioSource;
 	private bool damageDealt;
  	float speed = 10f;
 
 	public int bounces;	
 
-
 	private Rigidbody rb;
 
  	public void Start () {
+		audioSource = GetComponent<AudioSource>();
 		damageDealt = false;
 		rb = GetComponent<Rigidbody>();
 		players = GameObject.FindGameObjectsWithTag("Player");
@@ -32,8 +35,21 @@ public class ReflectoidEngine : MonoBehaviour {
 		}
 	}
 
+	public bool bounceHasPlayed = false;
 	void OnCollisionEnter(Collision coll){
 		bounces += 1;
+		if(!bounceHasPlayed){
+			Debug.Log("Collision sound should play!");
+			audioSource.PlayScheduled(AudioSettings.dspTime + delay);
+			bounceHasPlayed = true;
+			StartCoroutine(ResetBoolToFalse(0.01f));
+		}
+	}
+
+	IEnumerator ResetBoolToFalse(float delay){
+		yield return new WaitForSeconds(delay);
+		bounceHasPlayed = false;
+		// Debug.Log("Bool should be false!");
 	}
 
 	void DetectPlayers(){

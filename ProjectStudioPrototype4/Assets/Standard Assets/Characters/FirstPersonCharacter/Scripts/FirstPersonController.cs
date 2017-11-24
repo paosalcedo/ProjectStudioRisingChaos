@@ -105,7 +105,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
             if (!m_PreviouslyGrounded && m_CharacterController.isGrounded)
             {
                 StartCoroutine(m_JumpBob.DoBobCycle());
-                PlayLandingSound();
+                if(!m_Crouching){
+                    PlayLandingSound();
+                }
                 m_MoveDir.y = 0f;
                 m_Jumping = false;
             }
@@ -172,7 +174,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             m_AudioSource.clip = m_JumpSound;
             m_AudioSource.Play();
-        }
+         }
 
 
         private void ProgressStepCycle(float speed)
@@ -189,8 +191,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
 
             m_NextStep = m_StepCycle + m_StepInterval;
-
-            PlayFootStepAudio();
+            if(!m_Crouching)            
+                PlayFootStepAudio();
         }
 
 
@@ -303,8 +305,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         
         public void ToggleCrouch(KeyCode key){
-            if(Input.GetKeyDown(key))
+            if(Input.GetKeyDown(key)){
                 m_Crouching = !m_Crouching;
+            }
         }
 
         public void Crouch(){

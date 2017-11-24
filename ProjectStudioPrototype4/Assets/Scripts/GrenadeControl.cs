@@ -5,6 +5,8 @@ using UnityEngine;
 public class GrenadeControl : MonoBehaviour {
 
 	public GameObject grenade;
+
+	public WeaponSoundManager weaponSoundManager;
 	protected PlayerTimeManager currentPlayerTimeManager;
 	protected PlayerTimeManager thisPlayerTimeManager;
 	protected KeyCode attackKey;
@@ -47,12 +49,16 @@ public class GrenadeControl : MonoBehaviour {
 		else if(cooldown <= 0){
 			cooldown = 0;
 		}
+		if(Input.GetKeyDown(key)){
+			weaponSoundManager.PlayGrenadePullPin();
+		}
 
-		if(Input.GetKeyDown(key) && cooldown <= 0){
+		if(Input.GetKeyUp (key) && cooldown <= 0){
 			GameObject grenade;
 			grenade = Instantiate (Services.Prefabs.Grenade) as GameObject;
 			grenade.transform.position = transform.position + transform.forward;
 			grenade.transform.rotation = transform.rotation;
+			weaponSoundManager.PlayGrenadeThrowSound();
 			thisPlayerTimeManager.myActionPoints -= thisPlayerTimeManager.ap_attackCost;  
 			cooldown = startingCooldown;
  		}

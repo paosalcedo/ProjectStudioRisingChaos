@@ -10,6 +10,10 @@ public class DestroyThis : MonoBehaviour {
 	public InputField p2NameInputField;
 	// Use this for initialization
 	
+	void Start(){	
+		p1NameInputField.text = "Player 1";
+		p2NameInputField.text = "Player 2";
+	}
 	// Update is called once per frame
 	void Update () {
 		if(Input.GetKeyDown(KeyCode.Return)){
