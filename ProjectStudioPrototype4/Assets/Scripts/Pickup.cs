@@ -44,15 +44,6 @@ public class Pickup : MonoBehaviour {
 			}
 			TogglePickupActive();
 			StartCoroutine(RespawnPickup(respawnTime));
-			// renderers = GetComponentsInChildren<MeshRenderer>();
-			// foreach (MeshRenderer renderer in renderers){
-			// 	renderer.enabled = false;
-			// }		
-			// colliders = GetComponentsInChildren<Collider>();
-			// foreach(Collider collider in colliders){
-			// 	collider.enabled = false;
-			// }	
-			// GetComponentInChildren<Collider>().enabled = false;
 			hasBeenPickedUp = true;
 		} 
 	}

@@ -8,7 +8,7 @@ public class ItemSpinner : MonoBehaviour {
 	float rotateSpeed = 50f;
 	// Use this for initialization
 	void Start () {
-		LeanTween.moveY(gameObject, 4.5f, 1f).setEase(LeanTweenType.easeInOutSine).setLoopPingPong();
+		LeanTween.moveY(gameObject, transform.position.y + 0.25f, 1f).setEase(LeanTweenType.easeInOutSine).setLoopPingPong();
 		// LeanTween.rotateY(gameObject, )
 		// transform.DOLocalMoveY(5f, 1f, false).OnComplete(;
 		// transform.DOShakePosition(1f, 3, 10, 0, false).SetLoops(-1);
