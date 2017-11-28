@@ -13,14 +13,62 @@ public class WeaponAndAmmoManager : MonoBehaviour {
 	public int trapAmmoCount; 
 	// Use this for initialization
 	void Start () {
-		grenadeAmmoCount = Services.WeaponDefinitions.weapons[WeaponType.Grenade].baseAmmoCount;
-		laserAmmoCount = Services.WeaponDefinitions.weapons[WeaponType.Laser].baseAmmoCount;
-		trapAmmoCount = Services.WeaponDefinitions.weapons[WeaponType.Trap].baseAmmoCount;
+		grenadeAmmoCount = 0;
+		laserAmmoCount = 0;
+		trapAmmoCount = 0;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		
+	}
+
+	public void PickupWeapon(WeaponType weaponType){
+		switch (weaponType){
+			case WeaponType.Laser:  
+				Debug.Log("Picked up a " + weaponType);
+				if(!hasLaser){
+					hasLaser = true;
+					laserAmmoCount = Services.WeaponDefinitions.weapons[weaponType].baseAmmoCount;
+				} else {
+					laserAmmoCount += Services.WeaponDefinitions.weapons[weaponType].baseAmmoCount;
+				}
+			break;
+			case WeaponType.Grenade:
+				Debug.Log("Picked up a " + weaponType);
+				hasGrenade = true;
+				grenadeAmmoCount = Services.WeaponDefinitions.weapons[weaponType].baseAmmoCount;
+			break;
+			case WeaponType.Trap:
+				Debug.Log("Picked up a " + weaponType);
+				hasTrap = true;
+				grenadeAmmoCount = Services.WeaponDefinitions.weapons[weaponType].baseAmmoCount;
+				break;
+			default:
+			break;			
+		}
+	}
+
+	public void PickupAmmo(WeaponType weaponType){
+		switch (weaponType){
+			case WeaponType.Laser:  
+				Debug.Log("Picked up ammo for " + weaponType);
+				hasLaser = true;
+				laserAmmoCount = Services.WeaponDefinitions.weapons[weaponType].baseAmmoCount;
+			break;
+			case WeaponType.Grenade:
+				Debug.Log("Picked up ammo for " + weaponType);
+				hasGrenade = true;
+				grenadeAmmoCount = Services.WeaponDefinitions.weapons[weaponType].baseAmmoCount;
+			break;
+			case WeaponType.Trap:
+				Debug.Log("Picked up ammo for " + weaponType);
+				hasTrap = true;
+				grenadeAmmoCount = Services.WeaponDefinitions.weapons[weaponType].ammoPickUpCount;
+				break;
+			default:
+			break;			
+		}
 	}
 
 	

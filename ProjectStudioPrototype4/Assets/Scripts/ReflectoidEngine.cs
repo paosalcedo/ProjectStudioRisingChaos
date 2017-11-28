@@ -40,6 +40,8 @@ public class ReflectoidEngine : MonoBehaviour {
 		bounces += 1;
 		if(!bounceHasPlayed){
 			Debug.Log("Collision sound should play!");
+					audioSource.pitch = Random.Range(0.1f, 1);
+
 			audioSource.PlayScheduled(AudioSettings.dspTime + delay);
 			bounceHasPlayed = true;
 			StartCoroutine(ResetBoolToFalse(0.01f));

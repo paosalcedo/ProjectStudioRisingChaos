@@ -66,6 +66,7 @@ public class PlayerTimeManager : MonoBehaviour {
 
 		switch (playerFrozenState){
 			case PlayerFrozenState.Frozen:
+			//Turn on audiolistener?
 			FreezeMe();
 			if(playerIdentifier.myPlayerNum == 0){
 				myCanvasUpdater.turnText.text = CurrentPlayerTracker.otherPlayer.GetComponent<PlayerIdentifier>().myName + "'s turn";

@@ -7,5 +7,6 @@ public enum WeaponType {
 	Trap,
 	Mine,
 	Laser,
-	Knife
+	Knife,
+	None
 }
