@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Pickup : MonoBehaviour {
+
+	GameManager gameManager;
 	public bool hasBeenPickedUp = false;
 	public enum PickupType{
 		Weapon,
@@ -19,6 +21,7 @@ public class Pickup : MonoBehaviour {
 	WeaponAndAmmoManager playerWpnManager;
 	// Use this for initialization
 	void Start () {
+		gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
  	}
 	
 	// Update is called once per frame

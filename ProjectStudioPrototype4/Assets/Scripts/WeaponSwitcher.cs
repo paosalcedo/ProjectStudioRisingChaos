@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class WeaponSwitcher : MonoBehaviour {
 
+	WeaponAndAmmoManager weaponAndAmmoManager;
+
 	public enum SelectedWeapon{
 		Laser,
 		Grenade,
@@ -12,16 +14,17 @@ public class WeaponSwitcher : MonoBehaviour {
 	}
 
 	private PlayerCanvasUpdater playerCanvasUpdater;
-	public KeyCode selectTrapKey;
-	public KeyCode selectLaserKey;
-	public KeyCode selectGrenadeKey;
-	public KeyCode selectKnifeKey;
+	// public KeyCode selectTrapKey;
+	// public KeyCode selectLaserKey;
+	// public KeyCode selectGrenadeKey;
+	// public KeyCode selectKnifeKey;
 	private LaserControl laserControl;
 	private GrenadeControl grenadeControl;
 	private TrapControl trapControl;
 	private KnifeControl knifeControl;
 	// Use this for initialization
 	void Start () {
+		weaponAndAmmoManager = GetComponentInParent<WeaponAndAmmoManager>();
 		trapControl = GetComponent<TrapControl>();
 		laserControl = GetComponent<LaserControl>();
 		grenadeControl = GetComponent<GrenadeControl>();
@@ -36,29 +39,45 @@ public class WeaponSwitcher : MonoBehaviour {
 	void Update(){
 		//only allow weapon switching if you're not frozen.
 		if(GetComponentInParent<PlayerTimeManager>().playerFrozenState == PlayerTimeManager.PlayerFrozenState.Not_Frozen){
-			SelectTrap(selectTrapKey);
-			SelectGrenade(selectGrenadeKey);
-			SelectKnife(selectKnifeKey);
-			SelectLaser(selectLaserKey);
+			// SelectTrap(selectTrapKey);
+			// SelectGrenade(selectGrenadeKey);
+			// SelectKnife(selectKnifeKey);
+			// SelectLaser(selectLaserKey);
+			SelectLaser();
+			SelectKnife();
+			SelectGrenade();
+			SelectTrap();
 		}
 	}
 	
-	public void SelectTrap(KeyCode key){
-		if(Input.GetKeyDown(key)){
-			trapControl.enabled = true;
-			laserControl.enabled = false;
+	public void SelectLaser(){
+		if(Input.GetAxisRaw("DpadX") == 1f && weaponAndAmmoManager.hasLaser){
+			trapControl.enabled = false;
+			laserControl.enabled = true;
 			grenadeControl.enabled = false;
 			knifeControl.enabled = false;
-			trapControl.trap.SetActive(true);
-			laserControl.laserPistol.SetActive(false);
+			trapControl.trap.SetActive(false);
+			laserControl.laserPistol.SetActive(true);
 			knifeControl.knife.SetActive(false);
 			grenadeControl.grenade.SetActive(false);
-			trapControl.cooldown = 0;
 		}
 	}
 
-	public void SelectGrenade(KeyCode key){
-		if(Input.GetKeyDown(key)){
+	public void SelectKnife(){
+		if(Input.GetAxisRaw("DpadX") == -1f){
+			trapControl.enabled = false;
+			laserControl.enabled = false;
+			grenadeControl.enabled = false;
+			knifeControl.enabled = true;
+			trapControl.trap.SetActive(false);
+			laserControl.laserPistol.SetActive(false);
+			grenadeControl.grenade.SetActive(false);
+			knifeControl.knife.SetActive(true);
+		}
+	}
+
+	public void SelectGrenade(){
+ 		if(Input.GetAxisRaw("DpadY") == 1f && weaponAndAmmoManager.hasGrenade){
 			trapControl.enabled = false;
 			laserControl.enabled = false;
 			grenadeControl.enabled = true;
@@ -71,20 +90,70 @@ public class WeaponSwitcher : MonoBehaviour {
 		}
 	}
 
-	public void SelectLaser(KeyCode key){
-		if(Input.GetKeyDown(key)){
-			trapControl.enabled = false;
-			laserControl.enabled = true;
+	public void SelectTrap(){
+		if(Input.GetAxisRaw("DpadY") == -1f && weaponAndAmmoManager.hasTrap){
+			trapControl.enabled = true;
+			laserControl.enabled = false;
 			grenadeControl.enabled = false;
 			knifeControl.enabled = false;
-			trapControl.trap.SetActive(false);
-			laserControl.laserPistol.SetActive(true);
+			trapControl.trap.SetActive(true);
+			laserControl.laserPistol.SetActive(false);
 			knifeControl.knife.SetActive(false);
 			grenadeControl.grenade.SetActive(false);
+			trapControl.cooldown = 0;
 		}
 	}
 
-	public void SelectKnife(KeyCode key){
+
+	public void ResetWeaponCooldowns(){
+		if(trapControl != null && grenadeControl != null){
+			trapControl.cooldown = 0;
+			grenadeControl.cooldown = 0;
+		}
+	}
+
+/*	public void SelectTrap(KeyCode key){
+		if(Input.GetKeyDown(key) && weaponAndAmmoManager.hasTrap){
+			trapControl.enabled = true;
+			laserControl.enabled = false;
+			grenadeControl.enabled = false;
+			knifeControl.enabled = false;
+			trapControl.trap.SetActive(true);
+			laserControl.laserPistol.SetActive(false);
+			knifeControl.knife.SetActive(false);
+			grenadeControl.grenade.SetActive(false);
+			trapControl.cooldown = 0;
+		}
+	}*/
+
+/*	public void SelectGrenade(KeyCode key){
+		if(Input.GetKeyDown(key) && weaponAndAmmoManager.hasGrenade){
+			trapControl.enabled = false;
+			laserControl.enabled = false;
+			grenadeControl.enabled = true;
+			knifeControl.enabled = false;
+			trapControl.trap.SetActive(false);
+			laserControl.laserPistol.SetActive(false);
+			knifeControl.knife.SetActive(false);
+			grenadeControl.grenade.SetActive(true);
+			grenadeControl.cooldown = 0;
+		}
+	}*/
+
+	// public void SelectLaser(KeyCode key){
+	// 	if(Input.GetKeyDown(key) && weaponAndAmmoManager.hasLaser){
+	// 		trapControl.enabled = false;
+	// 		laserControl.enabled = true;
+	// 		grenadeControl.enabled = false;
+	// 		knifeControl.enabled = false;
+	// 		trapControl.trap.SetActive(false);
+	// 		laserControl.laserPistol.SetActive(true);
+	// 		knifeControl.knife.SetActive(false);
+	// 		grenadeControl.grenade.SetActive(false);
+	// 	}
+	// }
+
+	/*public void SelectKnife(KeyCode key){
 		if(Input.GetKeyDown(key)){
 			trapControl.enabled = false;
 			laserControl.enabled = false;
@@ -95,13 +164,7 @@ public class WeaponSwitcher : MonoBehaviour {
 			grenadeControl.grenade.SetActive(false);
 			knifeControl.knife.SetActive(true);
 		}
-	}
-
-	public void ResetWeaponCooldowns(){
-		if(trapControl != null && grenadeControl != null){
-			trapControl.cooldown = 0;
-			grenadeControl.cooldown = 0;
-		}
-	}
+	}*/
+	
 
 }
