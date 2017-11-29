@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class KnifeControl : LaserControl {
 	private Vector3 startPos;
@@ -21,7 +22,7 @@ public class KnifeControl : LaserControl {
 	// Update is called once per frame
 	public override void Update () {
 		base.Update();
-	}
+ 	}
 
 	void AnimateKnifeAttack(){
 		// Debug.Log("Animating knife!");
@@ -40,13 +41,23 @@ public class KnifeControl : LaserControl {
 	}
 
 	public override void Attack(KeyCode key){
-		// Debug.Log("Using Knife!");
 		if(Input.GetKeyDown(key)){
+		Debug.Log("Using Knife!");
+
 			AnimateKnifeAttack();
 			weaponSoundManager.PlayKnifeSound();
 			thisPlayerTimeManager.myActionPoints -= myAPcost;  
 		}
   	}
+	bool m_attack;
+	// private void Attack(){	
+	// 	if(CrossPlatformInputManager.GetButtonDown("Fire1")){
+	// 		Debug.Log("attacking!");
+	// 		AnimateKnifeAttack();
+	// 		weaponSoundManager.PlayKnifeSound();
+	// 		thisPlayerTimeManager.myActionPoints -= myAPcost;  
+	// 	}
+  	// }
 	
 
 

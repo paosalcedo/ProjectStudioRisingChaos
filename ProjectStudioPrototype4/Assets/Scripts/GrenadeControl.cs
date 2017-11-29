@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.CrossPlatformInput;
+
 
 public class GrenadeControl : MonoBehaviour {
 
@@ -9,7 +11,7 @@ public class GrenadeControl : MonoBehaviour {
 	public WeaponSoundManager weaponSoundManager;
 	protected PlayerTimeManager currentPlayerTimeManager;
 	protected PlayerTimeManager thisPlayerTimeManager;
-	protected KeyCode attackKey;
+	public KeyCode attackKey;
 	public float cooldown = 0;
 	protected float startingCooldown;
 	protected float myAPcost; 
@@ -24,7 +26,6 @@ public class GrenadeControl : MonoBehaviour {
 		startingCooldown = cooldown;
 		currentPlayerTimeManager = CurrentPlayerTracker.currentPlayer.GetComponent<PlayerTimeManager>();
 		thisPlayerTimeManager = GetComponentInParent<PlayerTimeManager>();
-		attackKey = KeyCode.Mouse0;
 		myAPcost = Services.WeaponDefinitions.weapons[WeaponType.Grenade].ap_cost;
 		startingCooldown = Services.WeaponDefinitions.weapons[WeaponType.Grenade].cooldown;
 		cooldown = 0;
@@ -35,8 +36,10 @@ public class GrenadeControl : MonoBehaviour {
 		if(thisPlayerTimeManager.playerFrozenState == PlayerTimeManager.PlayerFrozenState.Not_Frozen){
 			if(thisPlayerTimeManager.myActionPoints >= 0 && thisPlayerTimeManager.ap_attackCost <= thisPlayerTimeManager.myActionPoints){
 				Attack(attackKey);	
+				// ControllerAttack();
 			}
 		}
+
 		
 	}
 	public virtual void Attack(KeyCode key){
@@ -49,7 +52,7 @@ public class GrenadeControl : MonoBehaviour {
 		else if(cooldown <= 0){
 			cooldown = 0;
 		}
-		if(Input.GetKeyDown(key)){
+		if(Input.GetKeyUp (key)){
 			weaponSoundManager.PlayGrenadePullPin();
 		}
 
@@ -63,7 +66,23 @@ public class GrenadeControl : MonoBehaviour {
 			cooldown = startingCooldown;
  		}
   	}
-	
+
+	public virtual void ControllerAttack(){
+		if(CrossPlatformInputManager.GetButtonDown("Fire1")){
+			weaponSoundManager.PlayGrenadePullPin();
+		}
+
+		if(CrossPlatformInputManager.GetButtonUp("Fire1")){
+			GameObject grenade;
+			grenade = Instantiate (Services.Prefabs.Grenade) as GameObject;
+			grenade.transform.position = transform.position + transform.forward;
+			grenade.transform.rotation = transform.rotation;
+			weaponSoundManager.PlayGrenadeThrowSound();
+			thisPlayerTimeManager.myActionPoints -= thisPlayerTimeManager.ap_attackCost;  
+			cooldown = startingCooldown;
+		}
+
+	}	
 	public virtual void ResetCooldown(){
 		cooldown = 0;
 	}
