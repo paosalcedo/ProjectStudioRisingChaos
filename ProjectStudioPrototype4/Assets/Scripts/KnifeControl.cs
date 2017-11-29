@@ -42,7 +42,7 @@ public class KnifeControl : LaserControl {
 
 	public override void Attack(KeyCode key){
 		if(Input.GetKeyDown(key)){
-		Debug.Log("Using Knife!");
+			Debug.Log("Using Knife!");
 
 			AnimateKnifeAttack();
 			weaponSoundManager.PlayKnifeSound();

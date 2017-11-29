@@ -11,6 +11,11 @@ public class TrapControl : GrenadeControl {
  	void Start () {
 		trap.SetActive(true);
 		startingCooldown = cooldown;
+		if(GetComponentInParent<PlayerIdentifier>().myPlayerNum == 0){
+			attackKey = KeyCode.Joystick1Button7;
+		} else if (GetComponentInParent<PlayerIdentifier>().myPlayerNum == 1){
+			attackKey = KeyCode.Joystick2Button7;
+		}
 		currentPlayerTimeManager = CurrentPlayerTracker.currentPlayer.GetComponent<PlayerTimeManager>();
 		thisPlayerTimeManager = GetComponentInParent<PlayerTimeManager>();
 		startingCooldown = Services.WeaponDefinitions.weapons[WeaponType.Trap].cooldown;

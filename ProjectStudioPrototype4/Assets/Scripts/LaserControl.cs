@@ -16,6 +16,7 @@ public class LaserControl : MonoBehaviour {
 	protected int damage;
 	Transform parent;
 	public KeyCode attackKey;
+	public KeyCode p2_attackKey;
 	float laserLifetimeReset;
 	// Use this for initialization
 	protected virtual void Start () {
@@ -33,7 +34,11 @@ public class LaserControl : MonoBehaviour {
 	public virtual void Update () {
 		if(thisPlayerTimeManager.playerFrozenState == PlayerTimeManager.PlayerFrozenState.Not_Frozen){
 			if(thisPlayerTimeManager.myActionPoints >= 0 && myAPcost <= thisPlayerTimeManager.myActionPoints){
-				Attack(attackKey);
+				if(GetComponentInParent<PlayerIdentifier>().myPlayerNum == 0){
+					Attack(attackKey);
+				} else if(GetComponentInParent<PlayerIdentifier>().myPlayerNum == 1){
+					Attack(p2_attackKey);
+				}
 			}
 		}
 	}

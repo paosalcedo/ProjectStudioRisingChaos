@@ -23,6 +23,11 @@ public class GrenadeControl : MonoBehaviour {
 	}
 	void Start () {
 		grenade.SetActive(true);
+		if(GetComponentInParent<PlayerIdentifier>().myPlayerNum == 0){
+			attackKey = KeyCode.Joystick1Button7;
+		} else if (GetComponentInParent<PlayerIdentifier>().myPlayerNum == 1){
+			attackKey = KeyCode.Joystick2Button7;
+		}
 		startingCooldown = cooldown;
 		currentPlayerTimeManager = CurrentPlayerTracker.currentPlayer.GetComponent<PlayerTimeManager>();
 		thisPlayerTimeManager = GetComponentInParent<PlayerTimeManager>();
