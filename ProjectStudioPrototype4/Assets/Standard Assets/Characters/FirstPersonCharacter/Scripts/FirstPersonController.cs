@@ -29,6 +29,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         [SerializeField] private AudioClip m_JumpSound;           // the sound played when character leaves the ground.
         [SerializeField] private AudioClip m_LandSound;           // the sound played when character touches back on ground.
 
+        [SerializeField] private int m_playerNum;
         private Camera m_Camera;
         private bool m_Jump;
 
@@ -37,6 +38,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private float m_YRotation;
         private Vector2 m_Input;
         private Vector3 m_MoveDir = Vector3.zero;
+
         private CharacterController m_CharacterController;
         private CollisionFlags m_CollisionFlags;
         private bool m_PreviouslyGrounded;
@@ -240,8 +242,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private void GetInput(out float speed)
         {
             // Read input
-            float horizontal = CrossPlatformInputManager.GetAxisRaw("Horizontal");
-            float vertical = CrossPlatformInputManager.GetAxisRaw("Vertical");
+            float horizontal = (m_playerNum == 0) ? CrossPlatformInputManager.GetAxisRaw("Horizontal") : CrossPlatformInputManager.GetAxisRaw("P2_Horizontal");
+            float vertical = (m_playerNum == 0) ? CrossPlatformInputManager.GetAxisRaw("Vertical") : CrossPlatformInputManager.GetAxisRaw("P2_Vertical");
 
             bool waswalking = m_IsWalking;
 
@@ -253,8 +255,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
 #endif
             // set the desired speed to be walking or running
             speed = m_IsWalking ? m_WalkSpeed : m_RunSpeed;
+            
             m_Input = new Vector2(horizontal, vertical);
-
+            
             // normalize input if it exceeds 1 in combined length:
             if (m_Input.sqrMagnitude > 1)
             {
@@ -303,6 +306,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_MouseLook.HideCursor();
         }
 
+        public void IdentifyPlayerForMouseLook(){
+            // m_MouseLook.
+        }
         
         public void ToggleCrouch(KeyCode key){
             if(Input.GetKeyDown(key)){
@@ -310,8 +316,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
         }
 
-        public void Crouch(){
-
+        public void IdentifyPlayer(int _playerNum){
+            m_playerNum = _playerNum;
         }
     }
 }

@@ -8,5 +8,6 @@ public enum WeaponType {
 	Mine,
 	Laser,
 	Knife,
+	Cameragun,
 	None
 }
