@@ -481,6 +481,7 @@ GameObject:
   - component: {fileID: 114883376108380738}
   - component: {fileID: 114870260325531698}
   - component: {fileID: 114131149934714540}
+  - component: {fileID: 114770306730941478}
   m_Layer: 0
   m_Name: StealthPlayer
   m_TagString: Player
@@ -2177,6 +2178,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 766913b2cdc6f3e449a8fd29cbc47a46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerIdentifier: {fileID: 114870260325531698}
 --- !u!114 &114570366968962886
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2225,6 +2227,22 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &114770306730941478
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1742240419215954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dee7c2de9b308d94b85073272bc956c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thisPlayerTimeManager: {fileID: 114491445911656940}
+  fpc: {fileID: 114859991204236706}
+  jumpKey: 353
+  P2_jumpKey: 373
+  isJumping: 0
 --- !u!114 &114793029823114444
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2388,7 +2406,9 @@ MonoBehaviour:
   m_JumpSound: {fileID: 8300000, guid: 5897aeed9b676024fbb8c694b421a861, type: 3}
   m_LandSound: {fileID: 8300000, guid: 3b09d59f4499d45428baa7a21e954296, type: 3}
   m_playerNum: 0
-  toggleCrouchKey: 340
+  m_Jump: 0
+  toggleCrouchKey: 360
+  p2_toggleCrouchKey: 380
   canJump: 0
   m_Crouching: 0
 --- !u!114 &114870260325531698

@@ -114,11 +114,12 @@ public class PlayerTimeManager : MonoBehaviour {
 	}
 	public void TrackPlayerAction(){
 		//restrict jumping based on AP
-		if(TimeManager.actionPoints < ap_jumpCost){
-			firstPersonController.canJump = false;
-		} else {
-			firstPersonController.canJump = true;
-		}
+		// if(TimeManager.actionPoints < ap_jumpCost){
+		// 	// firstPersonController.Get
+		// 	firstPersonController.canJump = false;
+		// } else {
+		// 	firstPersonController.canJump = true;
+ 		// }
 
 		//Deplete AP when you move
 		if(playerIdentifier.myPlayerNum	== 0){
@@ -127,7 +128,7 @@ public class PlayerTimeManager : MonoBehaviour {
 				if(!firstPersonController.m_Crouching){
 					myActionPoints -= ap_walkCost;
 				} else if (firstPersonController.m_Crouching){
-					myActionPoints -= ap_walkCost*0.2f;
+					myActionPoints -= ap_walkCost*(firstPersonController.m_WalkSpeed/firstPersonController.m_RunSpeed);
 				}
 			}
 		}
@@ -138,7 +139,7 @@ public class PlayerTimeManager : MonoBehaviour {
 				if(!firstPersonController.m_Crouching){
 					myActionPoints -= ap_walkCost;
 				} else if (firstPersonController.m_Crouching){
-					myActionPoints -= ap_walkCost*0.2f;
+					myActionPoints -= ap_walkCost*(firstPersonController.m_WalkSpeed/firstPersonController.m_RunSpeed);
 				}
 			}
 		}
@@ -149,7 +150,7 @@ public class PlayerTimeManager : MonoBehaviour {
 		}
 
 		//deplete AP when you jump and update alert text
-		if(CrossPlatformInputManager.GetButtonDown("Jump")){
+		if(GetComponent<JumpScript>().isJumping){
 			// float ap_cost = 20f;
  			// if(TimeManager.actionPoints >= ap_jumpCost){
 			if(myActionPoints >= ap_jumpCost){

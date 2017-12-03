@@ -12,8 +12,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
     public class FirstPersonController : MonoBehaviour
     {
         [SerializeField] private bool m_IsWalking;
-        [SerializeField] private float m_WalkSpeed;
-        [SerializeField] private float m_RunSpeed;
+        // [SerializeField] private float m_WalkSpeed;
+        public float m_WalkSpeed;
+        // [SerializeField] private float m_RunSpeed;
+        public float m_RunSpeed;
+
         [SerializeField] [Range(0f, 1f)] private float m_RunstepLenghten;
         [SerializeField] private float m_JumpSpeed;
         [SerializeField] private float m_StickToGroundForce;
@@ -31,9 +34,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         [SerializeField] private int m_playerNum;
         private Camera m_Camera;
-        private bool m_Jump;
+        public bool m_Jump;
+        //private bool m_Jump;
 
         public KeyCode toggleCrouchKey;
+        public KeyCode p2_toggleCrouchKey;
         public bool canJump;
         private float m_YRotation;
         private Vector2 m_Input;
@@ -61,10 +66,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private void Start()
         {
             if(m_playerNum == 0){
-                m_player_1 = false;
-            } 
-            else if (m_playerNum == 1){
                 m_player_1 = true;
+            } 
+            if (m_playerNum == 1){
+                m_player_1 = false;
             }
             myMesh = transform.GetChild(1).gameObject;
             myCameraObject = transform.GetChild(0).gameObject;
@@ -88,7 +93,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
         // Update is called once per frame
         private void Update()
         {
-            ToggleCrouch(toggleCrouchKey);
+            if(m_playerNum == 0){
+                ToggleCrouch(toggleCrouchKey);
+            } else if (m_playerNum == 1){
+                ToggleCrouch(p2_toggleCrouchKey);
+            }
 
             if(m_Crouching){
                 m_IsWalking = true;
@@ -106,10 +115,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
             RotateView();
             // the jump state needs to read here to make sure it is not missed
-            if (!m_Jump && m_CharacterController.isGrounded && canJump)
-            {
-                m_Jump = m_player_1 ? CrossPlatformInputManager.GetButtonDown("P2_Jump") : CrossPlatformInputManager.GetButtonDown("Jump");                
-            }
+            // if (!m_Jump && m_CharacterController.isGrounded && canJump)
+            // if (!m_Jump && m_CharacterController.isGrounded)
+            // {
+            //     m_Jump = (m_playerNum == 0) ? CrossPlatformInputManager.GetButtonDown("Jump") : CrossPlatformInputManager.GetButtonDown("P2_Jump");                
+            // }
 
             if (!m_PreviouslyGrounded && m_CharacterController.isGrounded)
             {
@@ -136,9 +146,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_NextStep = m_StepCycle + .5f;
         }
 
-        private void GetJumpInput(){
+        public void GetJumpInput(int _playerNum){
             if (!m_Jump && m_CharacterController.isGrounded && canJump){
-                m_Jump = m_player_1 ? CrossPlatformInputManager.GetButtonDown("P2_Jump") : CrossPlatformInputManager.GetButtonDown("Jump");                
+                // m_Jump = (_playerNum == 0) ? CrossPlatformInputManager.GetButtonDown("Jump") :  CrossPlatformInputManager.GetButtonDown("P2_Jump");                
+                // m_Jump = (_playerNum == 0) ? Input.GetKeyDown(KeyCode.Space) : Input.GetKeyDown(KeyCode.P);
+                m_Jump = (_playerNum == 0) ? CrossPlatformInputManager.GetButtonDown("Jump") : CrossPlatformInputManager.GetButtonDown("P2_Jump");
             }
         }
 

@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class WeaponSwitcher : MonoBehaviour {
 
+	public PlayerIdentifier playerIdentifier;
 	WeaponAndAmmoManager weaponAndAmmoManager;
-
 	public enum SelectedWeapon{
 		Laser,
 		Grenade,
@@ -37,21 +37,35 @@ public class WeaponSwitcher : MonoBehaviour {
 	}
 
 	void Update(){
-		//only allow weapon switching if you're not frozen.
+ 		// //only allow weapon switching if you're not frozen.
+		// if(GetComponentInParent<PlayerTimeManager>().playerFrozenState == PlayerTimeManager.PlayerFrozenState.Not_Frozen){
+		// 	// SelectTrap(selectTrapKey);
+		// 	// SelectGrenade(selectGrenadeKey);
+		// 	// SelectKnife(selectKnifeKey);
+		// 	// SelectLaser(selectLaserKey);
+
+		// 	SelectLaser();
+		// 	SelectKnife();
+		// 	SelectGrenade();
+		// 	SelectTrap();
+		// }
 		if(GetComponentInParent<PlayerTimeManager>().playerFrozenState == PlayerTimeManager.PlayerFrozenState.Not_Frozen){
-			// SelectTrap(selectTrapKey);
-			// SelectGrenade(selectGrenadeKey);
-			// SelectKnife(selectKnifeKey);
-			// SelectLaser(selectLaserKey);
-			SelectLaser();
-			SelectKnife();
-			SelectGrenade();
-			SelectTrap();
+			if(playerIdentifier.myPlayerNum == 0){
+				SelectLaser("DpadX");
+				SelectKnife("DpadX");
+				SelectGrenade("DpadY");
+				SelectTrap("DpadY");
+			} else if (playerIdentifier.myPlayerNum == 1){
+				SelectLaser("P2_DpadX");
+				SelectKnife("P2_DpadX");
+				SelectGrenade("P2_DpadY");
+				SelectTrap("P2_DpadY");
+			}
 		}
 	}
 	
-	public void SelectLaser(){
-		if(Input.GetAxisRaw("DpadX") == 1f && weaponAndAmmoManager.hasLaser){
+	public void SelectLaser(string _axis){
+		if(Input.GetAxisRaw(_axis) == 1f && weaponAndAmmoManager.hasLaser){
 			trapControl.enabled = false;
 			laserControl.enabled = true;
 			grenadeControl.enabled = false;
@@ -63,8 +77,8 @@ public class WeaponSwitcher : MonoBehaviour {
 		}
 	}
 
-	public void SelectKnife(){
-		if(Input.GetAxisRaw("DpadX") == -1f){
+	public void SelectKnife(string _axis){
+		if(Input.GetAxisRaw(_axis) == -1f){
 			trapControl.enabled = false;
 			laserControl.enabled = false;
 			grenadeControl.enabled = false;
@@ -76,8 +90,8 @@ public class WeaponSwitcher : MonoBehaviour {
 		}
 	}
 
-	public void SelectGrenade(){
- 		if(Input.GetAxisRaw("DpadY") == 1f && weaponAndAmmoManager.hasGrenade){
+	public void SelectGrenade(string _axis){
+ 		if(Input.GetAxisRaw(_axis) == 1f && weaponAndAmmoManager.hasGrenade){
 			trapControl.enabled = false;
 			laserControl.enabled = false;
 			grenadeControl.enabled = true;
@@ -90,8 +104,8 @@ public class WeaponSwitcher : MonoBehaviour {
 		}
 	}
 
-	public void SelectTrap(){
-		if(Input.GetAxisRaw("DpadY") == -1f && weaponAndAmmoManager.hasTrap){
+	public void SelectTrap(string _axis){
+		if(Input.GetAxisRaw(_axis) == -1f && weaponAndAmmoManager.hasTrap){
 			trapControl.enabled = true;
 			laserControl.enabled = false;
 			grenadeControl.enabled = false;
@@ -103,7 +117,6 @@ public class WeaponSwitcher : MonoBehaviour {
 			trapControl.cooldown = 0;
 		}
 	}
-
 
 	public void ResetWeaponCooldowns(){
 		if(trapControl != null && grenadeControl != null){
