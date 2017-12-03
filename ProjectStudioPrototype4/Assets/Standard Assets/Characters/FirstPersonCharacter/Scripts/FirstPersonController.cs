@@ -313,9 +313,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_MouseLook.HideCursor();
         }
 
-        public void IdentifyPlayerForMouseLook(){
+        public void IdentifyPlayerForMouseLook(int _playerNum){
             // m_MouseLook.
-            m_MouseLook.AssignPlayers(m_playerNum);
+            m_MouseLook.AssignPlayers(_playerNum);
+            Debug.Log("players assigned to mouselook!");
         }
         
         public void ToggleCrouch(KeyCode key){
@@ -326,6 +327,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         public void IdentifyPlayer(int _playerNum){
             m_playerNum = _playerNum;
+            IdentifyPlayerForMouseLook(_playerNum);
+            Debug.Log("Player identified as player " + _playerNum);
          }
     }
 }

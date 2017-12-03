@@ -41,8 +41,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         public void LookRotation(Transform character, Transform camera)
         {
-            float yRot = isNotPlayer_1 ? CrossPlatformInputManager.GetAxis("P2_Mouse X") * XSensitivity : CrossPlatformInputManager.GetAxis("Mouse X") * XSensitivity;
-            float xRot = isNotPlayer_1 ? CrossPlatformInputManager.GetAxis("P2_Mouse Y") * YSensitivity : CrossPlatformInputManager.GetAxis("Mouse Y") * YSensitivity;
+            // float yRot = isNotPlayer_1 ? CrossPlatformInputManager.GetAxis("P2_Mouse X") * XSensitivity : CrossPlatformInputManager.GetAxis("Mouse X") * XSensitivity;
+            // float xRot = isNotPlayer_1 ? CrossPlatformInputManager.GetAxis("P2_Mouse Y") * YSensitivity : CrossPlatformInputManager.GetAxis("Mouse Y") * YSensitivity;
+            float yRot = isNotPlayer_1 ? CrossPlatformInputManager.GetAxis("Mouse X") * XSensitivity : CrossPlatformInputManager.GetAxis("P2_Mouse X") * XSensitivity;
+            float xRot = isNotPlayer_1 ? CrossPlatformInputManager.GetAxis("Mouse Y") * YSensitivity : CrossPlatformInputManager.GetAxis("P2_Mouse Y") * YSensitivity;
+
 
             m_CharacterTargetRot *= Quaternion.Euler (0f, yRot, 0f);
             m_CameraTargetRot *= Quaternion.Euler (-xRot, 0f, 0f);
