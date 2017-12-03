@@ -46,7 +46,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private float m_StepCycle;
         private float m_NextStep;
         private bool m_Jumping;
-        private bool m_isNotPlayer_1;
+        private bool m_player_1;
         public bool m_Crouching;
         private AudioSource m_AudioSource;
         private Vector3 standingSize;
@@ -61,10 +61,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private void Start()
         {
             if(m_playerNum == 0){
-                m_isNotPlayer_1 = false;
+                m_player_1 = false;
             } 
             else if (m_playerNum == 1){
-                m_isNotPlayer_1 = true;
+                m_player_1 = true;
             }
             myMesh = transform.GetChild(1).gameObject;
             myCameraObject = transform.GetChild(0).gameObject;
@@ -108,7 +108,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             // the jump state needs to read here to make sure it is not missed
             if (!m_Jump && m_CharacterController.isGrounded && canJump)
             {
-                m_Jump = m_isNotPlayer_1 ? CrossPlatformInputManager.GetButtonDown("P2_Jump") : CrossPlatformInputManager.GetButtonDown("Jump");                
+                m_Jump = m_player_1 ? CrossPlatformInputManager.GetButtonDown("P2_Jump") : CrossPlatformInputManager.GetButtonDown("Jump");                
             }
 
             if (!m_PreviouslyGrounded && m_CharacterController.isGrounded)
@@ -136,6 +136,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_NextStep = m_StepCycle + .5f;
         }
 
+        private void GetJumpInput(){
+            if (!m_Jump && m_CharacterController.isGrounded && canJump){
+                m_Jump = m_player_1 ? CrossPlatformInputManager.GetButtonDown("P2_Jump") : CrossPlatformInputManager.GetButtonDown("Jump");                
+            }
+        }
 
         private void FixedUpdate()
         {

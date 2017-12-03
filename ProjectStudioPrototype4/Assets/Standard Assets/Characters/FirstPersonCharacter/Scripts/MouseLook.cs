@@ -16,16 +16,16 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public float smoothTime = 5f;
         public bool lockCursor = true;
 
-        private bool isNotPlayer_1 = false;
+        private bool isPlayer_1 = false;
         private Quaternion m_CharacterTargetRot;
         private Quaternion m_CameraTargetRot;
         private bool m_cursorIsLocked = true;
 
         public void AssignPlayers(int _playerNum){
             if(_playerNum == 0){
-                isNotPlayer_1 = true;
+                isPlayer_1 = true;
             } else {
-                isNotPlayer_1 = false;
+                isPlayer_1 = false;
             }
         }
         public void HideCursor(){
@@ -43,8 +43,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             // float yRot = isNotPlayer_1 ? CrossPlatformInputManager.GetAxis("P2_Mouse X") * XSensitivity : CrossPlatformInputManager.GetAxis("Mouse X") * XSensitivity;
             // float xRot = isNotPlayer_1 ? CrossPlatformInputManager.GetAxis("P2_Mouse Y") * YSensitivity : CrossPlatformInputManager.GetAxis("Mouse Y") * YSensitivity;
-            float yRot = isNotPlayer_1 ? CrossPlatformInputManager.GetAxis("Mouse X") * XSensitivity : CrossPlatformInputManager.GetAxis("P2_Mouse X") * XSensitivity;
-            float xRot = isNotPlayer_1 ? CrossPlatformInputManager.GetAxis("Mouse Y") * YSensitivity : CrossPlatformInputManager.GetAxis("P2_Mouse Y") * YSensitivity;
+            float yRot = isPlayer_1 ? CrossPlatformInputManager.GetAxis("Mouse X") * XSensitivity : CrossPlatformInputManager.GetAxis("P2_Mouse X") * XSensitivity;
+            float xRot = isPlayer_1 ? CrossPlatformInputManager.GetAxis("Mouse Y") * YSensitivity : CrossPlatformInputManager.GetAxis("P2_Mouse Y") * YSensitivity;
 
 
             m_CharacterTargetRot *= Quaternion.Euler (0f, yRot, 0f);

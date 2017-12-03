@@ -121,10 +121,27 @@ public class PlayerTimeManager : MonoBehaviour {
 		}
 
 		//Deplete AP when you move
-		if(CrossPlatformInputManager.GetAxis("Horizontal") != 0 || CrossPlatformInputManager.GetAxis("Vertical") != 0){
-			// TimeManager.DepleteAP(ap_walkCost);
-			myActionPoints -= ap_walkCost;
- 		}
+		if(playerIdentifier.myPlayerNum	== 0){
+			if(CrossPlatformInputManager.GetAxisRaw("Horizontal") != 0 || CrossPlatformInputManager.GetAxisRaw("Vertical") != 0){
+				// TimeManager.DepleteAP(ap_walkCost);
+				if(!firstPersonController.m_Crouching){
+					myActionPoints -= ap_walkCost;
+				} else if (firstPersonController.m_Crouching){
+					myActionPoints -= ap_walkCost*0.2f;
+				}
+			}
+		}
+
+		if(playerIdentifier.myPlayerNum	== 1){
+			if(CrossPlatformInputManager.GetAxisRaw("P2_Horizontal") != 0 || CrossPlatformInputManager.GetAxisRaw("P2_Vertical") != 0){
+				// TimeManager.DepleteAP(ap_walkCost);
+				if(!firstPersonController.m_Crouching){
+					myActionPoints -= ap_walkCost;
+				} else if (firstPersonController.m_Crouching){
+					myActionPoints -= ap_walkCost*0.2f;
+				}
+			}
+		}
 
 		if(CrossPlatformInputManager.GetAxisRaw("Mouse X") != 0 || CrossPlatformInputManager.GetAxisRaw("Mouse Y") != 0){
 			// TimeManager.DepleteAP(ap_lookCost);
