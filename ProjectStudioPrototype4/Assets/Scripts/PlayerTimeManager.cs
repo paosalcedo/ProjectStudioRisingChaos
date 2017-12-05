@@ -239,10 +239,12 @@ public class PlayerTimeManager : MonoBehaviour {
 		if(isActive){
 			if(playerIdentifier.myPlayerNum == 0){
 				CurrentPlayerTracker.otherPlayer.GetComponent<StealthPlayerSwitcher>().SwitchToThis();
+				GetComponentInChildren<CameragunControl>().ResetCameraCount();
 				isActive = false;
 			}
 			if(playerIdentifier.myPlayerNum == 1){
 				CurrentPlayerTracker.currentPlayer.GetComponent<StealthPlayerSwitcher>().SwitchToThis();
+				GetComponentInChildren<CameragunControl>().ResetCameraCount();
 				isActive = false;
 				// .GetComponent<StealthPlayerSwitcher>().SwitchToThis();
 			}

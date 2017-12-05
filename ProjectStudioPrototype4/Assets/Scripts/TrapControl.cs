@@ -22,9 +22,6 @@ public class TrapControl : GrenadeControl {
 		myAPcost = Services.WeaponDefinitions.weapons[WeaponType.Trap].ap_cost;
 		cooldown = 0;
 		myPlayerNum = GetComponentInParent<PlayerIdentifier>().myPlayerNum;
-		if(myPlayerNum == 0){
-			
-		}
 	}
 
 	public override void Update(){

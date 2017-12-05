@@ -13,7 +13,11 @@ public class CameraProjectile : MonoBehaviour {
 		rb = GetComponent<Rigidbody>();
 		speed = Services.WeaponDefinitions.weapons[_weaponType].speed;
 		damage = Services.WeaponDefinitions.weapons[_weaponType].damage;
-		Launch();
+		// Launch();
+	}
+
+	void Start(){
+		MoveProjectile();
 	}
 	public virtual void Launch () {
 		MoveProjectile();
@@ -29,6 +33,13 @@ public class CameraProjectile : MonoBehaviour {
 
 	public virtual void MoveProjectile(){
 		rb.AddForce(transform.forward * speed, ForceMode.Impulse);
+	}
+
+	void OnCollisionEnter(Collision collision){
+		// stick with whatever you collide with.
+		transform.SetParent(collision.transform);
+		rb.velocity = Vector3.zero;
+		rb.isKinematic = true;
 	}
 
 }

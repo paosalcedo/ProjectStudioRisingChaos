@@ -1,0 +1,34 @@
+newmtl material_0
+Kd 1.0000 1.0000 1.0000
+illum 0
+
+# HL2EP1/EFFECTS/COMBINEDISPLAY_CORE_
+newmtl material_1
+Kd 1.0000 1.0000 1.0000
+illum 0
+map_Kd hl2_aerowalk_material_1.tga
+
+# HL2EP1/EFFECTS/COMBINEDISPLAY_DUMP
+newmtl material_2
+Kd 1.0000 1.0000 1.0000
+illum 0
+map_Kd hl2_aerowalk_material_2.tga
+
+# maps/dm_aerowalk/hl2ep1/metal/metalwall_combinecore01a_2976_-2566_-2723
+newmtl material_3
+Kd 1.0000 1.0000 1.0000
+illum 0
+map_Kd hl2_aerowalk_material_3.tga
+
+# maps/dm_aerowalk/hl2ep1/metal/metalwall_combinecore01a_3610_-2555_-2334
+newmtl material_4
+Kd 1.0000 1.0000 1.0000
+illum 0
+map_Kd hl2_aerowalk_material_4.tga
+
+# maps/dm_aerowalk/hl2ep1/metal/metalwall_combinecore01a_2882_-3269_-2550
+newmtl material_5
+Kd 1.0000 1.0000 1.0000
+illum 0
+map_Kd hl2_aerowalk_material_5.tga
+

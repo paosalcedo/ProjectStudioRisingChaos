@@ -22,6 +22,12 @@ public class WeaponSwitcher : MonoBehaviour {
 	private GrenadeControl grenadeControl;
 	private TrapControl trapControl;
 	private KnifeControl knifeControl;
+
+	private CameragunControl cameragunControl;
+
+	public KeyCode p1_selectCameraKey = KeyCode.Joystick1Button4;
+	public KeyCode p2_selectCameraKey = KeyCode.Joystick2Button4;
+
 	// Use this for initialization
 	void Start () {
 		weaponAndAmmoManager = GetComponentInParent<WeaponAndAmmoManager>();
@@ -29,6 +35,7 @@ public class WeaponSwitcher : MonoBehaviour {
 		laserControl = GetComponent<LaserControl>();
 		grenadeControl = GetComponent<GrenadeControl>();
 		knifeControl = GetComponent<KnifeControl>();
+		cameragunControl = GetComponent<CameragunControl>();
 		playerCanvasUpdater = GetComponentInParent<PlayerCanvasUpdater>();
 		// trapControl.enabled = false;
 		// laserControl.enabled = false;
@@ -37,33 +44,40 @@ public class WeaponSwitcher : MonoBehaviour {
 	}
 
 	void Update(){
- 		// //only allow weapon switching if you're not frozen.
-		// if(GetComponentInParent<PlayerTimeManager>().playerFrozenState == PlayerTimeManager.PlayerFrozenState.Not_Frozen){
-		// 	// SelectTrap(selectTrapKey);
-		// 	// SelectGrenade(selectGrenadeKey);
-		// 	// SelectKnife(selectKnifeKey);
-		// 	// SelectLaser(selectLaserKey);
-
-		// 	SelectLaser();
-		// 	SelectKnife();
-		// 	SelectGrenade();
-		// 	SelectTrap();
-		// }
 		if(GetComponentInParent<PlayerTimeManager>().playerFrozenState == PlayerTimeManager.PlayerFrozenState.Not_Frozen){
 			if(playerIdentifier.myPlayerNum == 0){
 				SelectLaser("DpadX");
 				SelectKnife("DpadX");
 				SelectGrenade("DpadY");
 				SelectTrap("DpadY");
+				SelectCamera(p1_selectCameraKey);
 			} else if (playerIdentifier.myPlayerNum == 1){
 				SelectLaser("P2_DpadX");
 				SelectKnife("P2_DpadX");
 				SelectGrenade("P2_DpadY");
 				SelectTrap("P2_DpadY");
+				SelectCamera(p2_selectCameraKey);
 			}
 		}
 	}
 	
+	public void SelectCamera(KeyCode key){
+		if(Input.GetKeyDown(key)){
+			cameragunControl.enabled = true;
+			cameragunControl.firstPersonModel.SetActive(true);
+
+			trapControl.enabled = false;
+			laserControl.enabled = false;
+			grenadeControl.enabled = false;
+			knifeControl.enabled = false;
+			trapControl.trap.SetActive(false);
+			laserControl.laserPistol.SetActive(false);
+			knifeControl.knife.SetActive(false);
+			grenadeControl.firstPersonModel.SetActive(false);
+		}
+		//either select the camera launcher 
+		//or switch to camera view. maybe you only have one?
+	}
 	public void SelectLaser(string _axis){
 		if(Input.GetAxisRaw(_axis) == 1f && weaponAndAmmoManager.hasLaser){
 			trapControl.enabled = false;
@@ -73,7 +87,10 @@ public class WeaponSwitcher : MonoBehaviour {
 			trapControl.trap.SetActive(false);
 			laserControl.laserPistol.SetActive(true);
 			knifeControl.knife.SetActive(false);
-			grenadeControl.grenade.SetActive(false);
+			grenadeControl.firstPersonModel.SetActive(false);
+			
+			cameragunControl.enabled = false;
+			cameragunControl.firstPersonModel.SetActive(false);
 		}
 	}
 
@@ -85,8 +102,11 @@ public class WeaponSwitcher : MonoBehaviour {
 			knifeControl.enabled = true;
 			trapControl.trap.SetActive(false);
 			laserControl.laserPistol.SetActive(false);
-			grenadeControl.grenade.SetActive(false);
+			grenadeControl.firstPersonModel.SetActive(false);
 			knifeControl.knife.SetActive(true);
+
+			cameragunControl.enabled = false;
+			cameragunControl.firstPersonModel.SetActive(false);
 		}
 	}
 
@@ -99,8 +119,11 @@ public class WeaponSwitcher : MonoBehaviour {
 			trapControl.trap.SetActive(false);
 			laserControl.laserPistol.SetActive(false);
 			knifeControl.knife.SetActive(false);
-			grenadeControl.grenade.SetActive(true);
+			grenadeControl.firstPersonModel.SetActive(true);
 			grenadeControl.cooldown = 0;
+
+			cameragunControl.enabled = false;
+			cameragunControl.firstPersonModel.SetActive(false);
 		}
 	}
 
@@ -113,8 +136,11 @@ public class WeaponSwitcher : MonoBehaviour {
 			trapControl.trap.SetActive(true);
 			laserControl.laserPistol.SetActive(false);
 			knifeControl.knife.SetActive(false);
-			grenadeControl.grenade.SetActive(false);
+			grenadeControl.firstPersonModel.SetActive(false);
 			trapControl.cooldown = 0;
+
+			cameragunControl.enabled = false;
+			cameragunControl.firstPersonModel.SetActive(false);
 		}
 	}
 

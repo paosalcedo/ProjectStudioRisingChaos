@@ -34,4 +34,9 @@ public class PrefabDB : ScriptableObject {
     [SerializeField]
     private GameObject reflectoid;
     public GameObject Reflectoid {get { return reflectoid; }}
+
+    [SerializeField]
+    private GameObject cameraProjectile;
+    public GameObject CameraProjectile {get {return cameraProjectile; }}
+    
 }

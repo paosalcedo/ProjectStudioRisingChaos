@@ -23,8 +23,8 @@ public class WeaponDefinitions {
 				30, //damage
 				2, //cooldown
 				110, //ap cost
-				3,
-				2,
+				3,//base ammo
+				2,//
 				"unknown"
 			) 
 		},
@@ -47,8 +47,8 @@ public class WeaponDefinitions {
 				40,  
 				2.5f,
 				110,
-				6,
-				3,  
+				6,//base ammo on pickup
+				3,  //ammo box pickup
 				"who knows"
 			)
 		},
@@ -61,6 +61,18 @@ public class WeaponDefinitions {
 				110,
 				0,
 				0,  
+				"who knows"
+			)
+		},
+		{
+			WeaponType.Cameragun, new WeaponInfo (
+				"A recon weapon", 
+				20, 
+				0,  
+				5f,
+				110,
+				2,
+				1,  
 				"who knows"
 			)
 		}

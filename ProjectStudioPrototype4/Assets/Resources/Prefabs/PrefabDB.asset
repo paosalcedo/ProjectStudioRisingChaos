@@ -21,3 +21,5 @@ MonoBehaviour:
   grenade: {fileID: 1646510768976546, guid: c8b907e6ba93b804eaa4c70a2c846243, type: 2}
   trap: {fileID: 1681567116255820, guid: 5bfa66447af50704aac3f60e121b589c, type: 2}
   reflectoid: {fileID: 1879897694592564, guid: 1a47bae6c4734a642951c8484dc5f89e, type: 2}
+  cameraProjectile: {fileID: 1827080779229698, guid: 07f49925d1460ff4bba338e3a6230028,
+    type: 2}

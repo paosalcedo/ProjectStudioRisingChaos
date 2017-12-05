@@ -6,12 +6,14 @@ using UnityStandardAssets.CrossPlatformInput;
 
 public class GrenadeControl : MonoBehaviour {
 
-	public GameObject grenade;
+	public GameObject firstPersonModel;
 
 	public WeaponSoundManager weaponSoundManager;
 	protected PlayerTimeManager currentPlayerTimeManager;
 	protected PlayerTimeManager thisPlayerTimeManager;
 	public KeyCode attackKey;
+
+	public KeyCode p2_attackKey;
 	public float cooldown = 0;
 	protected float startingCooldown;
 	protected float myAPcost; 
@@ -22,7 +24,7 @@ public class GrenadeControl : MonoBehaviour {
 		NOT_FIRING
 	}
 	void Start () {
-		grenade.SetActive(true);
+		firstPersonModel.SetActive(true);
 		if(GetComponentInParent<PlayerIdentifier>().myPlayerNum == 0){
 			attackKey = KeyCode.Joystick1Button7;
 		} else if (GetComponentInParent<PlayerIdentifier>().myPlayerNum == 1){
@@ -38,14 +40,21 @@ public class GrenadeControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	public virtual void Update () {
+		// if(thisPlayerTimeManager.playerFrozenState == PlayerTimeManager.PlayerFrozenState.Not_Frozen){
+		// 	if(thisPlayerTimeManager.myActionPoints >= 0 && thisPlayerTimeManager.ap_attackCost <= thisPlayerTimeManager.myActionPoints){
+		// 		Attack(attackKey);	
+		// 		// ControllerAttack();
+		// 	}
+		// }
 		if(thisPlayerTimeManager.playerFrozenState == PlayerTimeManager.PlayerFrozenState.Not_Frozen){
-			if(thisPlayerTimeManager.myActionPoints >= 0 && thisPlayerTimeManager.ap_attackCost <= thisPlayerTimeManager.myActionPoints){
-				Attack(attackKey);	
-				// ControllerAttack();
+			if(thisPlayerTimeManager.myActionPoints >= 0 && myAPcost <= thisPlayerTimeManager.myActionPoints){
+				if(GetComponentInParent<PlayerIdentifier>().myPlayerNum == 0){
+					Attack(attackKey);
+				} else if(GetComponentInParent<PlayerIdentifier>().myPlayerNum == 1){
+					Attack(p2_attackKey);
+				}
 			}
 		}
-
-		
 	}
 	public virtual void Attack(KeyCode key){
 
