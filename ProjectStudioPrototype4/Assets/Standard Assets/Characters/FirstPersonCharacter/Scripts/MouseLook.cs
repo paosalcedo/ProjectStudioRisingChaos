@@ -7,8 +7,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
     [Serializable]
     public class MouseLook
     {
-        public float XSensitivity = 2f;
-        public float YSensitivity = 2f;
+        public float XSensitivity = 1f;
+        public float YSensitivity = 1f;
         public bool clampVerticalRotation = true;
         public float MinimumX = -90F;
         public float MaximumX = 90F;
@@ -45,10 +45,12 @@ namespace UnityStandardAssets.Characters.FirstPerson
             // float xRot = isNotPlayer_1 ? CrossPlatformInputManager.GetAxis("P2_Mouse Y") * YSensitivity : CrossPlatformInputManager.GetAxis("Mouse Y") * YSensitivity;
             float yRot = isPlayer_1 ? CrossPlatformInputManager.GetAxis("Mouse X") * XSensitivity : CrossPlatformInputManager.GetAxis("P2_Mouse X") * XSensitivity;
             float xRot = isPlayer_1 ? CrossPlatformInputManager.GetAxis("Mouse Y") * YSensitivity : CrossPlatformInputManager.GetAxis("P2_Mouse Y") * YSensitivity;
-
-
-            m_CharacterTargetRot *= Quaternion.Euler (0f, yRot, 0f);
-            m_CameraTargetRot *= Quaternion.Euler (-xRot, 0f, 0f);
+            Vector2 stick = new Vector2(xRot, yRot);
+            if (stick.magnitude <= .25){
+                stick = Vector2.zero;
+            }
+            m_CharacterTargetRot *= Quaternion.Euler (0f, stick.y, 0f);
+            m_CameraTargetRot *= Quaternion.Euler (-stick.x, 0f, 0f);
 
             if(clampVerticalRotation)
                 m_CameraTargetRot = ClampRotationAroundXAxis (m_CameraTargetRot);

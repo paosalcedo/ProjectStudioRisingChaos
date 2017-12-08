@@ -17,6 +17,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         // [SerializeField] private float m_RunSpeed;
         public float m_RunSpeed;
 
+        public bool cameragunActive;
+
         [SerializeField] [Range(0f, 1f)] private float m_RunstepLenghten;
         [SerializeField] private float m_JumpSpeed;
         [SerializeField] private float m_StickToGroundForce;
@@ -71,6 +73,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             if (m_playerNum == 1){
                 m_player_1 = false;
             }
+            cameragunActive = false;
             myMesh = transform.GetChild(1).gameObject;
             myCameraObject = transform.GetChild(0).gameObject;
             standingSize = transform.localScale;
@@ -300,13 +303,23 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void RotateView()
         {
-            if(m_Camera != null){
-                m_MouseLook.LookRotation (transform, m_Camera.transform);
+            if(!cameragunActive){
+                if(m_Camera != null){
+                    m_MouseLook.LookRotation (transform, m_Camera.transform);
+                }
+                else{
+                    m_Camera = GetComponentInChildren<Camera>();
+                    m_MouseLook.LookRotation (transform, m_Camera.transform);
+                }
             }
-            else{
-                m_Camera = GetComponentInChildren<Camera>();
-                m_MouseLook.LookRotation (transform, m_Camera.transform);
-            }
+        }
+
+        public void ToggleCameragunActive(){
+            cameragunActive = !cameragunActive;
+        }
+
+        public void DeactivateCameraGun(){
+            cameragunActive = false;
         }
 
 

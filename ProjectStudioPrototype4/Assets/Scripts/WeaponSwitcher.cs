@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityStandardAssets.Characters.FirstPerson;
 public class WeaponSwitcher : MonoBehaviour {
 
 	public PlayerIdentifier playerIdentifier;
@@ -22,14 +22,14 @@ public class WeaponSwitcher : MonoBehaviour {
 	private GrenadeControl grenadeControl;
 	private TrapControl trapControl;
 	private KnifeControl knifeControl;
-
 	private CameragunControl cameragunControl;
-
+	private FirstPersonController fpc;
 	public KeyCode p1_selectCameraKey = KeyCode.Joystick1Button4;
 	public KeyCode p2_selectCameraKey = KeyCode.Joystick2Button4;
 
 	// Use this for initialization
 	void Start () {
+		fpc = GetComponentInParent<FirstPersonController>();
 		weaponAndAmmoManager = GetComponentInParent<WeaponAndAmmoManager>();
 		trapControl = GetComponent<TrapControl>();
 		laserControl = GetComponent<LaserControl>();
@@ -64,8 +64,13 @@ public class WeaponSwitcher : MonoBehaviour {
 	public void SelectCamera(KeyCode key){
 		if(Input.GetKeyDown(key)){
 			cameragunControl.enabled = true;
+			cameragunControl.ActivateCameraOnWeaponSwitch();
 			cameragunControl.firstPersonModel.SetActive(true);
+			if(cameragunControl.cameraCount == 0){
+				fpc.ToggleCameragunActive();
+			}
 
+			
 			trapControl.enabled = false;
 			laserControl.enabled = false;
 			grenadeControl.enabled = false;
@@ -89,6 +94,8 @@ public class WeaponSwitcher : MonoBehaviour {
 			knifeControl.knife.SetActive(false);
 			grenadeControl.firstPersonModel.SetActive(false);
 			
+			fpc.DeactivateCameraGun();
+			cameragunControl.DeactivateCameraOnWeaponSwitch();
 			cameragunControl.enabled = false;
 			cameragunControl.firstPersonModel.SetActive(false);
 		}
@@ -105,6 +112,8 @@ public class WeaponSwitcher : MonoBehaviour {
 			grenadeControl.firstPersonModel.SetActive(false);
 			knifeControl.knife.SetActive(true);
 
+			fpc.DeactivateCameraGun();
+			cameragunControl.DeactivateCameraOnWeaponSwitch();
 			cameragunControl.enabled = false;
 			cameragunControl.firstPersonModel.SetActive(false);
 		}
@@ -122,6 +131,8 @@ public class WeaponSwitcher : MonoBehaviour {
 			grenadeControl.firstPersonModel.SetActive(true);
 			grenadeControl.cooldown = 0;
 
+			fpc.DeactivateCameraGun();
+			cameragunControl.DeactivateCameraOnWeaponSwitch();
 			cameragunControl.enabled = false;
 			cameragunControl.firstPersonModel.SetActive(false);
 		}
@@ -139,6 +150,8 @@ public class WeaponSwitcher : MonoBehaviour {
 			grenadeControl.firstPersonModel.SetActive(false);
 			trapControl.cooldown = 0;
 
+			fpc.DeactivateCameraGun();
+			cameragunControl.DeactivateCameraOnWeaponSwitch();
 			cameragunControl.enabled = false;
 			cameragunControl.firstPersonModel.SetActive(false);
 		}
@@ -150,6 +163,8 @@ public class WeaponSwitcher : MonoBehaviour {
 			grenadeControl.cooldown = 0;
 		}
 	}
+
+	
 
 /*	public void SelectTrap(KeyCode key){
 		if(Input.GetKeyDown(key) && weaponAndAmmoManager.hasTrap){

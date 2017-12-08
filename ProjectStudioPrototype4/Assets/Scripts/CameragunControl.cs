@@ -2,16 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityStandardAssets.Characters.FirstPerson;
 public class CameragunControl : GrenadeControl {
 
 	// Use this for initialization
-	[SerializeField] int cameraCount = 1;
+	FirstPersonController fpc;
+	public int cameraCount = 1;
 
 	[SerializeField] KeyCode retractCameraKey;
-	private GameObject camera;
+	public GameObject camera;
 	public GameObject cameraModel;
 	private int myPlayerNum;
 	void Start () {
+		fpc = GetComponentInParent<FirstPersonController>();
 		firstPersonModel.SetActive(true);
 		startingCooldown = cooldown;
 		if(GetComponentInParent<PlayerIdentifier>().myPlayerNum == 0){
@@ -35,6 +38,7 @@ public class CameragunControl : GrenadeControl {
 
 	public override void Attack(KeyCode key){
 		if(Input.GetKeyDown(key) && cameraCount > 0){
+			fpc.ToggleCameragunActive();
 			cameraModel.SetActive(false);
 			int _myPlayerNum;
 			_myPlayerNum = GetComponentInParent<PlayerIdentifier>().myPlayerNum;
@@ -62,10 +66,12 @@ public class CameragunControl : GrenadeControl {
 		if(Input.GetKeyDown(key)){
 			//check if camera was actually tossed
 			if(cameraCount == 0){
+				fpc.ToggleCameragunActive();
 				cameraCount = 1;
 				Sequence camReturnSequence = DOTween.Sequence();
 				camReturnSequence.Append(camera.transform.DOMove(transform.position + Vector3.forward, 1f, false));
 				camReturnSequence.OnComplete(()=>RestoreFirstPersonCameraAfterTween());
+
 				// Destroy (camera);
 			}
 		}
@@ -74,6 +80,16 @@ public class CameragunControl : GrenadeControl {
 	private void RestoreFirstPersonCameraAfterTween(){
 		Destroy(camera);
 		cameraModel.SetActive(true);
+	}
+
+	public void DeactivateCameraOnWeaponSwitch(){
+		if(camera != null)
+			camera.GetComponentInChildren<MouseLook>().enabled = false;
+	}
+
+	public void ActivateCameraOnWeaponSwitch(){
+		if(camera != null)
+			camera.GetComponentInChildren<MouseLook>().enabled = true;
 	}
 	public void ResetCameraCount(){
 		cameraCount = 1;

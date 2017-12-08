@@ -35,8 +35,11 @@ public class CameraProjectile : MonoBehaviour {
 	}
 
 	void OnCollisionEnter(Collision collision){
-		// stick with whatever you collide with.
-		// transform.SetParent(collision.transform);
+		// stick with whatever you collide with
+		if(collision.collider.tag == "Player"){
+			transform.SetParent(collision.transform);
+			transform.localEulerAngles = new Vector3 (0, 0, 0);
+		}
 		rb.velocity = Vector3.zero;
 		rb.isKinematic = true;
 		transform.eulerAngles = new Vector3 (0, -180, 0);
