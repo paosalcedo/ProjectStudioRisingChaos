@@ -8,7 +8,7 @@ public class DisplayScript : MonoBehaviour {
 	void Start () {
 		Debug.Log("displays connected: " + Display.displays.Length);
 		if(Display.displays.Length > 1){
-			Display.displays[1].Activate();
+			Display.displays[1].Activate(1920, 1080, 60);
 			Debug.Log("Activated second display!");
 		}
 	}

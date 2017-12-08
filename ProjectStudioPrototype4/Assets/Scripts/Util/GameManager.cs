@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour
 		Services.WeaponDefinitions = new WeaponDefinitions();
 		Services.EventManager = new EventManager();
 		Services.TaskManager = new TaskManager();
+		Services.WeaponSoundManager = FindObjectOfType<WeaponSoundManager>();
 		Services.Prefabs = Resources.Load<PrefabDB>("Prefabs/PrefabDB");
 		Services.Materials = Resources.Load<MaterialDB>("Art/Materials");
 		// Services.SceneStackManager = new SceneStackManager<TransitionData>(sceneRoot, Services.Prefabs.Scenes);

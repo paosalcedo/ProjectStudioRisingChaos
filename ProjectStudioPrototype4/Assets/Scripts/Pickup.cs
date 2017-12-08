@@ -3,34 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Pickup : MonoBehaviour {
-
-	GameManager gameManager;
 	public bool hasBeenPickedUp = false;
 	public enum PickupType{
 		Weapon,
 		Ammo,
-		Powerup
+		Powerup,
+		Health,
+		Action_Points
 	}
 
 	public float respawnTime;
 	public PickupType pickupType;
 	public WeaponType myWeaponType;
-
+	public int myValue;
 	private Component[] renderers;
 	private Component[] colliders;
 	WeaponAndAmmoManager playerWpnManager;
 	// Use this for initialization
-	void Start () {
-		gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
- 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
-	void OnTriggerEnter(Collider coll){
-		if(coll.GetComponent<WeaponAndAmmoManager>() != null && !hasBeenPickedUp){
+	public virtual void OnTriggerEnter(Collider coll){
+		if(	coll.GetComponent<WeaponAndAmmoManager>() != null 
+			&& coll.GetComponent<PlayerTimeManager>() != null
+			&& coll.GetComponent<PlayerHealthManager>() != null
+			&& !hasBeenPickedUp){
+			PlayerHealthManager playerHealthManager = coll.GetComponent<PlayerHealthManager>();
+			PlayerTimeManager playerTimeManager = coll.GetComponent<PlayerTimeManager>(); 
  			playerWpnManager = coll.GetComponent<WeaponAndAmmoManager>();
 			switch(pickupType){
 				case PickupType.Weapon:
@@ -42,6 +39,12 @@ public class Pickup : MonoBehaviour {
 				case PickupType.Powerup:
 				//add powerups/health pickups here
 				break;
+				case PickupType.Health:
+				playerHealthManager.currentHealth += myValue;
+				break;
+				case PickupType.Action_Points:
+				playerTimeManager.myActionPoints += myValue;
+				break;
 				default:
 				break;
 			}
@@ -51,7 +54,7 @@ public class Pickup : MonoBehaviour {
 		} 
 	}
 
-	void TogglePickupActive(){
+	public virtual void TogglePickupActive(){
 		renderers = GetComponentsInChildren<MeshRenderer>();
 		foreach (MeshRenderer renderer in renderers){
 			renderer.enabled = !renderer.enabled;

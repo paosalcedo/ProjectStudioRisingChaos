@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
-
+using DG.Tweening;
 
 public class GrenadeControl : MonoBehaviour {
 
@@ -14,6 +14,7 @@ public class GrenadeControl : MonoBehaviour {
 	public KeyCode attackKey;
 
 	public KeyCode p2_attackKey;
+	[SerializeField]private GameObject pin;
 	public float cooldown = 0;
 	protected float startingCooldown;
 	protected float myAPcost; 
@@ -66,8 +67,10 @@ public class GrenadeControl : MonoBehaviour {
 		else if(cooldown <= 0){
 			cooldown = 0;
 		}
-		if(Input.GetKeyUp (key)){
+		if(Input.GetKeyDown (key)){
 			weaponSoundManager.PlayGrenadePullPin();
+			pin.transform.DOLocalRotate(new Vector3 (90, 0 ,0), 0.1f, RotateMode.Fast);
+			pin.transform.DOLocalMoveX(1, 0.25f, false);
 		}
 
 		if(Input.GetKeyUp (key) && cooldown <= 0){

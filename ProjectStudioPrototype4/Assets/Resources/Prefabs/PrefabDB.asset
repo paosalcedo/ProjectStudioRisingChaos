@@ -23,3 +23,5 @@ MonoBehaviour:
   reflectoid: {fileID: 1879897694592564, guid: 1a47bae6c4734a642951c8484dc5f89e, type: 2}
   cameraProjectile: {fileID: 1827080779229698, guid: 07f49925d1460ff4bba338e3a6230028,
     type: 2}
+  grenadeParticles: {fileID: 1794241576922218, guid: 06d15cd38dcc56b42aac089f843dc264,
+    type: 2}

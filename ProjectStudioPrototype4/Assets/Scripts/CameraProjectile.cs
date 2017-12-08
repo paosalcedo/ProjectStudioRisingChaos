@@ -25,7 +25,6 @@ public class CameraProjectile : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
 	}
 
 	void FixedUpdate(){
@@ -37,9 +36,16 @@ public class CameraProjectile : MonoBehaviour {
 
 	void OnCollisionEnter(Collision collision){
 		// stick with whatever you collide with.
-		transform.SetParent(collision.transform);
+		// transform.SetParent(collision.transform);
 		rb.velocity = Vector3.zero;
 		rb.isKinematic = true;
+		transform.eulerAngles = new Vector3 (0, -180, 0);
+		GetComponentInChildren<MouseLook>().enabled = true;
+	}
+
+	IEnumerator SetCameraMouseLookActive(float delay){
+		yield return new WaitForSeconds(delay);
+		GetComponentInChildren<MouseLook>().enabled = true;
 	}
 
 }

@@ -38,5 +38,9 @@ public class PrefabDB : ScriptableObject {
     [SerializeField]
     private GameObject cameraProjectile;
     public GameObject CameraProjectile {get {return cameraProjectile; }}
-    
+
+    [SerializeField]
+    private GameObject grenadeParticles;
+    public GameObject GrenadeParticles {get {return grenadeParticles; }}
+
 }

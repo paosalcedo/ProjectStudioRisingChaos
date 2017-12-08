@@ -42,6 +42,7 @@ public class PlayerHealthManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update(){
+		UpdateCanvasHealth(currentHealth);
 		if(currentHealth <= 0 && !scoreHasBeenIncreased){
 			AddToEnemyScore();
 			// Debug.Log("My enemy's health is: " + myEnemy.GetComponent<PlayerHealthManager>().currentHealth);			

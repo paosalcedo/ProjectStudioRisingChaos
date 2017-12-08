@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class GrenadeEngine : MonoBehaviour {
 
-
+	AudioSource audioSource;
 	Rigidbody rb;
+	public AudioClip bounceClip;
+	public AudioClip explodeClip;
 	private float radius = 3.5F;
     // private float power = 20.0F;	
 	private int damage;
@@ -17,6 +19,7 @@ public class GrenadeEngine : MonoBehaviour {
 	private float timeBeforeExplode = 2f;
 	void Awake(){
 		rb = GetComponent<Rigidbody>();
+		audioSource = GetComponent<AudioSource>();
 		speed = Services.WeaponDefinitions.weapons[WeaponType.Grenade].speed;
 		damage = Services.WeaponDefinitions.weapons[WeaponType.Grenade].damage;
 	}
@@ -29,7 +32,6 @@ public class GrenadeEngine : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
 	}
 
 	void FixedUpdate(){
@@ -41,6 +43,11 @@ public class GrenadeEngine : MonoBehaviour {
 
 	IEnumerator DelayedExplosion(float delay){
 		yield return new WaitForSeconds(delay);
+		audioSource.PlayOneShot(explodeClip);
+		audioSource.pitch = Random.Range(0.75f, 1);
+		transform.GetChild(0).gameObject.SetActive(false);
+		GameObject grenadeParticles = Instantiate(Services.Prefabs.GrenadeParticles, transform.position, transform.rotation) as GameObject;
+		// audioSource.PlayOneShot(explodeClip);
 		Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
 		foreach (Collider hit in colliders){
 			if(	  
@@ -48,6 +55,7 @@ public class GrenadeEngine : MonoBehaviour {
 				// && !exploded
 			){
 				//check if player within explosion is the other player. 
+				
 				if(hit.GetComponent<PlayerTimeManager>().playerFrozenState == PlayerTimeManager.PlayerFrozenState.Frozen){
 					//if so, deplete health.
 					// Debug.Log("Depleting health on " + hit.transform.GetComponent<PlayerIdentifier>().myName);
@@ -82,6 +90,15 @@ public class GrenadeEngine : MonoBehaviour {
 			}
 		}
 		// exploded = true;
-		Destroy(gameObject);
+		Destroy(grenadeParticles, explodeClip.length*0.75f);
+		Destroy(gameObject, explodeClip.length);
+	
+	}
+	double delay = 0.000001;
+	void OnCollisionEnter(){
+		Debug.Log("Should be playing grenade bounce now!");
+		audioSource.pitch = Random.Range(0.75f, 1);
+		audioSource.clip = bounceClip;
+		audioSource.PlayScheduled(AudioSettings.dspTime + delay);
 	}
 }

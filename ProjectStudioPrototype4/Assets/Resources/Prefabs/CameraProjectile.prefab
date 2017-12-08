@@ -362,6 +362,7 @@ GameObject:
   - component: {fileID: 4627828833619238}
   - component: {fileID: 20603636017611354}
   - component: {fileID: 114813456924676680}
+  - component: {fileID: 114128990060924904}
   m_Layer: 0
   m_Name: CameraHolder
   m_TagString: Untagged
@@ -665,7 +666,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1827080779229698}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.6561947, y: 1.787, z: 8.451025}
+  m_LocalPosition: {x: 0.66, y: 0.472, z: 4.55}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4627828833619238}
@@ -1606,13 +1607,25 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114813456924676680
+--- !u!114 &114128990060924904
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1926653968600312}
   m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  profile: {fileID: 11400000, guid: 03d5503fac034f84aad2e74faca6632f, type: 2}
+--- !u!114 &114813456924676680
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1926653968600312}
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fef3ab083a2509d459ac152ff7e7175e, type: 3}
   m_Name: 

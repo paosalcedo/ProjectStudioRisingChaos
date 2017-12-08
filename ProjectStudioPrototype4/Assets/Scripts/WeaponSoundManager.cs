@@ -9,7 +9,7 @@ public class WeaponSoundManager : MonoBehaviour {
 	public AudioClip grenadeThrowClip;
 	public AudioClip grenadePullClip;
 	public AudioClip knifeSlashClip;
-	private AudioSource audioSource;
+ 	private AudioSource audioSource;
 	// Use this for initialization
 	void Start () {
 		audioSource = GetComponent<AudioSource>();                      

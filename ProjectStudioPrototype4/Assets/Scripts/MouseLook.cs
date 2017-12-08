@@ -17,7 +17,8 @@ public class MouseLook : MonoBehaviour {
 
 	void Start () {
 		character = transform.parent.gameObject;
- 	}
+ 
+	}
 	
 	// Update is called once per frame
 	void Update () {
@@ -29,10 +30,11 @@ public class MouseLook : MonoBehaviour {
 			smoothV.y = Mathf.Lerp (smoothV.y, mousePos.y, 1f / smoothing);
 			mouseLook += smoothV;
 			mouseLook.y = Mathf.Clamp (mouseLook.y, -90f, 90f);
+			// mouseLook.x = Mathf.Clamp (mouseLook.x, -90f, 90f);
 
 			transform.localRotation = Quaternion.AngleAxis(-mouseLook.y, Vector3.right);
         	character.transform.localRotation = Quaternion.AngleAxis (mouseLook.x, Vector3.up);
-		} else {
+		} else if(myPlayerNum == 1){
 			Vector2 mousePos = new Vector2 (Input.GetAxisRaw ("P2_Mouse X"), Input.GetAxisRaw ("P2_Mouse Y"));
 
 			mousePos = Vector2.Scale (mousePos, new Vector2 (sensitivity * smoothing, sensitivity * smoothing));
@@ -40,17 +42,10 @@ public class MouseLook : MonoBehaviour {
 			smoothV.y = Mathf.Lerp (smoothV.y, mousePos.y, 1f / smoothing);
 			mouseLook += smoothV;
 			mouseLook.y = Mathf.Clamp (mouseLook.y, -90f, 90f);
-
-			// transform.localRotation = Quaternion.AngleAxis(mouseLook.x, Vector3.up);
-			// character.transform.localRotation = Quaternion.AngleAxis (mouseLook.y, Vector3.right);	
+			// mouseLook.x = Mathf.Clamp (mouseLook.x, -90f, 90f);
 			transform.localRotation = Quaternion.AngleAxis(-mouseLook.y, Vector3.right);
         	character.transform.localRotation = Quaternion.AngleAxis (mouseLook.x, Vector3.up);
-		
 		}
-
-		
-
-		
 
 	}
 
