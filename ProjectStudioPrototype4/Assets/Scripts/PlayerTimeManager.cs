@@ -12,10 +12,8 @@ public class PlayerTimeManager : MonoBehaviour {
  	public bool isActive;
 	public float ap_jumpCost = 20f;
 	public float ap_walkCost = 1f;
-
 	public float ap_lookCost = 0.2f;
 	public float ap_attackCost = 50f;
-
 	public float myActionPoints;
 	public float maxActionPoints;
 	float mouseX_pos;
@@ -38,7 +36,10 @@ public class PlayerTimeManager : MonoBehaviour {
 	public PlayerFrozenState playerFrozenState;
 	public KeyCode switchKey;
 
+	public List<Pickup> pickups = new List<Pickup>();
+
 	void Start () {
+		pickups.AddRange(FindObjectsOfType<Pickup>());
 		// otherPlayer = GetComponent<StealthPlayerSwitcher>().otherPlayer;
 		maxActionPoints = myActionPoints;
 		playerIdentifier = GetComponent<PlayerIdentifier>();
@@ -175,6 +176,7 @@ public class PlayerTimeManager : MonoBehaviour {
 		if(myActionPoints <= 0){
 		// if(TimeManager.actionPoints <= 0){
 			playerFrozenState = PlayerFrozenState.Frozen;
+			turnEnded = true;
 			// FreezeMe();
  			myCanvas.GetComponent<Canvas>().enabled = true;
 			Invoke("SwitchToOtherPlayer", 3.5f);
@@ -183,19 +185,31 @@ public class PlayerTimeManager : MonoBehaviour {
 		}		
 	}
 
+	public bool turnCounted = false;
 	public void FreezeMe(){
-		// Debug.Log("Freezing player " + playerIdentifier.myPlayerNum);
+		// Debug.Log("Freezing player " + playerIdentifier.m`yPlayerNum);
 		// playerFrozenState = PlayerFrozenState.Frozen;
 		rb.constraints = RigidbodyConstraints.FreezeAll;
 		rb.useGravity = false;
+		if(!turnCounted){
+			foreach (Pickup pickup in pickups){
+				if(pickup.hasBeenPickedUp){
+					pickup.IncrementTurnCounter();
+				}
+			}
+			turnCounted = true;
+		} 
 		GetComponent<CharacterController>().enabled = false;
 		GetComponent<FirstPersonController>().enabled = false;
 		// Debug.Log(playerFrozenState);
 	}
 
+	public bool turnEnded;
+
 	public void UnFreezeMe(){
 		// Debug.Log("Unfreezing player " + playerIdentifier.myPlayerNum);
 		isActive = true;
+		turnCounted = false;
 		playerFrozenState = PlayerFrozenState.Not_Frozen;
 		rb.constraints = RigidbodyConstraints.None;
 		rb.useGravity = true;						
@@ -211,29 +225,6 @@ public class PlayerTimeManager : MonoBehaviour {
 			myActionPoints = 0;
 	}
 
-	//if time is <= 0, freeze this player, load UI screen that says "Switching to Player 2", then complete the switch.
-	
-	// void SwitchToOtherPlayerTemp(KeyCode key){
-	// 	if(Input.GetKeyDown(key)){
-	// 		//freeze or unfreeze this player; this should happen immediately.
-	// 		FreezeMe();
-	// 		myCanvas.GetComponent<Canvas>().enabled = true;
-	// 		//load a UI screen that says "Switching to Other Player". could have a bit of delay.
-	// 		// StartCoroutine(ActivatePlayerSwitchCanvas(0.01f));
-	// 		Invoke("SwitchToOtherPlayer", 5f);
-	// 	} 
-	// }
-
-	// void SwitchToOtherPlayer(){
-	// 	Debug.Log("Switching to other player without input!");
-	// 	//freeze or unfreeze this player; this should happen immediately.
-	// 	FreezeMe();
-	// 	canvas.GetComponent<Canvas>().enabled = true;
-	// 	//load a UI screen that says "Switching to Other Player". could have a bit of delay.
-	// 	// StartCoroutine(ActivatePlayerSwitchCanvas(0.01f));
-	// 	Invoke("SwitchToOtherPlayer", 3.5f);
- 	// }
-
 	public void SwitchToOtherPlayer(){
 		//only run this code if you're not frozen, aka you're the active player.
 		if(isActive){
@@ -246,27 +237,8 @@ public class PlayerTimeManager : MonoBehaviour {
 				CurrentPlayerTracker.currentPlayer.GetComponent<StealthPlayerSwitcher>().SwitchToThis();
 				GetComponentInChildren<CameragunControl>().ResetCameraCount();
 				isActive = false;
-				// .GetComponent<StealthPlayerSwitcher>().SwitchToThis();
-			}
-		}
-		// GetComponentInChildren<AudioListener>().enabled = false;
-
-
-        // yield return new WaitForSeconds(delay);
-        //talk to the StealthPlayerSwitcher script on the other player.
-		// Debug.Log("Switching to other player without input!");
-		// myActionPoints = 100f;
-        // myCanvas.GetComponent<Canvas>().enabled = false;
-        // GetComponentInChildren<Camera>().enabled = false;
-        // CurrentPlayerTracker.SetCurrentPlayer(otherPlayer);
-		// Debug.Log("Current player is now " + CurrentPlayerTracker.currentPlayer.GetComponent<PlayerIdentifier>().myName);
-		// CurrentPlayerTracker.currentPlayer = CurrentPlayerTracker.otherPlayer;
-		// CurrentPlayerTracker.otherPlayer = this.gameObject;
-		// CurrentPlayerTracker.otherPlayer.GetComponent<StealthPlayerSwitcher>().SwitchToThis();
-		// CurrentPlayerTracker.otherPlayer = this.gameObject;
-		// CurrentPlayerTracker.currentPlayer.GetComponent<PlayerTimeManager>().myCanvas.GetComponent<Canvas>().enabled = true;
-		// playerSwitcher.GetComponent<StealthPlayerSwitcher>().otherPlayer.GetComponent<StealthPlayerSwitcher>().SwitchToThis();
-		// playerSwitcher.GetComponent<StealthPlayerSwitcher>().otherPlayer.GetComponent<PlayerTimeManager>().myCanvas.GetComponent<Canvas>().enabled = true;
+ 			}
+		}	
     }
 	
 }

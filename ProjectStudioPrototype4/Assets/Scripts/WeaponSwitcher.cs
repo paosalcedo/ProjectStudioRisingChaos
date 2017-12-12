@@ -69,7 +69,6 @@ public class WeaponSwitcher : MonoBehaviour {
 			if(cameragunControl.cameraCount == 0){
 				fpc.ToggleCameragunActive();
 			}
-
 			
 			trapControl.enabled = false;
 			laserControl.enabled = false;

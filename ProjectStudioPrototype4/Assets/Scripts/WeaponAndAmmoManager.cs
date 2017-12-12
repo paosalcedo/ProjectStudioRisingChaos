@@ -26,7 +26,7 @@ public class WeaponAndAmmoManager : MonoBehaviour {
 	public void PickupWeapon(WeaponType weaponType){
 		switch (weaponType){
 			case WeaponType.Laser:  
-				Debug.Log("Picked up a " + weaponType);
+				// Debug.Log("Picked up a " + weaponType);
 				if(!hasLaser){
 					hasLaser = true;
 					laserAmmoCount = Services.WeaponDefinitions.weapons[weaponType].baseAmmoCount;
@@ -35,12 +35,12 @@ public class WeaponAndAmmoManager : MonoBehaviour {
 				}
 			break;
 			case WeaponType.Grenade:
-				Debug.Log("Picked up a " + weaponType);
+				// Debug.Log("Picked up a " + weaponType);
 				hasGrenade = true;
 				grenadeAmmoCount = Services.WeaponDefinitions.weapons[weaponType].baseAmmoCount;
 			break;
 			case WeaponType.Trap:
-				Debug.Log("Picked up a " + weaponType);
+				// Debug.Log("Picked up a " + weaponType);
 				hasTrap = true;
 				grenadeAmmoCount = Services.WeaponDefinitions.weapons[weaponType].baseAmmoCount;
 				break;

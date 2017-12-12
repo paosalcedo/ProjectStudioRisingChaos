@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class TurnManager : MonoBehaviour {
 
+	//no turncounter, each 
+	//maybe have an object spawner/spawn point script
+	//on objectspawner script, that's where you count
 	// Use this for initialization
 	void Start () {
 		

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Pickup : MonoBehaviour {
+	public int turnsSincePickedUp;
+	public int turnsUntilRespawn;
 	public bool hasBeenPickedUp = false;
 	public enum PickupType{
 		Weapon,
@@ -21,13 +23,19 @@ public class Pickup : MonoBehaviour {
 	WeaponAndAmmoManager playerWpnManager;
 	// Use this for initialization
 
+	void Update(){
+		if(turnsSincePickedUp >= turnsUntilRespawn){
+			RespawnPickup();
+			turnsSincePickedUp = 0;
+		}
+	}
 	public virtual void OnTriggerEnter(Collider coll){
 		if(	coll.GetComponent<WeaponAndAmmoManager>() != null 
 			&& coll.GetComponent<PlayerTimeManager>() != null
 			&& coll.GetComponent<PlayerHealthManager>() != null
 			&& !hasBeenPickedUp){
 			PlayerHealthManager playerHealthManager = coll.GetComponent<PlayerHealthManager>();
-			PlayerTimeManager playerTimeManager = coll.GetComponent<PlayerTimeManager>(); 
+			PlayerTimeManager playerTimeManager = coll.GetComponent<PlayerTimeManager>();
  			playerWpnManager = coll.GetComponent<WeaponAndAmmoManager>();
 			switch(pickupType){
 				case PickupType.Weapon:
@@ -49,7 +57,7 @@ public class Pickup : MonoBehaviour {
 				break;
 			}
 			TogglePickupActive();
-			StartCoroutine(RespawnPickup(respawnTime));
+			// StartCoroutine(RespawnPickup(respawnTime));
 			hasBeenPickedUp = true;
 		} 
 	}
@@ -65,10 +73,22 @@ public class Pickup : MonoBehaviour {
 		}
 	}
 
-	IEnumerator RespawnPickup(float respawnTime_){
-		yield return new WaitForSeconds(respawnTime_);
+	public virtual void IncrementTurnCounter(){
+		turnsSincePickedUp++;
+		Debug.Log("Incrementing turns on " + this.name);
+	}
+
+	// IEnumerator RespawnPickup(float respawnTime_){
+	// 	yield return new WaitForSeconds(respawnTime_);
+	// 	TogglePickupActive();
+	// 	hasBeenPickedUp = false;
+	// }
+
+	void RespawnPickup(){
+		// yield return new WaitForSeconds(respawnTime_);
 		TogglePickupActive();
 		hasBeenPickedUp = false;
 	}
+
 
 }
