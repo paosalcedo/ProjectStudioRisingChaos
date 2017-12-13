@@ -31,13 +31,18 @@ public class MapManager : MonoBehaviour {
 	public void AddPlayersToMap(){
 		// maybe change this to a for loop in the future
 		GameObject playerOne = Instantiate(Services.Prefabs.StealthPlayers[0]) as GameObject;
-		playerOne.transform.position = spawnPoints[0].transform.position;
+		playerOne.transform.position = spawnPoints[Random.Range(0, 6)].transform.position;
 		// playerOne.transform.eulerAngles = new Vector3 (0, 180, 0);
 		GameObject playerTwo = Instantiate(Services.Prefabs.StealthPlayers[0]) as GameObject;
-		playerTwo.transform.position = spawnPoints[1].transform.position;
+		playerTwo.transform.position = spawnPoints[Random.Range(7,spawnPoints.Length)].transform.position;
 		
 		playerOne.GetComponent<StealthPlayerSwitcher>().otherPlayer = playerTwo;
 		playerTwo.GetComponent<StealthPlayerSwitcher>().otherPlayer = playerOne;
+		
+		while(Vector3.Distance(playerTwo.transform.position, playerOne.transform.position) <= 2f){
+			playerOne.transform.position = spawnPoints[Random.Range(0, 6)].transform.position;
+			playerTwo.transform.position = spawnPoints[Random.Range(7,spawnPoints.Length)].transform.position;
+		}
  		// for (int i = 0; i < numPlayers; i++){
 		// 	Debug.Log("adding player!");
 		// 	players[i] = Instantiate(Services.Prefabs.StealthPlayers[0]) as GameObject;

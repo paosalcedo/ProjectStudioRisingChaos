@@ -240,5 +240,11 @@ public class PlayerTimeManager : MonoBehaviour {
  			}
 		}	
     }
+
+	public void PickupActionPoints(int apPickedUp){
+		PlayerCanvasUpdater myCanvasUpdater = myCanvas.GetComponent<PlayerCanvasUpdater>();
+		myCanvasUpdater.hitAlertText.text = "Gained " + apPickedUp + " Action Points!";
+		StartCoroutine(myCanvasUpdater.ClearText(2f, myCanvasUpdater.hitAlertText));
+	}
 	
 }

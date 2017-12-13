@@ -102,17 +102,23 @@ public class PlayerHealthManager : MonoBehaviour {
 
 	public void RespawnPlayerAfterDeath(){
 		if(playerIdentifier.myPlayerNum == 0){
-			transform.position = Services.MapManager.spawnPoints[Random.Range(0,2)].transform.position;
+			transform.position = Services.MapManager.spawnPoints[Random.Range(0,Services.MapManager.spawnPoints.Length)].transform.position;
 			currentHealth = maxHealth;
 			UpdateCanvasHealth(currentHealth);
 			myCanvas.GetComponent<PlayerCanvasUpdater>().UpdateAlertTextWithDeath(myEnemy.GetComponent<PlayerIdentifier>().myName);
 		} else if (playerIdentifier.myPlayerNum == 1){
 			// transform.position = Services.MapManager.playerTwoStartPos;			
-			transform.position = Services.MapManager.spawnPoints[Random.Range(0,2)].transform.position;
+			transform.position = Services.MapManager.spawnPoints[Random.Range(0,Services.MapManager.spawnPoints.Length)].transform.position;
 			currentHealth = maxHealth;
 			UpdateCanvasHealth(currentHealth);
 			myCanvas.GetComponent<PlayerCanvasUpdater>().UpdateAlertTextWithDeath(myEnemy.GetComponent<PlayerIdentifier>().myName);
 		}
+	}
+
+	public void PickupHealth(int healthPickedUp){
+		PlayerCanvasUpdater canvasUpdater = myCanvas.GetComponent<PlayerCanvasUpdater>();
+		canvasUpdater.hitAlertText.text = "Restored " + healthPickedUp + " health"; 
+		StartCoroutine(canvasUpdater.ClearText(2f, canvasUpdater.hitAlertText));
 	}
 
 

@@ -3688,6 +3688,7 @@ MonoBehaviour:
   hasGrenade: 0
   hasLaser: 0
   hasTrap: 0
+  myCanvasUpdater: {fileID: 0}
   grenadeAmmoCount: 0
   laserAmmoCount: 0
   trapAmmoCount: 0
@@ -3878,8 +3879,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firstPersonModel: {fileID: 0}
   weaponSoundManager: {fileID: 114328035116805452}
-  attackKey: 337
-  p2_attackKey: 0
+  attackKey: 357
+  p2_attackKey: 377
   pin: {fileID: 0}
   cooldown: 0
   trap: {fileID: 1568167273774002}

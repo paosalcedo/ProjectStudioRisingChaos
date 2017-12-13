@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Pickup : MonoBehaviour {
+
+	private List<PlayerCanvasUpdater> playerHUDs = new List<PlayerCanvasUpdater>();
 	public int turnsSincePickedUp;
 	public int turnsUntilRespawn;
 	public bool hasBeenPickedUp = false;
@@ -20,7 +22,7 @@ public class Pickup : MonoBehaviour {
 	public int myValue;
 	private Component[] renderers;
 	private Component[] colliders;
-	WeaponAndAmmoManager playerWpnManager;
+
 	// Use this for initialization
 
 	void Update(){
@@ -34,24 +36,31 @@ public class Pickup : MonoBehaviour {
 			&& coll.GetComponent<PlayerTimeManager>() != null
 			&& coll.GetComponent<PlayerHealthManager>() != null
 			&& !hasBeenPickedUp){
-			PlayerHealthManager playerHealthManager = coll.GetComponent<PlayerHealthManager>();
+			WeaponAndAmmoManager playerWpnManager;
+ 			PlayerHealthManager playerHealthManager = coll.GetComponent<PlayerHealthManager>();
 			PlayerTimeManager playerTimeManager = coll.GetComponent<PlayerTimeManager>();
+			
  			playerWpnManager = coll.GetComponent<WeaponAndAmmoManager>();
+
 			switch(pickupType){
 				case PickupType.Weapon:
-				playerWpnManager.PickupWeapon(myWeaponType);	
+				if(myWeaponType != WeaponType.None)
+					playerWpnManager.PickupWeapon(myWeaponType);	
 				break;
 				case PickupType.Ammo:
-				playerWpnManager.PickupAmmo(myWeaponType);
+				if(myWeaponType != WeaponType.None)
+					playerWpnManager.PickupAmmo(myWeaponType);
 				break;
 				case PickupType.Powerup:
 				//add powerups/health pickups here
 				break;
 				case PickupType.Health:
 				playerHealthManager.currentHealth += myValue;
+				playerHealthManager.PickupHealth(myValue);
 				break;
 				case PickupType.Action_Points:
 				playerTimeManager.myActionPoints += myValue;
+				playerTimeManager.PickupActionPoints(myValue);
 				break;
 				default:
 				break;
