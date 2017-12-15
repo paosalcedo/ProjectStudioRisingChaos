@@ -27,6 +27,11 @@ public class CameraProjectile : MonoBehaviour {
 	void Update () {
 	}
 
+	void ChangeCameraGunFeedMaterial(){
+		Camera camera = GetComponentInChildren<Camera>();
+		
+	}
+
 	void FixedUpdate(){
  	}
 
