@@ -10,7 +10,7 @@ public class CameragunControl : GrenadeControl {
 	public int cameraCount = 1;
 
 	[SerializeField] KeyCode retractCameraKey;
-	public GameObject camera;
+	public GameObject myCam;
 	public GameObject cameraModel;
 	private int myPlayerNum;
 	void Start () {
@@ -18,9 +18,9 @@ public class CameragunControl : GrenadeControl {
 		firstPersonModel.SetActive(true);
 		startingCooldown = cooldown;
 		if(GetComponentInParent<PlayerIdentifier>().myPlayerNum == 0){
-			attackKey = KeyCode.Joystick1Button7;
+			// attackKey = KeyCode.Joystick1Button7;
 		} else if (GetComponentInParent<PlayerIdentifier>().myPlayerNum == 1){
-			attackKey = KeyCode.Joystick2Button7;
+			// attackKey = KeyCode.Joystick2Button7;
 		}
 		currentPlayerTimeManager = CurrentPlayerTracker.currentPlayer.GetComponent<PlayerTimeManager>();
 		thisPlayerTimeManager = GetComponentInParent<PlayerTimeManager>();
@@ -38,6 +38,7 @@ public class CameragunControl : GrenadeControl {
 
 	public override void Attack(KeyCode key){
 		if(Input.GetKeyDown(key) && cameraCount > 0){
+			Debug.Log("what up");
 			fpc.ToggleCameragunActive();
 			cameraModel.SetActive(false);
 			int _myPlayerNum;
@@ -49,7 +50,7 @@ public class CameragunControl : GrenadeControl {
 			_camera.GetComponent<CameraProjectile>().Setup(WeaponType.Cameragun);
 			_camera.transform.position = transform.position + transform.forward * 2;
 			_camera.transform.rotation = transform.rotation;
-			camera = _camera;
+			myCam = _camera;
 			// camera.GetComponent<cameraEngine>().colliderToIgnore = transform.parent.GetComponent<CapsuleCollider>();
 			if(GetComponentInParent<PlayerIdentifier>().myPlayerNum == 0){
 				_camera.layer = 8;	
@@ -69,7 +70,7 @@ public class CameragunControl : GrenadeControl {
 				fpc.ToggleCameragunActive();
 				cameraCount = 1;
 				Sequence camReturnSequence = DOTween.Sequence();
-				camReturnSequence.Append(camera.transform.DOMove(transform.position + Vector3.forward, 1f, false));
+				camReturnSequence.Append(myCam.transform.DOMove(transform.position + Vector3.forward, 1f, false));
 				camReturnSequence.OnComplete(()=>RestoreFirstPersonCameraAfterTween());
 
 				// Destroy (camera);
@@ -78,18 +79,18 @@ public class CameragunControl : GrenadeControl {
 	}
 
 	private void RestoreFirstPersonCameraAfterTween(){
-		Destroy(camera);
+		Destroy(myCam);
 		cameraModel.SetActive(true);
 	}
 
 	public void DeactivateCameraOnWeaponSwitch(){
-		if(camera != null)
-			camera.GetComponentInChildren<MouseLook>().enabled = false;
+		if(myCam != null)
+			myCam.GetComponentInChildren<MouseLook>().enabled = false;
 	}
 
 	public void ActivateCameraOnWeaponSwitch(){
-		if(camera != null)
-			camera.GetComponentInChildren<MouseLook>().enabled = true;
+		if(myCam != null)
+			myCam.GetComponentInChildren<MouseLook>().enabled = true;
 	}
 	public void ResetCameraCount(){
 		cameraCount = 1;

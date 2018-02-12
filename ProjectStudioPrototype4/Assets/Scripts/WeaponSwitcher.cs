@@ -14,10 +14,10 @@ public class WeaponSwitcher : MonoBehaviour {
 	}
 
 	private PlayerCanvasUpdater playerCanvasUpdater;
-	// public KeyCode selectTrapKey;
-	// public KeyCode selectLaserKey;
-	// public KeyCode selectGrenadeKey;
-	// public KeyCode selectKnifeKey;
+	public KeyCode selectTrapKey;
+	public KeyCode selectLaserKey;
+	public KeyCode selectGrenadeKey;
+	public KeyCode selectKnifeKey;
 	private LaserControl laserControl;
 	private GrenadeControl grenadeControl;
 	private TrapControl trapControl;
@@ -29,6 +29,10 @@ public class WeaponSwitcher : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		selectKnifeKey = KeyCode.Alpha1;
+		selectLaserKey = KeyCode.Alpha2;
+		selectGrenadeKey = KeyCode.Alpha3;
+		selectTrapKey = KeyCode.Alpha4;
 		fpc = GetComponentInParent<FirstPersonController>();
 		weaponAndAmmoManager = GetComponentInParent<WeaponAndAmmoManager>();
 		trapControl = GetComponent<TrapControl>();
@@ -46,12 +50,23 @@ public class WeaponSwitcher : MonoBehaviour {
 	void Update(){
 		if(GetComponentInParent<PlayerTimeManager>().playerFrozenState == PlayerTimeManager.PlayerFrozenState.Not_Frozen){
 			if(playerIdentifier.myPlayerNum == 0){
+				//keyboard and mouse
+				SelectLaserKeyboard(selectLaserKey);
+				SelectKnifeKeyboard(selectKnifeKey);
+				SelectGrenadeKeyboard(selectGrenadeKey);
+				SelectTrapKeyboard(selectTrapKey);
+				//controller input
 				SelectLaser("DpadX");
 				SelectKnife("DpadX");
 				SelectGrenade("DpadY");
 				SelectTrap("DpadY");
 				SelectCamera(p1_selectCameraKey);
 			} else if (playerIdentifier.myPlayerNum == 1){
+				SelectLaserKeyboard(selectLaserKey);
+				SelectKnifeKeyboard(selectKnifeKey);
+				SelectGrenadeKeyboard(selectGrenadeKey);
+				SelectTrapKeyboard(selectTrapKey);
+				
 				SelectLaser("P2_DpadX");
 				SelectKnife("P2_DpadX");
 				SelectGrenade("P2_DpadY");
@@ -81,6 +96,80 @@ public class WeaponSwitcher : MonoBehaviour {
 		}
 		//either select the camera launcher 
 		//or switch to camera view. maybe you only have one?
+	}
+
+	public void SelectLaserKeyboard(KeyCode key){
+		if(Input.GetKeyDown(key) && weaponAndAmmoManager.hasLaser){
+			trapControl.enabled = false;
+			laserControl.enabled = true;
+			grenadeControl.enabled = false;
+			knifeControl.enabled = false;
+			trapControl.trap.SetActive(false);
+			laserControl.laserPistol.SetActive(true);
+			knifeControl.knife.SetActive(false);
+			grenadeControl.firstPersonModel.SetActive(false);
+			
+			fpc.DeactivateCameraGun();
+			cameragunControl.DeactivateCameraOnWeaponSwitch();
+			cameragunControl.enabled = false;
+			cameragunControl.firstPersonModel.SetActive(false);
+		}
+	}
+
+	public void SelectKnifeKeyboard(KeyCode key){
+		if(Input.GetKeyDown(key)){
+			trapControl.enabled = false;
+			laserControl.enabled = false;
+			grenadeControl.enabled = false;
+			knifeControl.enabled = true;
+			trapControl.trap.SetActive(false);
+			laserControl.laserPistol.SetActive(false);
+			grenadeControl.firstPersonModel.SetActive(false);
+			knifeControl.knife.SetActive(true);
+
+			fpc.DeactivateCameraGun();
+			cameragunControl.DeactivateCameraOnWeaponSwitch();
+			cameragunControl.enabled = false;
+			cameragunControl.firstPersonModel.SetActive(false);
+		}
+	}
+
+	public void SelectGrenadeKeyboard(KeyCode key){
+ 		if(Input.GetKeyDown(key) && weaponAndAmmoManager.hasGrenade){
+			trapControl.enabled = false;
+			laserControl.enabled = false;
+			grenadeControl.enabled = true;
+			knifeControl.enabled = false;
+			trapControl.trap.SetActive(false);
+			laserControl.laserPistol.SetActive(false);
+			knifeControl.knife.SetActive(false);
+			grenadeControl.firstPersonModel.SetActive(true);
+			grenadeControl.cooldown = 0;
+
+			fpc.DeactivateCameraGun();
+			cameragunControl.DeactivateCameraOnWeaponSwitch();
+			cameragunControl.enabled = false;
+			cameragunControl.firstPersonModel.SetActive(false);
+		}
+	}
+
+		public void SelectTrapKeyboard(KeyCode key){
+		if(Input.GetKeyDown(key) && weaponAndAmmoManager.hasTrap){
+			trapControl.enabled = true;
+			laserControl.enabled = false;
+			grenadeControl.enabled = false;
+			knifeControl.enabled = false;
+			trapControl.trap.SetActive(true);
+			laserControl.laserPistol.SetActive(false);
+			knifeControl.knife.SetActive(false);
+			grenadeControl.firstPersonModel.SetActive(false);
+			trapControl.cooldown = 0;
+
+			fpc.DeactivateCameraGun();
+			cameragunControl.DeactivateCameraOnWeaponSwitch();
+			cameragunControl.enabled = false;
+			cameragunControl.firstPersonModel.SetActive(false);
+		}
 	}
 	public void SelectLaser(string _axis){
 		if(Input.GetAxisRaw(_axis) == 1f && weaponAndAmmoManager.hasLaser){

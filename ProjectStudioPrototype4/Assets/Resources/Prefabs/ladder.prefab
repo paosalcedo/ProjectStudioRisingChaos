@@ -50,9 +50,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1655604599951236}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -8.226, y: 1.078, z: 1.999}
-  m_LocalScale: {x: 0.38104054, y: 0.38104048, z: 0.38104048}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -10.0130005, y: -5.8995037, z: 28.339003}
+  m_LocalScale: {x: 0.19052027, y: 0.1905203, z: 0.1905203}
   m_Children:
   - {fileID: 4229026067415330}
   m_Father: {fileID: 0}
@@ -80,11 +80,12 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: d179553f251bf8b4487f07e94552f78d, type: 2}
+  - {fileID: 2100000, guid: a7e7292c2d844e54faf110a5694a177f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -95,6 +96,7 @@ MeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
