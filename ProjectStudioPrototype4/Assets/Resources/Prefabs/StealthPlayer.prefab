@@ -1053,7 +1053,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1742240419215954}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.018, y: 4.9312, z: 2.21}
+  m_LocalPosition: {x: 6.125, y: -1.049, z: 5.0832}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4126024473055688}
@@ -1763,6 +1763,7 @@ Camera:
   m_TargetEye: 3
   m_HDR: 1
   m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -1798,6 +1799,7 @@ Camera:
   m_TargetEye: 3
   m_HDR: 0
   m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -3990,8 +3992,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firstPersonModel: {fileID: 0}
   weaponSoundManager: {fileID: 114328035116805452}
-  attackKey: 357
-  p2_attackKey: 377
+  attackKey: 323
+  p2_attackKey: 323
   pin: {fileID: 0}
   cooldown: 0
   trap: {fileID: 1568167273774002}
@@ -4010,8 +4012,8 @@ MonoBehaviour:
   weaponSoundManager: {fileID: 114328035116805452}
   laserPistol: {fileID: 1007152106091084}
   laserLifetime: 1
-  attackKey: 357
-  p2_attackKey: 377
+  attackKey: 323
+  p2_attackKey: 323
 --- !u!114 &114491445911656940
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4063,8 +4065,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firstPersonModel: {fileID: 1906870799659552}
   weaponSoundManager: {fileID: 114328035116805452}
-  attackKey: 357
-  p2_attackKey: 377
+  attackKey: 323
+  p2_attackKey: 323
   pin: {fileID: 1468763042274858}
   cooldown: 1
 --- !u!114 &114567996893682654
@@ -4079,8 +4081,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIdentifier: {fileID: 114870260325531698}
-  p1_selectCameraKey: 354
-  p2_selectCameraKey: 374
+  selectTrapKey: 0
+  selectLaserKey: 0
+  selectGrenadeKey: 0
+  selectKnifeKey: 0
+  p1_selectCameraKey: 113
+  p2_selectCameraKey: 113
 --- !u!114 &114570366968962886
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4142,7 +4148,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thisPlayerTimeManager: {fileID: 114491445911656940}
   fpc: {fileID: 114859991204236706}
-  jumpKey: 353
+  jumpKey: 32
   P2_jumpKey: 373
   isJumping: 0
 --- !u!114 &114793029823114444
@@ -4221,7 +4227,7 @@ MonoBehaviour:
   m_RunSpeed: 10
   cameragunActive: 0
   m_RunstepLenghten: 1
-  m_JumpSpeed: 10
+  m_JumpSpeed: 6
   m_StickToGroundForce: 10
   m_GravityMultiplier: 2
   m_MouseLook:
@@ -4327,13 +4333,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firstPersonModel: {fileID: 1018658878570322}
   weaponSoundManager: {fileID: 114328035116805452}
-  attackKey: 357
-  p2_attackKey: 377
+  attackKey: 323
+  p2_attackKey: 323
   pin: {fileID: 0}
   cooldown: 0
   cameraCount: 1
-  retractCameraKey: 336
-  camera: {fileID: 0}
+  retractCameraKey: 324
+  myCam: {fileID: 0}
   cameraModel: {fileID: 1129032270191044}
 --- !u!114 &114870260325531698
 MonoBehaviour:
@@ -4434,8 +4440,8 @@ MonoBehaviour:
   weaponSoundManager: {fileID: 114328035116805452}
   laserPistol: {fileID: 0}
   laserLifetime: 1
-  attackKey: 357
-  p2_attackKey: 377
+  attackKey: 323
+  p2_attackKey: 323
   knife: {fileID: 1250504520738960}
 --- !u!114 &114925718177605224
 MonoBehaviour:
@@ -4627,7 +4633,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1118243190417172}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 82, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 224629499974993310}
@@ -4645,7 +4651,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1993580186329018}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -29, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 224629499974993310}
@@ -4663,7 +4669,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1561819883446354}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 101.100006, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 224629499974993310}
@@ -4699,7 +4705,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1069461272432030}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -137, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 224629499974993310}
@@ -4745,7 +4751,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1544844344696736}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 32.2, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 224629499974993310}
@@ -4781,7 +4787,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1243022794947648}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -101, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 224629499974993310}
@@ -4817,7 +4823,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1195867188095504}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -139, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 224629499974993310}

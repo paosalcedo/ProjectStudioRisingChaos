@@ -153,7 +153,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
             if (!m_Jump && m_CharacterController.isGrounded && canJump){
                 // m_Jump = (_playerNum == 0) ? CrossPlatformInputManager.GetButtonDown("Jump") :  CrossPlatformInputManager.GetButtonDown("P2_Jump");                
                 // m_Jump = (_playerNum == 0) ? Input.GetKeyDown(KeyCode.Space) : Input.GetKeyDown(KeyCode.P);
-                m_Jump = (_playerNum == 0) ? CrossPlatformInputManager.GetButtonDown("Jump") : CrossPlatformInputManager.GetButtonDown("P2_Jump");
+//                m_Jump = (_playerNum == 0) ? CrossPlatformInputManager.GetButtonDown("Jump") : CrossPlatformInputManager.GetButtonDown("P2_Jump");
+                
+                m_Jump = (_playerNum == 0) ? CrossPlatformInputManager.GetButtonDown("Jump") : CrossPlatformInputManager.GetButtonDown("Jump");
+
             }
         }
 
@@ -269,9 +272,12 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private void GetInput(out float speed)
         {
             // Read input
-            float horizontal = (m_playerNum == 0) ? CrossPlatformInputManager.GetAxisRaw("Horizontal") : CrossPlatformInputManager.GetAxisRaw("P2_Horizontal");
-            float vertical = (m_playerNum == 0) ? CrossPlatformInputManager.GetAxisRaw("Vertical") : CrossPlatformInputManager.GetAxisRaw("P2_Vertical");
+//            float horizontal = (m_playerNum == 0) ? CrossPlatformInputManager.GetAxisRaw("Horizontal") : CrossPlatformInputManager.GetAxisRaw("P2_Horizontal");
+//            float vertical = (m_playerNum == 0) ? CrossPlatformInputManager.GetAxisRaw("Vertical") : CrossPlatformInputManager.GetAxisRaw("P2_Vertical");
 
+            float horizontal = (m_playerNum == 0) ? CrossPlatformInputManager.GetAxisRaw("Horizontal") : CrossPlatformInputManager.GetAxisRaw("Horizontal");
+            float vertical = (m_playerNum == 0) ? CrossPlatformInputManager.GetAxisRaw("Vertical") : CrossPlatformInputManager.GetAxisRaw("Vertical");            
+            
             bool waswalking = m_IsWalking;
 
 #if !MOBILE_INPUT
@@ -305,9 +311,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             if(!cameragunActive){
                 if(m_Camera != null){
+                    Debug.Log("Camera is ACTIVE");
                     m_MouseLook.LookRotation (transform, m_Camera.transform);
                 }
                 else{
+                    Debug.Log("Camera is NULL!");
                     m_Camera = GetComponentInChildren<Camera>();
                     m_MouseLook.LookRotation (transform, m_Camera.transform);
                 }

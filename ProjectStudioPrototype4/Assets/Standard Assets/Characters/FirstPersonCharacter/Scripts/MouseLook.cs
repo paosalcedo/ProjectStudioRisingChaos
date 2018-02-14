@@ -43,8 +43,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             // float yRot = isNotPlayer_1 ? CrossPlatformInputManager.GetAxis("P2_Mouse X") * XSensitivity : CrossPlatformInputManager.GetAxis("Mouse X") * XSensitivity;
             // float xRot = isNotPlayer_1 ? CrossPlatformInputManager.GetAxis("P2_Mouse Y") * YSensitivity : CrossPlatformInputManager.GetAxis("Mouse Y") * YSensitivity;
-            float yRot = isPlayer_1 ? CrossPlatformInputManager.GetAxis("Mouse X") * XSensitivity : CrossPlatformInputManager.GetAxis("P2_Mouse X") * XSensitivity;
-            float xRot = isPlayer_1 ? CrossPlatformInputManager.GetAxis("Mouse Y") * YSensitivity : CrossPlatformInputManager.GetAxis("P2_Mouse Y") * YSensitivity;
+//            float yRot = isPlayer_1 ? CrossPlatformInputManager.GetAxis("Mouse X") * XSensitivity : CrossPlatformInputManager.GetAxis("P2_Mouse X") * XSensitivity;
+//            float xRot = isPlayer_1 ? CrossPlatformInputManager.GetAxis("Mouse Y") * YSensitivity : CrossPlatformInputManager.GetAxis("P2_Mouse Y") * YSensitivity;
+            float yRot = isPlayer_1 ? CrossPlatformInputManager.GetAxis("Mouse X") * XSensitivity : CrossPlatformInputManager.GetAxis("Mouse X") * XSensitivity;
+            float xRot = isPlayer_1 ? CrossPlatformInputManager.GetAxis("Mouse Y") * YSensitivity : CrossPlatformInputManager.GetAxis("Mouse Y") * YSensitivity;
             Vector2 stick = new Vector2(xRot, yRot);
             if (stick.magnitude <= .25){
                 stick = Vector2.zero;
